@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
-"""通过 GitHub Contents API 把本地仓库同步到 Holer0917/child-learning。
+"""通过 GitHub Contents API 同步变更文件（git 协议不通时的备用通道）。
 
-用法：python docs/evidence/push_github.py --dry-run
-      python docs/evidence/push_github.py
-令牌从环境变量 GH_TOKEN 读取，不写入文件。
+用法：
+  GH_TOKEN=... python docs/evidence/push_github.py --dry-run
+  GH_TOKEN=... python docs/evidence/push_github.py
 """
 import base64
 import json
 import os
 import sys
 import time
+import urllib.error
+import urllib.parse
 import urllib.request
+from pathlib import Path
 
-ROOT = __import__('pathlib').Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[2]
 TOKEN = os.environ.get('GH_TOKEN', '')
 REPO = 'Holer0917/child-learning'
 BRANCH = 'main'
@@ -37,7 +40,6 @@ def api(path, method='GET', body=None):
 
 
 def blob_sha(data):
-    """计算 git blob 的 SHA-1，用于判断远端内容是否已相同。"""
     import hashlib
     h = hashlib.sha1()
     h.update(b'blob %d\0' % len(data))
@@ -46,7 +48,6 @@ def blob_sha(data):
 
 
 def remote_tree():
-    """返回 {path: sha}（仅文件）。空仓库返回 {}。"""
     try:
         info = api(f'/repos/{REPO}/git/trees/{BRANCH}?recursive=1')
     except urllib.error.HTTPError as e:
@@ -65,6 +66,10 @@ def local_files():
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fn in filenames:
             if os.path.splitext(fn)[1].lower() in SKIP_SUFFIX:
+                continue
+            if fn.startswith('~$'):
+                continue
+            if fn.startswith('.') and fn != '.gitignore':
                 continue
             rel = f'{rel_dir}/{fn}' if rel_dir else fn
             out.append(rel)
@@ -86,33 +91,27 @@ def main():
     dry = '--dry-run' in sys.argv
     if not TOKEN:
         sys.exit('GH_TOKEN 未设置')
-    import urllib.parse  # noqa: F811  供 put_file 使用
 
     tree = remote_tree()
     files = local_files()
-    print(f'远端文件 {len(tree)} 个，本地文件 {len(files)} 个')
-    plan = []
-    for rel in files:
-        data = (ROOT / rel).read_bytes()
-        plan.append((rel, data, tree.get(rel)))
+    plan = [(rel, (ROOT / rel).read_bytes(), tree.get(rel)) for rel in files]
     new = [p for p in plan if p[2] is None]
     upd = [p for p in plan if p[2] is not None and p[2] != blob_sha(p[1])]
     same = [p for p in plan if p[2] is not None and p[2] == blob_sha(p[1])]
     deleted = sorted(set(tree) - set(files))
-    print(f'新增 {len(new)}，内容有变 {len(upd)}，内容相同跳过 {len(same)}，远端独有（不删除）{len(deleted)}')
-    for p in same:
-        print('  = 未变化:', p[0])
-    for d in deleted:
-        print('  远端独有:', d)
+
+    print(f'远端 {len(tree)} 个文件，本地 {len(files)} 个文件')
+    print(f'新增 {len(new)}，内容有变 {len(upd)}，未变跳过 {len(same)}')
+    if deleted:
+        print(f'远端独有（本脚本不删除）: {deleted}')
+    todo = new + upd
     if dry:
-        for p in new:
-            print('  +', p[0])
-        for p in upd:
-            print('  ~', p[0])
+        for rel, _, _ in todo:
+            print(('  + ' if tree.get(rel) is None else '  ~ ') + rel)
         return
-    for i, (rel, data, sha) in enumerate(plan, 1):
+    for i, (rel, data, sha) in enumerate(todo, 1):
         put_file(rel, data, sha)
-        print(f'[{i}/{len(plan)}] {rel}')
+        print(f'[{i}/{len(todo)}] {rel}')
         time.sleep(0.4)
 
 
