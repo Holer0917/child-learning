@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>冒烟测试</title></head>
+<body>
+<pre id="out">running...</pre>
+<script>
+const LOG = [];
+function say(s) { LOG.push(s); document.getElementById('out').textContent = LOG.join('\n'); }
+function report() { fetch('/result', { method: 'POST', body: LOG.join('\n') }).catch(() => {}); }
+window.addEventListener('error', function (e) {
+  say('[ERROR] ' + (e.message || e.error) + ' @ ' + (e.filename || '') + ':' + (e.lineno || ''));
+});
+</script>
+<script type="module">
+import { SYLLABUS, syllabusStats, commonTypes } from '../src/domain/syllabus.js';
+import { generateQuestions, generatePaper, dedupeKey, adjustSpec, buildVerticalLayout } from '../src/domain/generator.js';
+import { judgeAnswer, settleSession } from '../src/domain/grader.js';
+import { gcd, normalizeAnswer } from '../src/utils/format.js';
+
+try {
+  let bad = 0, total = 0;
+  const fails = [];
+
+  // ---- 1. 每个知识点各出 300 道，校验答案正确性 ----
+  for (const kp of SYLLABUS) {
+    for (let s = 0; s < 300; s++) {
+      const qs = generateQuestions(kp.id, 1, { seed: s * 7919 + kp.grade * 131 });
+      if (!qs.length) { bad++; fails.push(kp.id + ' 生成失败'); continue; }
+      const q = qs[0]; total++;
+      const p = q.params;
+      // 填空/比较大小题会改写答案，其数值校验方式不同，单独处理
+      const skipNum = q.type === 'fill' || q.type === 'compare';
+      const ev = function (op, x, y) {
+        return { '+': x + y, '-': x - y, '×': x * y,
+                 '÷': (y !== 0 && x % y === 0) ? x / y : null }[op];
+      };
+      if (q.op === 'add' && !skipNum && Number(q.answer) !== p.a + p.b) { bad++; fails.push(kp.id + ' add ' + q.text); }
+      if (q.op === 'sub' && !skipNum && Number(q.answer) !== p.a - p.b) { bad++; fails.push(kp.id + ' sub ' + q.text); }
+      if (q.op === 'mul' && !skipNum && Number(q.answer) !== p.a * p.b) { bad++; fails.push(kp.id + ' mul ' + q.text); }
+      if (q.op === 'div' && !skipNum) {
+        const exp = p.rem ? p.quotient + '余' + p.rem : String(p.quotient);
+        if (q.answer !== exp) { bad++; fails.push(kp.id + ' div ' + q.answer + ' vs ' + exp); }
+        if (p.a !== p.b * p.quotient + p.rem) { bad++; fails.push(kp.id + ' div-a'); }
+      }
+      if (q.op === 'mix' && !skipNum) {
+        const mid = ev(p.op1, p.a, p.b);
+        const r = mid == null ? null : ev(p.op2, mid, p.c);
+        if (r == null || String(r) !== q.answer) { bad++; fails.push(kp.id + ' mix ' + q.text + ' -> ' + q.answer); }
+      }
+      if (q.kind === 'fraction' && !skipNum) {
+        // 分数题：校验 (n1±n2)/denom 约分后与答案一致
+        const [rn, rd] = q.answer.indexOf('/') >= 0
+          ? q.answer.split('/').map(Number) : [Number(q.answer), 1];
+        if (gcd(rn, rd) !== 1) { bad++; fails.push(kp.id + ' frac-not-simplified ' + q.answer); }
+        const num = q.op === 'add' ? p.a + p.b : p.a - p.b;
+        if (num * rd !== rn * p.denom) { bad++; fails.push(kp.id + ' frac ' + q.text + ' -> ' + q.answer); }
+      }
+      if (q.kind === 'decimal') {
+        const r = Number(q.answer);
+        if (!isFinite(r) || Math.abs(r - Math.round(r * 10) / 10) > 1e-9) { bad++; fails.push(kp.id + ' dec'); }
+      }
+    }
+  }
+  say('[1] 答案正确性：' + total + ' 题，异常 ' + bad);
+  if (fails.length) {
+    const uniq = Array.from(new Set(fails));
+    say('    异常种类共 ' + uniq.length + ' 种：' + uniq.slice(0, 10).join(' | '));
+  }
+
+  // ---- 2. 卷内去重 ----
+  let dup = 0;
+  for (let s = 1; s <= 60; s++) {
+    const paper = generatePaper({ kpIds: ['G2-03', 'G3-01', 'G1-01'], count: 30, types: ['horizontal'], seed: s });
+    const keys = paper.questions.map(function (q) { return dedupeKey(q, true); });
+    if (new Set(keys).size !== keys.length) dup++;
+  }
+  say('[2] 卷内去重：60 份卷子，出现重复的份数 = ' + dup);
+
+  // ---- 3. 交换律去重键 ----
+  const a1 = { kpId: 'G1-01', op: 'add', kind: 'int', params: { a: 3, b: 5 } };
+  const a2 = { kpId: 'G1-01', op: 'add', kind: 'int', params: { a: 5, b: 3 } };
+  say('[3] 交换律去重：一级合并 ' + (dedupeKey(a1, true) === dedupeKey(a2, true) ? 'PASS' : 'FAIL')
+    + '；二级区分 ' + (dedupeKey(a1, false) !== dedupeKey(a2, false) ? 'PASS' : 'FAIL'));
+
+  // ---- 4. 答案规范化 ----
+  const cases = [['624', '624.0', 'int'], ['0624', '624', 'int'], ['2/4', '1/2', 'fraction'],
+                 ['0.50', '0.5', 'decimal'], ['3.0', '3', 'decimal']];
+  let nrm = 0;
+  for (const c of cases) if (normalizeAnswer(c[0], c[2]) === normalizeAnswer(c[1], c[2])) nrm++;
+  say('[4] 答案规范化：' + nrm + '/' + cases.length + ' 通过');
+
+  // ---- 5. 判分 ----
+  const q5 = { answer: '624', kind: 'int' };
+  say('[5] 判分：624.0 -> ' + (judgeAnswer(q5, '624.0').correct ? '对' : '错')
+    + '；空答 -> ' + (judgeAnswer(q5, '').skipped ? '跳过' : '未跳过'));
+
+  // ---- 6. 难度调整不越界 ----
+  let over = 0;
+  for (const kp of SYLLABUS) {
+    for (const d of ['easy', 'hard']) {
+      const adj = adjustSpec(kp.spec, d);
+      for (const k of ['a', 'b', 'c', 'quotient']) {
+        if (adj[k] && kp.spec[k] && (adj[k].min < kp.spec[k].min || adj[k].max > kp.spec[k].max)) over++;
+      }
+    }
+  }
+  say('[6] 难度调整不越界：异常 ' + over);
+
+  // ---- 7. 题型交集 ----
+  say('[7] 题型交集 G1-01 & G3-02 = ' + JSON.stringify(commonTypes(['G1-01', 'G3-02'])));
+
+  // ---- 8. 竖式版式 ----
+  const vq = generateQuestions('G3-01', 1, { types: ['vertical'], seed: 5 })[0];
+  say('[8] 竖式版式：' + JSON.stringify(buildVerticalLayout(vq)));
+
+  // ---- 9. 结算 ----
+  const p9 = generatePaper({ kpIds: ['G2-03'], count: 10, types: ['horizontal'], seed: 99 });
+  const at = {};
+  p9.questions.forEach(function (q, i) {
+    at[q.id] = i < 8 ? { userAnswer: q.answer, correct: true, skipped: false, elapsedMs: 1000 }
+      : (i === 8 ? { userAnswer: '0', correct: false, skipped: false, elapsedMs: 2000 }
+                 : { userAnswer: '', correct: false, skipped: true, elapsedMs: 0 });
+  });
+  const r9 = settleSession(p9, at, 12000);
+  say('[9] 结算：' + r9.correct + ' 对 / ' + r9.wrong + ' 错 / ' + r9.skipped + ' 跳过，正确率 '
+    + r9.accuracy + '%，等级 ' + r9.grade.label + '，错题 ' + r9.wrongList.length + ' 条');
+
+  // ---- 10. 大纲统计 ----
+  const st = syllabusStats();
+  say('[10] 知识点：共 ' + st.total + ' 个；' + st.byGrade.map(function (g) { return g.name + g.count; }).join('、'));
+
+  // ---- 11. 全题型覆盖 ----
+  const typeCount = {};
+  for (const kp of SYLLABUS) {
+    const paper = generatePaper({ kpIds: [kp.id], count: 40, types: kp.types, difficulty: 'normal', seed: 7 });
+    for (const q of paper.questions) typeCount[q.type] = (typeCount[q.type] || 0) + 1;
+  }
+  say('[11] 题型覆盖：' + JSON.stringify(typeCount));
+
+  // ---- 12. 难度档位真的有效 ----
+  function avgA(kpId, d) {
+    const ps = generatePaper({ kpIds: [kpId], count: 60, types: ['horizontal'], difficulty: d, seed: 11 });
+    return ps.questions.reduce(function (s, q) { return s + Number(q.params.a); }, 0) / ps.questions.length;
+  }
+  say('[12] G3-01 被乘数均值：easy ' + avgA('G3-01', 'easy').toFixed(1) + ' vs hard ' + avgA('G3-01', 'hard').toFixed(1));
+
+  // ---- 13. 边界：一年级 8 个知识点出 100 题 ----
+  const big = generatePaper({
+    kpIds: ['G1-01', 'G1-02', 'G1-03', 'G1-04', 'G1-05', 'G1-06', 'G1-07', 'G1-08'],
+    count: 100, types: ['horizontal', 'vertical', 'compare', 'fill'], seed: 3
+  });
+  say('[13] 一年级全知识点 100 题：实际 ' + big.questions.length + ' 题，缺口 ' + big.shortfall);
+
+  // ---- 14. 单知识点极限（G1-03 组合空间最小） ----
+  const tight = generatePaper({ kpIds: ['G1-03'], count: 50, types: ['horizontal'], seed: 2 });
+  say('[14] G1-03 单知识点求 50 题：实际 ' + tight.questions.length + ' 题，缺口 ' + tight.shortfall);
+
+  say('DONE');
+} catch (err) {
+  say('[FATAL] ' + (err && err.stack ? err.stack : err));
+}
+report();
+setTimeout(report, 400);
+</script>
+</body>
+</html>
