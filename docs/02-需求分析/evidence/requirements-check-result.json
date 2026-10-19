@@ -1,0 +1,35 @@
+{
+  "session_date": "2026-10-19",
+  "executor": "AI assistant through local Python",
+  "scope": "需求文档静态检查；不代表功能测试或人工核实",
+  "srs_version": "V1.3",
+  "counts": {
+    "functional_requirements": 28,
+    "functional_acceptance_criteria": 161,
+    "acceptance_test_cases": 161,
+    "keyboard_acceptance_criteria": 5
+  },
+  "checks": {
+    "functional_requirement_count_28": true,
+    "functional_acceptance_count_161": true,
+    "acceptance_ids_unique": true,
+    "all_acceptance_ids_have_case_mapping": true,
+    "no_template_case_text": true,
+    "every_case_has_threshold": true,
+    "statistics_definition_present": true,
+    "mistake_key_definition_present": true,
+    "five_variant_questions": true,
+    "ambiguous_trend_removed": true,
+    "no_dangling_section_56": true,
+    "no_placeholder_sections": true,
+    "keyboard_ac_split": true,
+    "rn_to_fr_mapping_present": true,
+    "rn12_explicit_wont": true,
+    "s7_s8_moved_to_validation": true,
+    "rtm_uses_tc_ac": true,
+    "priority_doc_uses_tc_ac": true,
+    "no_a9_misreference_for_fr09": true,
+    "won_t_count_nine": true
+  },
+  "all_passed": true
+}

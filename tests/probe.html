@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre id="out">init</pre>
+<script>document.getElementById('out').textContent='plain-ok';</script>
+<script type="module">
+document.getElementById('out').textContent += '|module-ok';
+import { SYLLABUS } from '../src/domain/syllabus.js';
+document.getElementById('out').textContent += '|syllabus=' + SYLLABUS.length;
+</script>
+</body></html>

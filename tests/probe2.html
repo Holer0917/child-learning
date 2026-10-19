@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre id="out">x</pre>
+<script>
+const L=[]; window.addEventListener('error',function(e){L.push('ERR '+e.message+' @'+e.filename+':'+e.lineno);document.getElementById('out').textContent=L.join('\n');});
+</script>
+<script type="module">
+import { generateQuestions } from '../src/domain/generator.js';
+import { gcd } from '../src/utils/format.js';
+const kp='G3-07';
+const q = generateQuestions(kp, 1, { seed: 0 })[0];
+const p = q.params;
+const parts = q.answer.indexOf('/') >= 0 ? q.answer.split('/').map(Number) : [Number(q.answer), 1];
+const num = q.op === 'add' ? p.a + p.b : p.a - p.b;
+L.push(`answer=${q.answer} rn=${parts[0]} rd=${parts[1]} gcd=${gcd(parts[0],parts[1])} num=${num} denom=${p.denom} check=${num*parts[1] === parts[0]*p.denom}`);
+document.getElementById('out').textContent=L.join('\n');
+</script></body></html>
