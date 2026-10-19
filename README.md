@@ -1,5 +1,8 @@
 # 口算小达人 · KidsMath
 
+> **课程信息**：华中科技大学 CS2406 软件工程实践，选题 2「儿童学习」。
+> 仓库同时维护于 GitHub（Holer0917/child-learning）与 Gitee（huang-lei544513/childrens-learning）。
+
 > 小学 1–3 年级口算练习工具 —— 一键出题、自动批改、错题重练、A4 打印。
 > 免注册 · 免安装 · 数据全部留在本机 · 打开网页就能用。
 
