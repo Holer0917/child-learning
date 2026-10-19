@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body><pre id="out">init</pre>
+<script type="module">
+import { generateQuestions } from '../src/domain/generator.js';
+import { gcd } from '../src/utils/format.js';
+const out = [];
+for (let s = 0; s < 20; s++) {
+  const q = generateQuestions('G3-07', 1, { seed: s * 13 + 3 })[0];
+  const p = q.params;
+  const parts = q.answer.indexOf('/') >= 0 ? q.answer.split('/').map(Number) : [Number(q.answer), 1];
+  out.push(`type=${q.type} kind=${q.kind} op=${q.op} a=${p.a} b=${p.b} denom=${p.denom} answer="${q.answer}" parts=[${parts}] gcd=${gcd(parts[0],parts[1])} text=${q.text}`);
+}
+document.getElementById('out').textContent = out.join('\n');
+</script>
+</body></html>
