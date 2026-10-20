@@ -416,7 +416,10 @@ function genFraction(spec, rng) {
 
     return {
       op, kind: 'fraction', a: n1, b: n2, denom, answer,
+      // num 保留未约分的分子：判分展示与变式题反推都要还原原算式，
+      // 否则 3/6 + 1/6 会被误当成 1/2 的同型题。
       params: { op, a: n1, b: n2, denom, result: n,
+                num: n, denomRaw: denom, scale: 1,
                 digits: 1, kind: 'fraction' }
     };
   }
