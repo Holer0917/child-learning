@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>probe</title></head><body>
+<iframe id="f" src="/index.html#/home" style="width:420px;height:900px"></iframe>
+<pre id="out">wait</pre>
+<script>
+const f=document.getElementById('f'), out=document.getElementById('out');
+f.onload=()=>setTimeout(()=>{
+  const d=f.contentDocument;
+  const btn=[...d.querySelectorAll('button')].find(b=>b.textContent.includes('开始出题'));
+  btn.click();
+  setTimeout(()=>{
+    const items=d.querySelectorAll('.question-item');
+    const meta=d.querySelector('.paper-meta')?.textContent||'';
+    const err=d.querySelector('.alert')?.textContent||'';
+    out.textContent=JSON.stringify({count:items.length, meta, err, first:[...items].slice(0,3).map(x=>x.textContent)},null,1);
+  },600);
+},1200);
+</script></body></html>
