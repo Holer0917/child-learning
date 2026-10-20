@@ -34,8 +34,8 @@ try {
         return { '+': x + y, '-': x - y, '×': x * y,
                  '÷': (y !== 0 && x % y === 0) ? x / y : null }[op];
       };
-      if (q.op === 'add' && !skipNum && Number(q.answer) !== p.a + p.b) { bad++; fails.push(kp.id + ' add ' + q.text); }
-      if (q.op === 'sub' && !skipNum && Number(q.answer) !== p.a - p.b) { bad++; fails.push(kp.id + ' sub ' + q.text); }
+      if (q.op === 'add' && !skipNum && q.kind !== 'fraction' && q.kind !== 'decimal' && Number(q.answer) !== p.a + p.b) { bad++; fails.push(kp.id + ' add ' + q.text); }
+      if (q.op === 'sub' && !skipNum && q.kind !== 'fraction' && q.kind !== 'decimal' && Number(q.answer) !== p.a - p.b) { bad++; fails.push(kp.id + ' sub ' + q.text); }
       if (q.op === 'mul' && !skipNum && Number(q.answer) !== p.a * p.b) { bad++; fails.push(kp.id + ' mul ' + q.text); }
       if (q.op === 'div' && !skipNum) {
         const exp = p.rem ? p.quotient + '余' + p.rem : String(p.quotient);
@@ -48,12 +48,14 @@ try {
         if (r == null || String(r) !== q.answer) { bad++; fails.push(kp.id + ' mix ' + q.text + ' -> ' + q.answer); }
       }
       if (q.kind === 'fraction' && !skipNum) {
-        // 分数题：校验 (n1±n2)/denom 约分后与答案一致
+        // 分数题：用未约分的分子 num / 原始分母 denomRaw 还原算式，
+        // 再校验 (num/denom) 约分后与答案一致。
         const [rn, rd] = q.answer.indexOf('/') >= 0
           ? q.answer.split('/').map(Number) : [Number(q.answer), 1];
         if (gcd(rn, rd) !== 1) { bad++; fails.push(kp.id + ' frac-not-simplified ' + q.answer); }
         const num = q.op === 'add' ? p.a + p.b : p.a - p.b;
-        if (num * rd !== rn * p.denom) { bad++; fails.push(kp.id + ' frac ' + q.text + ' -> ' + q.answer); }
+        if (num !== p.num) { bad++; fails.push(kp.id + ' frac-num ' + q.text + ' ' + num + '!=' + p.num); }
+        if (num * rd !== rn * (p.denomRaw ?? p.denom)) { bad++; fails.push(kp.id + ' frac ' + q.text + ' -> ' + q.answer); }
       }
       if (q.kind === 'decimal') {
         const r = Number(q.answer);
