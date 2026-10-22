@@ -77,6 +77,7 @@ export function normalizeAnswer(raw, kind = 'int') {
 
   switch (kind) {
     case 'int': {
+      if (/^\d+\s*余\s*\d+$/.test(s)) return s.replace(/\s+/g, '');
       // 接受 "624" / "0624" / "624.0"（等价写法），但不接受 "624.5"
       if (!/^-?\d+(\.\d+)?$/.test(s)) return s;
       const n = Number(s);
