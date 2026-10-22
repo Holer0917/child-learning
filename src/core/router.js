@@ -11,6 +11,8 @@ const routes = new Map();
 let container = null;
 let notFound = null;
 let current = '';
+let dispose = null;
+let beforeLeave = null;
 
 /** 当前页面路径，形如 `/home` */
 export function currentPath() {
@@ -56,13 +58,21 @@ function render() {
   if (!container) return;
 
   const path = currentPath();
+  const routePath = path.split('?')[0];
+  if (current && path !== current && beforeLeave && !beforeLeave()) {
+    window.history.replaceState(null, '', '#' + current);
+    return;
+  }
+  dispose?.();
+  dispose = null;
+  beforeLeave = null;
   current = path;
 
   container.replaceChildren();
   container.scrollTop = 0;
 
-  const route = routes.get(path);
-  const ctx = { path, query: parseQuery(path) };
+  const route = routes.get(routePath);
+  const ctx = { path: routePath, query: parseQuery(path) };
 
   if (!route) {
     if (notFound) notFound(container, ctx);
@@ -73,7 +83,12 @@ function render() {
   if (route.title) document.title = route.title + ' · 口算小达人';
 
   try {
-    route.render(container, ctx);
+    const lifecycle = route.render(container, ctx);
+    if (typeof lifecycle === 'function') dispose = lifecycle;
+    else if (lifecycle) {
+      dispose = lifecycle.dispose;
+      beforeLeave = lifecycle.beforeLeave;
+    }
   } catch (err) {
     // 页面级异常不应导致整站白屏（FM-11）
     console.error('[router] 页面渲染失败：', err);
