@@ -106,9 +106,10 @@ export function settleSession(paper, attempts = {}, elapsedMs = 0) {
     paper,                                   // 保存整卷，供历史详情与错题重练使用
     total, correct, wrong, skipped,
     accuracy,
-    grade: gradeOf(accuracy),
+    grade: gradeOf(total === 0 ? 0 : correct / total * 100),
     elapsedMs,
-    avgMs: total === 0 ? 0 : Math.round(elapsedMs / total),
+    avgMs: total === skipped ? null : Math.round(
+      detail.reduce((sum, a) => sum + (a.skipped ? 0 : a.elapsedMs), 0) / (total - skipped)),
     wrongList,
     detail,
     finishedAt: Date.now()

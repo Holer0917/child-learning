@@ -11,6 +11,8 @@ import { migrate, isAvailable } from './core/storage.js';
 import { ensureProfile, getActiveProfile } from './domain/profile.js';
 import { start, register, registerFallback } from './core/router.js';
 import { renderHome } from './ui/pages/home.js';
+import { renderQuiz } from './ui/pages/quiz.js';
+import { renderResult } from './ui/pages/result.js';
 import { el } from './utils/dom.js';
 
 function boot() {
@@ -43,6 +45,8 @@ function boot() {
 
   // 4. 路由
   register('/home', (root) => renderHome(root), '出题');
+  register('/quiz', renderQuiz, '答题');
+  register('/result', renderResult, '成绩');
   registerFallback((root, ctx) => {
     root.replaceChildren(
       el('p', { class: 'empty', text: `页面不存在：${ctx.path}` }),

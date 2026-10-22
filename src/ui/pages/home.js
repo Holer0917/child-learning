@@ -12,6 +12,8 @@ import {
   GRADES, QUESTION_TYPES, groupByGrade, getGradeDefaultKPs
 } from '../../domain/syllabus.js';
 import { generatePaper } from '../../domain/generator.js';
+import { go } from '../../core/router.js';
+import { createSession, resumeSession, discardSession } from '../../app/quizSession.js';
 
 const DIFFICULTIES = [
   { id: 'easy', name: '简单', desc: '更基础' },
@@ -30,7 +32,8 @@ const state = {
   types: [],
   paper: null,
   error: '',
-  elapsed: 0
+  elapsed: 0,
+  limitMinutes: 0
 };
 
 export function renderHome(root) {
@@ -42,6 +45,7 @@ export function renderHome(root) {
   state.types = ['horizontal'];
   state.paper = null;
   state.error = '';
+  state.limitMinutes = 0;
 
   paint(root);
 }
@@ -53,6 +57,7 @@ function paint(root) {
         el('h1', { text: '今天练什么？' }),
         el('p', { class: 'muted', text: '选好知识点和题量，一键生成口算题。' })
       ]),
+      resumeBlock(root),
       card('① 年级', gradeRow(root)),
       card('② 知识点', pointBlock(root)),
       card('③ 题量与难度', optionBlock(root)),
@@ -72,6 +77,20 @@ function card(title, body) {
     el('h2', { class: 'card-title', text: title }),
     body
   ]);
+}
+
+function resumeBlock(root) {
+  const session = resumeSession();
+  if (!session) return null;
+  return card('还有一份未完成的练习', el('div', {}, [
+    el('p', { text: `进度：第 ${session.cursor + 1} / ${session.paper.questions.length} 题` }),
+    el('div', { class: 'actions' }, [
+      el('a', { class: 'btn btn-primary', href: '#/quiz', text: '继续练习' }),
+      el('button', { class: 'btn', text: '放弃上次练习', onclick: () => {
+        if (window.confirm('放弃上次练习？未结算的进度将被删除。')) { discardSession(); paint(root); }
+      } })
+    ])
+  ]));
 }
 
 function gradeRow(root) {
@@ -136,6 +155,14 @@ function pointBlock(root) {
 
 function optionBlock(root) {
   return el('div', {}, [
+    el('div', { class: 'field' }, [
+      el('label', { class: 'field-label', for: 'limit-minutes', text: '倒计时（可选）' }),
+      el('select', { id: 'limit-minutes', class: 'time-select', onchange: e => {
+        state.limitMinutes = Number(e.target.value);
+      } }, [0, ...Array.from({ length: 60 }, (_, i) => i + 1)].map(n => el('option', {
+        value: n, selected: state.limitMinutes === n, text: n ? `${n} 分钟` : '不限时，记录用时'
+      })))
+    ]),
     el('div', { class: 'field' }, [
       el('span', { class: 'field-label', text: '题量' }),
       el('div', { class: 'chips' }, COUNTS.map((n) =>
@@ -264,6 +291,20 @@ function paperBlock(root) {
         ? el('span', { class: 'warn-text', text: `已接近上限，少出 ${paper.shortfall} 道` })
         : null
     ].filter(Boolean)),
+
+    el('button', { class: 'btn btn-primary btn-block', text: '开始答题', disabled: actual === 0,
+      onclick: () => {
+        if (resumeSession()) {
+          state.error = '请先继续或放弃上次练习，再开始新练习。';
+          paint(root);
+          return;
+        }
+        try {
+          createSession(paper, { limitMs: state.limitMinutes ? state.limitMinutes * 60000 : null });
+          go('/quiz?start=1');
+        } catch (e) { state.error = e.message; paint(root); }
+      }
+    }),
 
     el('ol', { class: 'question-list' }, paper.questions.map((q) =>
       el('li', { class: 'question-item' }, [
