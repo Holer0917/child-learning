@@ -70,6 +70,7 @@ function render() {
 
   container.replaceChildren();
   container.scrollTop = 0;
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
   const route = routes.get(routePath);
   const ctx = { path: routePath, query: parseQuery(path) };
