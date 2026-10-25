@@ -4,6 +4,7 @@ import { go } from '../../core/router.js';
 import { resumeSession, saveDraft, recordAttempt, advance, finishSession,
   discardSession, elapsedMs, expired, savedDurably } from '../../app/quizSession.js';
 import { mountKeypad } from '../components/keypad.js';
+import { icon } from '../components/icon.js';
 
 export function renderQuiz(root, ctx) {
   let autoNext = null, ticker = null, disposed = false, retrying = false;
@@ -12,7 +13,7 @@ export function renderQuiz(root, ctx) {
   function empty() {
     root.replaceChildren(el('section', { class: 'card' }, [
       el('h1', { text: '还没有进行中的练习' }),
-      el('a', { class: 'btn btn-primary', href: '#/home', text: '去出题' })
+      el('a', { class: 'btn btn-primary', href: '#/practice', text: '去出题' })
     ]));
   }
   function finish(reason) {
@@ -103,25 +104,31 @@ export function renderQuiz(root, ctx) {
       }) : null
     ];
     root.replaceChildren(el('section', { class: 'page quiz-page' }, [
-      el('div', { class: 'row-between' }, [
-        el('h1', { class: 'card-title', text: '口算练习' }),
+      el('div', { class: 'row-between quiz-heading' }, [
+        el('div', {}, [el('span', { class: 'eyebrow' }, [icon('leaf'), '专注的小小时间']),
+          el('h1', { text: '口算练习' }), el('p', { class: 'muted', text: '慢慢想，你一定可以。' })]),
         el('button', { class: 'link-btn', text: '退出练习', onclick: exit })
       ]),
-      el('div', { class: 'paper-meta' }, [
-        el('span', { text: `第 ${s.cursor + 1} / 共 ${s.paper.questions.length} 题` }),
-        el('span', { 'data-timer': '', role: 'timer' })
+      el('div', { class: 'paper-meta quiz-meta' }, [
+        el('span', { class: 'progress-label', text: `第 ${s.cursor + 1} / 共 ${s.paper.questions.length} 题` }),
+        el('span', { class: 'timer-label' }, [icon('clock'), el('span', { 'data-timer': '', role: 'timer' })])
       ]),
       el('progress', { class: 'quiz-progress', max: s.paper.questions.length, value: s.cursor,
         'aria-label': '已完成题数' }),
-      el('section', { class: 'card quiz-card' }, [
+      el('section', { class: 'card quiz-card' + (feedback && !editing ? ' has-feedback' : '') }, [
+        el('div', { class: 'quiz-problem' }, [
+        el('span', { class: 'question-tag', text: `QUESTION ${String(s.cursor + 1).padStart(2, '0')}` }),
         el('h2', { class: 'quiz-question', text: q.text }),
         q.type === 'vertical' && q.layout?.rows ? el('pre', { class: 'vertical-question', text: q.layout.rows.join('\n') + '\n' + '─'.repeat(Math.max(4, q.layout.width || 4)) }) : null,
         el('label', { for: 'quiz-answer', class: 'field-label', text: '你的答案' }), input,
         el('p', { id: 'answer-hint', class: 'muted small', text: q.kind === 'fraction' ? '分数写成 1/2；可以用下面的键盘。'
           : q.type === 'compare' ? '输入 <、> 或 =。' : q.params?.rem ? '有余数时写成 9余2。' : '输入答案，按回车或点击提交。' }),
-        status, error,
-        el('div', { class: 'actions' }, actions),
-        editing ? mountKeypad(input, value => { saveDraft(value); warnSave(); }) : null
+        status, error]),
+        el('div', { class: 'quiz-controls' }, [
+        el('div', { class: 'keypad-caption' }, [icon('grid'), editing ? '敲下你的答案' : '每一步，都算进步']),
+        el('div', { class: 'actions quiz-actions' }, actions),
+        mountKeypad(input, value => { saveDraft(value); warnSave(); })
+        ])
       ])
     ]));
     warnSave();

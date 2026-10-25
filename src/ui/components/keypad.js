@@ -4,7 +4,7 @@ import { el } from '../../utils/dom.js';
 export function mountKeypad(input, onChange) {
   const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0', '⌫', '/', '余', '-', '<', '=', '>'];
   return el('div', { class: 'keypad', 'aria-label': '答题键盘' }, keys.map(key =>
-    el('button', { type: 'button', class: 'btn key', text: key,
+    el('button', { type: 'button', class: 'btn key', text: key, disabled: input.disabled,
       'aria-label': key === '⌫' ? '删除一位' : key,
       onpointerdown: e => e.preventDefault(),
       onclick: () => {

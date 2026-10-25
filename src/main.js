@@ -11,6 +11,9 @@ import { migrate, isAvailable } from './core/storage.js';
 import { ensureProfile, getActiveProfile } from './domain/profile.js';
 import { start, register, registerFallback } from './core/router.js';
 import { renderHome } from './ui/pages/home.js';
+import { renderPractice } from './ui/pages/practice.js';
+import { renderHistory } from './ui/pages/history.js';
+import { renderMistakes } from './ui/pages/mistakes.js';
 import { renderQuiz } from './ui/pages/quiz.js';
 import { renderResult } from './ui/pages/result.js';
 import { el } from './utils/dom.js';
@@ -26,16 +29,34 @@ function boot() {
   // 2. 顶栏：档案信息（切换功能后续补）
   const profile = getActiveProfile();
   header.replaceChildren(
-    el('div', { class: 'brand' }, [
-      el('span', { class: 'brand-mark', text: '🧮' }),
+    el('a', { class: 'brand', href: '#/home', 'aria-label': '口算小达人首页' }, [
       el('span', { class: 'brand-name', text: '口算小达人' })
     ]),
+    el('nav', { class: 'header-nav', 'aria-label': '主导航' }, [
+      el('a', { class: 'nav-link', href: '#/home', text: '开始' }),
+      el('a', { class: 'nav-link', href: '#/practice', text: '出题练习' }),
+      el('a', { class: 'nav-link', href: '#/history', text: '成绩历史' }),
+      el('a', { class: 'nav-link', href: '#/mistakes', text: '错题本' })
+    ]),
     el('div', { class: 'profile-chip' }, [
-      el('span', { text: profile?.avatar ?? '🙂' }),
-      el('span', { text: profile?.name ?? '小朋友' }),
-      el('span', { class: 'grade-tag', text: `${profile?.grade ?? 1} 年级` })
+      el('span', { class: 'profile-copy' }, [
+        el('span', { text: profile?.name ?? '小朋友' }),
+        el('span', { class: 'grade-tag', text: `${profile?.grade ?? 1} 年级学习档案` })
+      ])
     ])
   );
+
+  const updateNavigation = () => {
+    const path = window.location.hash.split('?')[0];
+    header.querySelectorAll('.nav-link').forEach(link => {
+      if (link.hash === path || (link.hash === '#/home' && !path)
+          || (link.hash === '#/practice' && path === '#/quiz')
+          || (link.hash === '#/history' && path === '#/result')) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  updateNavigation();
+  window.addEventListener('hashchange', updateNavigation);
 
   // 3. 存储不可用时给出提示（FM-01）
   if (!isAvailable()) {
@@ -44,7 +65,10 @@ function boot() {
   }
 
   // 4. 路由
-  register('/home', (root) => renderHome(root), '出题');
+  register('/home', renderHome, '开始');
+  register('/practice', renderPractice, '出题');
+  register('/history', renderHistory, '成绩历史');
+  register('/mistakes', renderMistakes, '错题本');
   register('/quiz', renderQuiz, '答题');
   register('/result', renderResult, '成绩');
   registerFallback((root, ctx) => {

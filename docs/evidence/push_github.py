@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""通过 GitHub Contents API 同步变更文件（git 协议不通时的备用通道）。
+"""通过 GitHub Contents API 同步当前 Git 提交（git 协议不通时的备用通道）。
+
+只发布 HEAD 的已提交文件，不上传测试临时数据或未采用的本地素材。
 
 用法：
   GH_TOKEN=... python docs/evidence/push_github.py --dry-run
@@ -8,6 +10,7 @@
 import base64
 import json
 import os
+import subprocess
 import sys
 import time
 import urllib.error
@@ -19,8 +22,6 @@ ROOT = Path(__file__).resolve().parents[2]
 TOKEN = os.environ.get('GH_TOKEN', '')
 REPO = 'Holer0917/child-learning'
 BRANCH = 'main'
-SKIP_DIRS = {'.git', '.tmp', 'node_modules'}
-SKIP_SUFFIX = {'.zip'}
 
 
 def api(path, method='GET', body=None):
@@ -58,22 +59,14 @@ def remote_tree():
 
 
 def local_files():
-    out = []
-    for dirpath, dirnames, filenames in os.walk(ROOT):
-        rel_dir = os.path.relpath(dirpath, ROOT).replace('\\', '/')
-        if rel_dir == '.':
-            rel_dir = ''
-        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
-        for fn in filenames:
-            if os.path.splitext(fn)[1].lower() in SKIP_SUFFIX:
-                continue
-            if fn.startswith('~$'):
-                continue
-            if fn.startswith('.') and fn != '.gitignore':
-                continue
-            rel = f'{rel_dir}/{fn}' if rel_dir else fn
-            out.append(rel)
-    return sorted(out)
+    raw = subprocess.check_output(
+        ['git', 'ls-tree', '--full-tree', '-r', '-z', '--name-only', 'HEAD'], cwd=ROOT)
+    return sorted(path for path in raw.decode('utf-8').split('\0') if path)
+
+
+def committed_content(path):
+    # 读取提交中的字节，避免 Windows 工作区换行差异造成两边内容不同。
+    return subprocess.check_output(['git', 'show', 'HEAD:' + path], cwd=ROOT)
 
 
 def put_file(path, content, sha=None):
@@ -94,13 +87,13 @@ def main():
 
     tree = remote_tree()
     files = local_files()
-    plan = [(rel, (ROOT / rel).read_bytes(), tree.get(rel)) for rel in files]
+    plan = [(rel, committed_content(rel), tree.get(rel)) for rel in files]
     new = [p for p in plan if p[2] is None]
     upd = [p for p in plan if p[2] is not None and p[2] != blob_sha(p[1])]
     same = [p for p in plan if p[2] is not None and p[2] == blob_sha(p[1])]
     deleted = sorted(set(tree) - set(files))
 
-    print(f'远端 {len(tree)} 个文件，本地 {len(files)} 个文件')
+    print(f'远端 {len(tree)} 个文件，当前提交 {len(files)} 个文件')
     print(f'新增 {len(new)}，内容有变 {len(upd)}，未变跳过 {len(same)}')
     if deleted:
         print(f'远端独有（本脚本不删除）: {deleted}')

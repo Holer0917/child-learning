@@ -12,7 +12,7 @@ const server = http.createServer(async (req, res) => {
     const url = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const file = path.resolve(root, '.' + (url === '/' ? '/index.html' : url));
     if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
-    const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript', '.css': 'text/css' };
+    const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript', '.css': 'text/css', '.svg': 'image/svg+xml' };
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'text/plain' });
     res.end(await fs.readFile(file));
   } catch { if (!res.headersSent) res.writeHead(404); res.end(); }
@@ -28,7 +28,7 @@ let browser;
   page.on('pageerror', e => errors.push(e.message));
   const active = () => page.evaluate(() => JSON.parse(localStorage.getItem(`km:quiz:active:${JSON.parse(localStorage.getItem('km:active'))}`)));
   const start = async () => {
-    await page.goto(base + '/#/home');
+    await page.goto(base + '/#/practice');
     await page.getByRole('button', { name: '全不选', exact: true }).click();
     await page.getByRole('checkbox', { name: /^10 以内加法/ }).check();
     await page.getByRole('button', { name: '10', exact: true }).click();
@@ -114,7 +114,7 @@ let browser;
   const isolated=await browser.newContext();
   await isolated.addInitScript(() => { Storage.prototype.setItem = () => { throw new Error('disabled'); }; });
   const fallback=await isolated.newPage();
-  await fallback.goto(base);
+  await fallback.goto(base+'/#/practice');
   await fallback.getByRole('button',{name:'开始出题 · 30 道',exact:true}).click();
   await fallback.getByRole('button',{name:'开始答题',exact:true}).click();
   await fallback.locator('#quiz-answer').fill('1');
