@@ -4,3 +4,9 @@
 .DS_Store
 Thumbs.db
 node_modules/
+__pycache__/
+*.py[cod]
+
+# 未采用的本地美术素材，保留在工作区，不纳入发布。
+assets/icons/favicon.svg
+assets/illustrations/math-garden.svg
