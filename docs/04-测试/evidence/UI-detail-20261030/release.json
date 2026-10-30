@@ -1,0 +1,46 @@
+{
+  "executedAt": "2026-10-30T12:08:26.214336+00:00",
+  "passed": true,
+  "sourceCodeCommit": "01cf2d2040921b960f857fe48055c2eea33adbff",
+  "previewCommit": "e4ceedbc55dc17a73d6bba0b33d8273c248af50b",
+  "formalWorker": "abc-2",
+  "previewWorker": "abc-preview-2",
+  "formalRepos": [
+    "https://github.com/Holer0917/child-learning",
+    "https://gitee.com/huang-lei544513/childrens-learning"
+  ],
+  "pages": {
+    "formal": {
+      "status": "built",
+      "commit": "01cf2d2040921b960f857fe48055c2eea33adbff",
+      "expectedCommit": "01cf2d2040921b960f857fe48055c2eea33adbff",
+      "url": "https://holer0917.github.io/child-learning/"
+    },
+    "preview": {
+      "status": "built",
+      "commit": "e4ceedbc55dc17a73d6bba0b33d8273c248af50b",
+      "expectedCommit": "e4ceedbc55dc17a73d6bba0b33d8273c248af50b",
+      "url": "https://holer0917.github.io/child-learning-b10-preview/"
+    }
+  },
+  "sourceTests": {
+    "suites": 14,
+    "passedSuites": 14,
+    "browserCheckGroups": 125,
+    "unit": {
+      "tests": 77,
+      "pass": 77,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "previewTests": {
+    "unitPass": 80,
+    "browserGroups": 43
+  },
+  "filesMatchedPerSite": 43,
+  "testedInputsStillMatch": true,
+  "scope": "两处既有需求实现修复；独立无头浏览器验证，不等同于真实手机最终验收"
+}
