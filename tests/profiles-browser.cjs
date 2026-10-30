@@ -197,7 +197,8 @@ const exported = (page, url) => page.evaluate(async url => (await import(new URL
   {
     const { context, page, url } = await open(true);
     await page.waitForFunction(() => document.querySelector('#pwa-panel')?.dataset.ready === 'true' && !!navigator.serviceWorker.controller);
-    assert.equal(await page.locator('#pwa-panel').getAttribute('data-version'), 'abc-1');
+    const workerVersion = (await fs.readFile(path.join(root, 'sw.js'), 'utf8')).match(/const VERSION = '([^']+)'/)[1];
+    assert.equal(await page.locator('#pwa-panel').getAttribute('data-version'), workerVersion);
     await context.setOffline(true); await page.goto(url + '#/profiles'); await page.getByRole('button', { name: '创建档案', exact: true }).click();
     assert.equal(await page.locator('.profile-card').count(), 2);
     await page.goto(url + '#/settings'); const payload = await exported(page, url); await file(page, payload); await page.locator('#import-mode').selectOption('overwrite');

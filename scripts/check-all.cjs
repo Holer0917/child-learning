@@ -7,7 +7,7 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).replaceAll('-', '');
-const output = path.join(root, 'docs', '04-测试', 'evidence', 'ABC-integration-' + day);
+const output = process.env.CHECK_OUTPUT ? path.resolve(root, process.env.CHECK_OUTPUT) : path.join(root, 'docs', '04-测试', 'evidence', 'ABC-integration-' + day);
 const relative = file => path.relative(root, file).split(path.sep).join('/');
 const digest = data => createHash('sha256').update(data).digest('hex');
 const unitFiles = ['generator-options', 'paper-stats', 'paper-edit', 'quiz-session', 'history', 'mistakes-stats', 'profiles-backup'].map(name => `tests/${name}.test.mjs`);

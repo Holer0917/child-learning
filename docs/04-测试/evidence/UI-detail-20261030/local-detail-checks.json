@@ -1,0 +1,131 @@
+{
+  "executedAt": "2026-10-30T12:00:18.343Z",
+  "passed": true,
+  "mode": "local",
+  "results": [
+    {
+      "site": {
+        "label": "local",
+        "url": "http://127.0.0.1:65195/"
+      },
+      "colors": [
+        {
+          "level": "mastery-entry level-weak",
+          "text": "! 薄弱 · 50%",
+          "color": "rgb(162, 27, 27)",
+          "background": "rgba(0, 0, 0, 0)",
+          "image": "repeating-linear-gradient(45deg, rgb(162, 27, 27) 0px, rgb(162, 27, 27) 2px, rgb(255, 255, 255) 2px, rgb(255, 255, 255) 4px)",
+          "aria": "50%，薄弱"
+        },
+        {
+          "level": "mastery-entry level-warn",
+          "text": "△ 待加强 · 70%",
+          "color": "rgb(118, 80, 18)",
+          "background": "rgb(118, 80, 18)",
+          "image": "none",
+          "aria": "70%，待加强"
+        },
+        {
+          "level": "mastery-entry level-good",
+          "text": "✓ 良好 · 90%",
+          "color": "rgb(23, 99, 55)",
+          "background": "rgb(23, 99, 55)",
+          "image": "none",
+          "aria": "90%，良好"
+        },
+        {
+          "level": "mastery-entry level-unpracticed",
+          "text": "— 未练习 · 未练习",
+          "color": "rgb(96, 96, 96)",
+          "background": "rgb(96, 96, 96)",
+          "image": "none",
+          "aria": "未练习"
+        }
+      ],
+      "layouts": [
+        {
+          "width": 320,
+          "height": 568,
+          "position": "sticky",
+          "top": 0,
+          "bottom": 144.171875,
+          "variable": 145,
+          "overflow": false,
+          "profileVisible": true,
+          "white": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "position": "sticky",
+          "top": 0,
+          "bottom": 144.171875,
+          "variable": 145,
+          "overflow": false,
+          "profileVisible": true,
+          "white": true
+        },
+        {
+          "width": 667,
+          "height": 375,
+          "position": "sticky",
+          "top": 0,
+          "bottom": 130.578125,
+          "variable": 131,
+          "overflow": false,
+          "profileVisible": true,
+          "white": true
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "position": "sticky",
+          "top": 0,
+          "bottom": 88.1875,
+          "variable": 89,
+          "overflow": false,
+          "profileVisible": true,
+          "white": true
+        }
+      ],
+      "quiz": [
+        {
+          "width": 320,
+          "height": 568,
+          "header": 78.578125,
+          "input": 245.953125,
+          "keypad": 568.140625
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "header": 78.578125,
+          "input": 329.15625,
+          "keypad": 651.34375
+        },
+        {
+          "width": 568,
+          "height": 320,
+          "header": 78.578125,
+          "input": 235.453125,
+          "keypad": 319.765625
+        },
+        {
+          "width": 667,
+          "height": 375,
+          "header": 78.578125,
+          "input": 290.453125,
+          "keypad": 374.765625
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "header": 84.1875,
+          "input": 301.265625,
+          "keypad": 389.578125
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
