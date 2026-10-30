@@ -1,0 +1,32 @@
+{
+  "executedAt": "2026-10-30T10:30:44.849Z",
+  "sourceCodeCommit": "3b97cf453b1b211793be370dcbbd3f7402c451fe",
+  "localImplementationCommit": "a3a0a170837842845658b10557965e67485a904a",
+  "originalGithubHead": "b483cef9bde525ed0f79b95305e86d92b436f517",
+  "originalGiteeHead": "bae3ca8646981a5680a2a433a0d1eba00ec0ec78",
+  "previewCommit": "51c5351f6b56d5bd6d3ede2e290433f3a9cef9a9",
+  "pages": {
+    "formal": {
+      "url": "https://holer0917.github.io/child-learning/",
+      "commit": "3b97cf453b1b211793be370dcbbd3f7402c451fe",
+      "status": "built"
+    },
+    "preview": {
+      "url": "https://holer0917.github.io/child-learning-b10-preview/",
+      "commit": "51c5351f6b56d5bd6d3ede2e290433f3a9cef9a9",
+      "status": "built"
+    }
+  },
+  "formalCodeTests": {
+    "unit": 77,
+    "browserGroups": 125
+  },
+  "previewTests": {
+    "unit": 80,
+    "browserGroups": 43
+  },
+  "publicFilesPerSite": 43,
+  "namespaceIsolationVerified": true,
+  "credentialsInWindowsCredentialManager": true,
+  "remoteUrlsContainNoCredentials": true
+}

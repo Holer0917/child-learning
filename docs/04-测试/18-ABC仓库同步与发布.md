@@ -25,4 +25,21 @@
 
 ## 3. 执行状态
 
-当前为发布准备记录。完成推送、静态站部署与公开流程核对后补记实际结果。未将未完成的部署写成成功。
+**已完成正式两仓库及独立测试站的同步与部署。**
+
+| 核对项 | 实际结果 |
+|---|---|
+| 正式源代码发布提交 | `3b97cf453b1b211793be370dcbbd3f7402c451fe`，同时保留原GitHub/Gitee历史；后续验证记录提交只补充文档与证据 |
+| 本地功能提交 | `a3a0a170837842845658b10557965e67485a904a` |
+| 独立测试提交 | `51c5351f6b56d5bd6d3ede2e290433f3a9cef9a9` |
+| 正式代码自测 | 77项逻辑、125组浏览器检查通过 |
+| 测试副本检查 | 80项逻辑/隔离、43组浏览器检查通过 |
+| Pages | 正式与测试两站均构建成功，版本分别abc-1、abc-preview-1 |
+| 公开文件 | 两站各43个运行文件与其发布提交逐字节一致 |
+| 公开实际流程 | 标准备份真实下载/覆盖回导、1题错题重练攻克、离线刷新档案/统计通过 |
+| 同源数据隔离 | 同一个隔离浏览器上下文中，测试站操作未改变正式站km:数据 |
+| 后续认证 | 已迁移到本机Windows凭据管理器并核对读取；Git远程URL不含令牌 |
+
+本地状态与发布记录分别保存在被忽略的`.tmp/abc-release-state.json`、`.tmp/github-abc-preview-state.json`。公开测试使用独立无头Edge，未操作个人浏览器学习数据，不等同于真实手机验收。
+
+[发布摘要](evidence/ABC-release-20261030/release.json) · [逐文件核对](evidence/ABC-release-20261030/public-files.json) · [公开流程](evidence/ABC-release-20261030/public-browser.json) · [测试副本检查](evidence/ABC-release-20261030/preview-qa.json) · [校验和](evidence/ABC-release-20261030/SHA256SUMS.txt)。
