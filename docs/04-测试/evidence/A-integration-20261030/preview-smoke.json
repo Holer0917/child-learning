@@ -1,0 +1,23 @@
+{
+  "executedAt": "2026-10-30T04:55:27.184Z",
+  "browser": "156.0.4314.50",
+  "routes": [
+    {
+      "route": "home",
+      "status": 200,
+      "title": "开始"
+    },
+    {
+      "route": "mistakes",
+      "status": 200,
+      "title": "错题本"
+    },
+    {
+      "route": "stats",
+      "status": 200,
+      "title": "学习统计"
+    }
+  ],
+  "pageErrors": [],
+  "scope": "independent browser context against real local development server"
+}

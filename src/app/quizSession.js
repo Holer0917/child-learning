@@ -4,11 +4,24 @@ import { getActiveProfile } from '../domain/profile.js';
 import { judgeAnswer, settleSession } from '../domain/grader.js';
 import { makeId } from '../utils/random.js';
 import { getKnowledgePoint } from '../domain/syllabus.js';
+import { archiveSession } from '../domain/mistakes.js';
+import { updateAwards } from '../domain/stats.js';
+import { bus, EVENTS } from '../core/bus.js';
+import { retainHistory } from '../domain/history.js';
 
 const volatile = new Map();
 const copy = (v) => JSON.parse(JSON.stringify(v));
 const activeKey = (id) => `quiz:active:${id}`;
 let lastSaved = true;
+
+bus.on(EVENTS.PROFILE_CHANGED, event => {
+  if (event.imported) { volatile.clear(); lastSaved = true; }
+  else if (event.removed) {
+    volatile.delete(activeKey(event.profileId));
+    volatile.delete(`result:${event.profileId}`);
+  }
+  else if (event.historyDeleted && volatile.get(`result:${event.profileId}`)?.id === event.historyDeleted) volatile.delete(`result:${event.profileId}`);
+});
 
 export function savedDurably() { return lastSaved && isAvailable(); }
 
@@ -48,7 +61,7 @@ export function createSession(paper, { limitMs = null } = {}) {
   }
   const now = Date.now();
   return copy(persist({ schemaVersion: 1, id: makeId('s'), profileId: pid,
-    mode: 'practice', paper: copy(paper), attempts: {}, retries: {}, cursor: 0,
+    mode: paper.retry ? 'retry' : paper.variant ? 'variant' : 'practice', paper: copy(paper), attempts: {}, retries: {}, cursor: 0,
     startAt: now, questionAt: now, savedAt: now, limitMs, draft: '' }));
 }
 
@@ -123,24 +136,19 @@ export function finishSession(reason = 'completed') {
   // 主动退出且零作答不产生成绩；超时仍展示全卷的未作答情况。
   if (!answered && reason === 'exit') { discardSession(); return null; }
   const result = { ...settleSession(s.paper, s.attempts, elapsedMs(s)),
-    id: s.id, profileId: s.profileId, answered, reason, compressed: false };
+    id: s.id, profileId: s.profileId, mode: s.mode, answered, reason, compressed: false };
   const key = `sessions:${s.profileId}`;
   const stored = read(key, []);
   const records = Array.isArray(stored) ? stored.filter(r => r.id !== s.id) : [];
   records.unshift(result);
-  // 第 501 条起保留统计摘要；历史页在后续步骤实现。
-  const retained = records.slice(0, 2500).map((r, i) => {
-    if (i < 500 || r.compressed) return r;
-    const kpCount = {}, kpCorrect = {}, kpAnswered = {};
-    for (const q of r.paper?.questions ?? []) kpCount[q.kpId] = (kpCount[q.kpId] ?? 0) + 1;
-    for (const a of r.detail ?? []) {
-      if (!a.skipped) kpAnswered[a.kpId] = (kpAnswered[a.kpId] ?? 0) + 1;
-      if (a.correct) kpCorrect[a.kpId] = (kpCorrect[a.kpId] ?? 0) + 1;
-    }
-    const { paper, detail, wrongList, ...summary } = r;
-    return { ...summary, paper: null, detail: [], wrongList: [], kpCount, kpCorrect, kpAnswered, compressed: true };
-  });
+  // 第 501 条起保留统计摘要，合计最多 2500 条。
+  const retained = retainHistory(records);
   const recordSaved = write(key, retained);
+  // 成绩先保存为恢复来源；错题写入失败可在成绩页/错题本回补，不回滚或重复追加成绩。
+  const archive = recordSaved ? archiveSession(result) : { ok: false, code: 'HISTORY_NOT_SAVED' };
+  result.mistakesSaved = archive.ok;
+  result.mistakeError = archive.ok ? null : archive.code;
+  result.awardsSaved = recordSaved ? updateAwards(s.profileId) : false;
   result.saved = recordSaved && isAvailable();
   volatile.set(`result:${s.profileId}`, result);
   const resultSaved = write(`quiz:result:${s.profileId}`, result);

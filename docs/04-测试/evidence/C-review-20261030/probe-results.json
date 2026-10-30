@@ -1,0 +1,263 @@
+{
+  "executedAt": "2026-10-30T08:52:27.420Z",
+  "basis": "C ZIP overlay on current local A+B in isolated sandbox; not Gitee HEAD",
+  "checks": [
+    {
+      "id": "C-P01",
+      "kind": "positive",
+      "name": "三档案上限、编辑、切换与数据隔离",
+      "reproduced": true,
+      "observed": {
+        "profiles": 3,
+        "fourthRejected": true,
+        "profileIsolation": true,
+        "updatedName": "修改后的昵称"
+      }
+    },
+    {
+      "id": "C-P02",
+      "kind": "positive",
+      "name": "正常级联删除登记键，保留其他档案和同源其他数据",
+      "reproduced": true,
+      "observed": {
+        "registeredPartitions": 7,
+        "remainingProfiles": 1,
+        "otherDataPreserved": true
+      }
+    },
+    {
+      "id": "C-P03",
+      "kind": "positive",
+      "name": "日期/知识点筛选与历史单删不反向删除错题",
+      "reproduced": true,
+      "observed": {
+        "dateInclusive": true,
+        "kpFilter": true,
+        "historyDeleted": true,
+        "mistakesUnchanged": true
+      }
+    },
+    {
+      "id": "C-P04",
+      "kind": "positive",
+      "name": "无A错题容器的C备份正常回导",
+      "reproduced": true,
+      "observed": {
+        "response": {
+          "ok": true,
+          "profileCount": 1,
+          "active": "umvuqhs30culd"
+        },
+        "restoredHistory": 1
+      }
+    },
+    {
+      "id": "C-D01",
+      "kind": "defect",
+      "name": "现有A错题V2容器导出后无法回导，预览错题数误报0",
+      "reproduced": true,
+      "observed": {
+        "actualMistakes": 1,
+        "previewMistakes": 0,
+        "errors": [
+          {
+            "path": "$.data.umvuqhs34ednl.mistakes",
+            "message": "mistakes 必须是数组。"
+          }
+        ],
+        "importRejected": true
+      }
+    },
+    {
+      "id": "C-D02",
+      "kind": "defect",
+      "name": "重练和变式会话被旧schema判无效并删除",
+      "reproduced": true,
+      "observed": [
+        {
+          "mode": "practice",
+          "storedBeforeResume": true,
+          "resumed": true,
+          "diskAfterResume": true
+        },
+        {
+          "mode": "retry",
+          "storedBeforeResume": true,
+          "resumed": false,
+          "diskAfterResume": false
+        },
+        {
+          "mode": "variant",
+          "storedBeforeResume": true,
+          "resumed": false,
+          "diskAfterResume": false
+        }
+      ]
+    },
+    {
+      "id": "C-D03",
+      "kind": "defect",
+      "name": "持续写入失败时回滚丢数据但仍提示已恢复",
+      "reproduced": true,
+      "observed": {
+        "originalKeys": [
+          "km:active",
+          "km:profiles",
+          "km:sessions:umvuqhs3584de",
+          "km:settings"
+        ],
+        "remainingKeys": [],
+        "response": {
+          "ok": false,
+          "reason": "write-failed",
+          "errors": [
+            {
+              "path": "$",
+              "message": "导入写入中断，已恢复原有数据。请释放浏览器存储空间后重试。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "C-P05",
+      "kind": "positive",
+      "name": "单次写入失败且后续存储恢复时可以回滚",
+      "reproduced": true,
+      "observed": {
+        "failedWrite": 3,
+        "originalDataRestored": true,
+        "response": {
+          "ok": false,
+          "reason": "write-failed",
+          "errors": [
+            {
+              "path": "$",
+              "message": "导入写入中断，已恢复原有数据。请释放浏览器存储空间后重试。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "C-D04",
+      "kind": "defect",
+      "name": "备份未包含音效设置，恢复成功后旧设置被删除",
+      "reproduced": true,
+      "observed": {
+        "exportedSettings": false,
+        "restoredSettings": null
+      }
+    },
+    {
+      "id": "C-D05",
+      "kind": "defect",
+      "name": "导入未清理quizSession内存，继续作答覆盖恢复的会话",
+      "reproduced": true,
+      "observed": {
+        "diskAfterImport": "restored-active",
+        "memoryResume": "smvuqhs40hgr4",
+        "diskAfterNextSave": "smvuqhs40hgr4",
+        "recoveredSessionOverwritten": true
+      }
+    },
+    {
+      "id": "C-D06",
+      "kind": "defect",
+      "name": "备份校验放过档案上限、非法版本及坏题目/会话",
+      "reproduced": true,
+      "observed": {
+        "incorrectlyAcceptedCases": 14,
+        "accepted": [
+          "version=-1",
+          "version=0",
+          "exportedAt=invalid",
+          "profiles=4",
+          "missing profile data",
+          "whitespace nickname",
+          "grade is string",
+          "session total=999",
+          "question ids duplicated",
+          "fraction denominator zero",
+          "empty paper questions",
+          "invalid active session",
+          "arbitrary mistake item",
+          "unknown badges version"
+        ]
+      }
+    },
+    {
+      "id": "C-D07",
+      "kind": "defect",
+      "name": "删除分区失败被吞掉，仍返回档案已删除",
+      "reproduced": true,
+      "observed": {
+        "reportedRemoved": true,
+        "childDataRemains": true,
+        "deletedProfilePresent": false
+      }
+    },
+    {
+      "id": "C-D08",
+      "kind": "defect",
+      "name": "昵称实现与1至12字符及空值默认需求不一致",
+      "reproduced": true,
+      "observed": {
+        "thirteenCharacterNameAccepted": true,
+        "emptyNameDefaultRejected": true
+      }
+    },
+    {
+      "id": "C-D09",
+      "kind": "defect",
+      "name": "需求定义的备份格式被拒绝，未记录格式变更",
+      "reproduced": true,
+      "observed": {
+        "formatInRequirements": "kidsmath-backup",
+        "requirementsVersion": "1.0",
+        "rejection": [
+          {
+            "path": "$.app",
+            "message": "不是口算小达人的备份文件，请重新选择。"
+          },
+          {
+            "path": "$.version",
+            "message": "备份版本号缺失或不是整数。"
+          },
+          {
+            "path": "$.data.u1a2b3.badges",
+            "message": "badges 必须是对象。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C-D10",
+      "kind": "defect",
+      "name": "导出文件名带连字符且显示字节数与UTF8实际不一致",
+      "reproduced": true,
+      "observed": {
+        "filename": "kidsmath-backup-2026-10-30.json",
+        "reportedBytes": 440,
+        "actualUtf8Bytes": 450
+      }
+    },
+    {
+      "id": "C-P06",
+      "kind": "positive",
+      "name": "超大文件与未来版本在写入前拒绝",
+      "reproduced": true,
+      "observed": {
+        "oversizeFileRejected": true,
+        "futureVersionRejected": true,
+        "diskUnchanged": true
+      }
+    }
+  ],
+  "totals": {
+    "probes": 16,
+    "reproduced": 16,
+    "positive": 6,
+    "defectGroups": 10
+  }
+}

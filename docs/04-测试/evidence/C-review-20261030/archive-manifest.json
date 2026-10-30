@@ -1,0 +1,78 @@
+{
+  "archive": "新建文件夹 (3).zip",
+  "sha256": "d75112fa19c92c651ff07b79c62e993113eb9df9aac9578dd00eac498de4dfae",
+  "files": [
+    {
+      "file": "assets/css/base.css",
+      "bytes": 19223,
+      "sha256": "d0261627011c3786891e52a923c95f4ff8ea8e2f30de52d0806d56c847a4dd26",
+      "existsLocally": true
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 1234,
+      "sha256": "e03f5c216fbb67bf9d96f888bf3a2bdda49a0b33ec3cd9fa78807dee25c9aae7",
+      "existsLocally": false
+    },
+    {
+      "file": "package.json",
+      "bytes": 691,
+      "sha256": "8943df50a5fb3621363aa0b1365e16f98081be2e7cc2d2dfda3cc52037b96d6c",
+      "existsLocally": false
+    },
+    {
+      "file": "src/core/schema.js",
+      "bytes": 10176,
+      "sha256": "8adda6ea1a6a2df69f8891266916344dfbee6be8178230f68afa9e9782bf6074",
+      "existsLocally": true
+    },
+    {
+      "file": "src/domain/backup.js",
+      "bytes": 7623,
+      "sha256": "fcf1c3e103152e130018ce933acdd851e97120f9753e392b8e0ce95e7fa3e783",
+      "existsLocally": false
+    },
+    {
+      "file": "src/domain/history.js",
+      "bytes": 3809,
+      "sha256": "21d470608ab229857b0ad0aa669c793f147cde86add2aa84c33841849c8bcb83",
+      "existsLocally": true
+    },
+    {
+      "file": "src/domain/profile.js",
+      "bytes": 7440,
+      "sha256": "b5d0b61967da9259ed4da0df5cb386796bd81ce1c302abc28174991448369f10",
+      "existsLocally": true
+    },
+    {
+      "file": "src/main.js",
+      "bytes": 4213,
+      "sha256": "632c71aecd22192a052ccb071b04cfcf9f3e7f9b62b8d3e81cda528ba4618c80",
+      "existsLocally": true
+    },
+    {
+      "file": "src/ui/pages/history.js",
+      "bytes": 7878,
+      "sha256": "215e0b4efc3d27db2f60003bd31667f7777caee6b790e0552f06c5bff632adcc",
+      "existsLocally": true
+    },
+    {
+      "file": "src/ui/pages/home.js",
+      "bytes": 2733,
+      "sha256": "5422695299160c4e4286d2fca4824ec184e226d925bb24bf33658e3e788af317",
+      "existsLocally": true
+    },
+    {
+      "file": "src/ui/pages/profiles.js",
+      "bytes": 8214,
+      "sha256": "410c279afe145ddb8a403d43c0c0130d0b355f0c589fdc815691913cdd924edb",
+      "existsLocally": false
+    },
+    {
+      "file": "src/ui/pages/settings.js",
+      "bytes": 6512,
+      "sha256": "02ece9a3174a16459e584144ca32846239db4f1db5ba4cd5a8b85ddb7d58244a",
+      "existsLocally": false
+    }
+  ]
+}

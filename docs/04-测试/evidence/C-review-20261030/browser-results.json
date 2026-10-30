@@ -1,0 +1,204 @@
+{
+  "executedAt": "2026-10-30T08:54:04.431Z",
+  "basis": "C ZIP overlay on current A+B; isolated headless Edge, not a real phone and not Gitee HEAD",
+  "checks": [
+    {
+      "id": "C-B01",
+      "kind": "positive",
+      "name": "档案界面可创建/编辑/切换，第四个禁用",
+      "reproduced": true,
+      "observed": {
+        "profileCount": 3,
+        "fourthDisabled": true,
+        "headerUpdates": true
+      },
+      "pageErrors": []
+    },
+    {
+      "id": "C-B02",
+      "kind": "integration",
+      "name": "覆盖main后学习统计入口失效，首页退回后续开放文案",
+      "reproduced": true,
+      "observed": {
+        "homeMistakesCopy": "错题本后续支持自动归档错题和错题重练。下一步开放",
+        "statsRoute": "not-found"
+      },
+      "pageErrors": []
+    },
+    {
+      "id": "C-B03",
+      "kind": "integration",
+      "name": "覆盖main后未注册PWA，新C模块未进入缓存清单",
+      "reproduced": true,
+      "observed": {
+        "workerRegistrations": 0,
+        "footerStatus": "首次打开需要联网；看到“离线已就绪”后可断网使用。",
+        "missingFromCache": [
+          "src/domain/backup.js",
+          "src/ui/pages/profiles.js",
+          "src/ui/pages/settings.js"
+        ]
+      },
+      "pageErrors": []
+    },
+    {
+      "id": "C-B04",
+      "kind": "defect",
+      "name": "A错题备份在UI显示0并且导入被拒绝",
+      "reproduced": true,
+      "observed": {
+        "preview": "备份预览包含 1 个档案undefined 小朋友（1 年级）· 历史 1 条 · 错题 0 条确认导入后，现有档案数据会被此备份覆盖。请确认已经了解覆盖范围。确认导入取消",
+        "error": "导入未执行：$.data.umvuqjtrl98sf.mistakes: mistakes 必须是数组。"
+      },
+      "pageErrors": []
+    },
+    {
+      "id": "C-B05",
+      "kind": "defect",
+      "name": "合法JSON但非法profiles在校验前触发预览异常",
+      "reproduced": true,
+      "observed": {
+        "errors": [
+          "Cannot read properties of null (reading 'id')"
+        ],
+        "validationMessageDisplayed": false
+      },
+      "pageErrors": [
+        "Cannot read properties of null (reading 'id')"
+      ]
+    },
+    {
+      "id": "C-B06",
+      "kind": "defect",
+      "name": "档案按钮内部重绘导致键盘焦点丢到body",
+      "reproduced": true,
+      "observed": {
+        "tag": "BODY",
+        "text": ""
+      },
+      "pageErrors": []
+    },
+    {
+      "id": "C-B07",
+      "kind": "measure",
+      "name": "手机/电脑页面布局与触控区实测",
+      "reproduced": true,
+      "observed": {
+        "measured": [
+          {
+            "route": "home",
+            "width": 360,
+            "scrollWidth": 360,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "profiles",
+            "width": 360,
+            "scrollWidth": 360,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "settings",
+            "width": 360,
+            "scrollWidth": 360,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "history",
+            "width": 360,
+            "scrollWidth": 360,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "mistakes",
+            "width": 360,
+            "scrollWidth": 360,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "home",
+            "width": 390,
+            "scrollWidth": 390,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "profiles",
+            "width": 390,
+            "scrollWidth": 390,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "settings",
+            "width": 390,
+            "scrollWidth": 390,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "history",
+            "width": 390,
+            "scrollWidth": 390,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "mistakes",
+            "width": 390,
+            "scrollWidth": 390,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "home",
+            "width": 1440,
+            "scrollWidth": 1440,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "profiles",
+            "width": 1440,
+            "scrollWidth": 1440,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "settings",
+            "width": 1440,
+            "scrollWidth": 1440,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "history",
+            "width": 1440,
+            "scrollWidth": 1440,
+            "overflow": false,
+            "smallButtons": []
+          },
+          {
+            "route": "mistakes",
+            "width": 1440,
+            "scrollWidth": 1440,
+            "overflow": false,
+            "smallButtons": []
+          }
+        ],
+        "overflowCases": 0,
+        "undersizedButtonCases": 0
+      },
+      "pageErrors": []
+    }
+  ],
+  "totals": {
+    "groups": 7,
+    "reproduced": 7
+  }
+}

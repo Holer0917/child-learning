@@ -139,12 +139,16 @@ try {
   }
   say('[11] 题型覆盖：' + JSON.stringify(typeCount));
 
-  // ---- 12. 难度档位真的有效 ----
-  function avgA(kpId, d) {
-    const ps = generatePaper({ kpIds: [kpId], count: 60, types: ['horizontal'], difficulty: d, seed: 11 });
-    return ps.questions.reduce(function (s, q) { return s + Number(q.params.a); }, 0) / ps.questions.length;
+  // ---- 12. 难度星级配额；缺少目标星级时必须拒绝，不再静默改写知识点 ----
+  let difficultyOK = true;
+  for (const [difficulty, star, ratio] of [['easy', 1, 0.7], ['hard', 3, 0.5]]) {
+    const ps = generatePaper({ kpIds: ['G1-01', 'G1-03', 'G3-01'], count: 30,
+      types: ['horizontal'], difficulty, seed: 11 });
+    difficultyOK = difficultyOK && ps.questions.filter(q => q.difficulty === star).length >= Math.ceil(ps.questions.length * ratio);
   }
-  say('[12] G3-01 被乘数均值：easy ' + avgA('G3-01', 'easy').toFixed(1) + ' vs hard ' + avgA('G3-01', 'hard').toFixed(1));
+  try { generatePaper({ kpIds: ['G3-01'], difficulty: 'easy' }); difficultyOK = false; }
+  catch (error) { difficultyOK = difficultyOK && error.code === 'DIFFICULTY_UNAVAILABLE'; }
+  say('[12] 星级占比与无解拒绝：' + (difficultyOK ? 'PASS' : 'FAIL'));
 
   // ---- 13. 边界：一年级 8 个知识点出 100 题 ----
   const big = generatePaper({

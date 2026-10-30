@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-30",
+  "archive": "改动与新增文件.zip",
+  "archiveSha256": "ff87b491f0c252eca5b11beb38c7bfda7e860794d2dbecc79cd2f26729778a81",
+  "files": [
+    {
+      "path": "改动与新增文件/assets/css/base.css",
+      "bytes": 20157,
+      "sha256": "f3302c6b117ab13df737594093933f0812c9149985e259cd446872386290a241"
+    },
+    {
+      "path": "改动与新增文件/src/domain/mistakes.js",
+      "bytes": 9895,
+      "sha256": "a32678cf1be084d870e1ad1c04f151dcb377561189b364c8a71b455ee6ea6bb4"
+    },
+    {
+      "path": "改动与新增文件/src/domain/stats.js",
+      "bytes": 7671,
+      "sha256": "0b0b46c4ab0ecaebc75cbfc02f43e36d5b12d10b9b19e2aebdbc38d44c1dfbef"
+    },
+    {
+      "path": "改动与新增文件/src/domain/variants.js",
+      "bytes": 3481,
+      "sha256": "1f6c7b0dfef6046ed58f656fdc7b35ffdd666bfaf0bfb5efeb6dc005602fb35e"
+    },
+    {
+      "path": "改动与新增文件/src/main.js",
+      "bytes": 3514,
+      "sha256": "a593c5f49b93dd4ea302edd08787de9184adfdbefabcfc86c517313972889d16"
+    },
+    {
+      "path": "改动与新增文件/src/ui/pages/mistakes.js",
+      "bytes": 17697,
+      "sha256": "a4119f253200328ae61bea7a146212bc1a3fcbe6186e2400da9ec3169163b392"
+    },
+    {
+      "path": "改动与新增文件/src/ui/pages/stats.js",
+      "bytes": 10935,
+      "sha256": "6acbe053ebedb5f830242d8ff19c8477ba8846ee69317f2a37c907607825b24c"
+    }
+  ],
+  "scope": "User-provided ZIP; Gitee remote not fetched or verified; production files not merged."
+}

@@ -1,0 +1,293 @@
+{
+  "status": "published",
+  "publishedAt": "2026-10-30T15:07:15.323536+08:00",
+  "repository": {
+    "id": 1435562307,
+    "full_name": "Holer0917/child-learning-b10-preview",
+    "html_url": "https://github.com/Holer0917/child-learning-b10-preview",
+    "clone_url": "https://github.com/Holer0917/child-learning-b10-preview.git",
+    "name": "child-learning-b10-preview"
+  },
+  "previousPreviewCommit": "4e8364ebf1020fca04fb82539536b26c627b1a3c",
+  "previewCommit": "359015f12945890f7569149fc5e8a9073f75b4cb",
+  "pagesUrl": "https://holer0917.github.io/child-learning-b10-preview/",
+  "workerVersion": "ab-preview-1",
+  "publicChecks": [
+    {
+      "file": "assets/css/base.css",
+      "status": 200,
+      "bytes": 25643,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "assets/icons/app-192.png",
+      "status": 200,
+      "bytes": 669,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "assets/icons/app-512.png",
+      "status": 200,
+      "bytes": 2038,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "assets/icons/apple-touch-icon.png",
+      "status": 200,
+      "bytes": 643,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 1442,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "manifest.webmanifest",
+      "status": 200,
+      "bytes": 665,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/app/mistakePractice.js",
+      "status": 200,
+      "bytes": 2765,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/app/pwa.js",
+      "status": 200,
+      "bytes": 6484,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/app/quizSession.js",
+      "status": 200,
+      "bytes": 6915,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/core/bus.js",
+      "status": 200,
+      "bytes": 2284,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/core/router.js",
+      "status": 200,
+      "bytes": 3474,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/core/schema.js",
+      "status": 200,
+      "bytes": 2897,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/core/storage.js",
+      "status": 200,
+      "bytes": 6556,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/generator.js",
+      "status": 200,
+      "bytes": 27532,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/grader.js",
+      "status": 200,
+      "bytes": 5444,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/history.js",
+      "status": 200,
+      "bytes": 2129,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/mistakes.js",
+      "status": 200,
+      "bytes": 11433,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/paper.js",
+      "status": 200,
+      "bytes": 2228,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/profile.js",
+      "status": 200,
+      "bytes": 4997,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/stats.js",
+      "status": 200,
+      "bytes": 5955,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/syllabus.js",
+      "status": 200,
+      "bytes": 13319,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/domain/variants.js",
+      "status": 200,
+      "bytes": 3029,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/main.js",
+      "status": 200,
+      "bytes": 3625,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/components/feedback.js",
+      "status": 200,
+      "bytes": 4805,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/components/icon.js",
+      "status": 200,
+      "bytes": 1216,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/components/keypad.js",
+      "status": 200,
+      "bytes": 2053,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/history.js",
+      "status": 200,
+      "bytes": 4739,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/home.js",
+      "status": 200,
+      "bytes": 2478,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/mistakes.js",
+      "status": 200,
+      "bytes": 16807,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/practice.js",
+      "status": 200,
+      "bytes": 27198,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/quiz.js",
+      "status": 200,
+      "bytes": 12905,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/result.js",
+      "status": 200,
+      "bytes": 7479,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/ui/pages/stats.js",
+      "status": 200,
+      "bytes": 9452,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/utils/accessibility.js",
+      "status": 200,
+      "bytes": 1636,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/utils/date.js",
+      "status": 200,
+      "bytes": 2216,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/utils/dom.js",
+      "status": 200,
+      "bytes": 3069,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/utils/format.js",
+      "status": 200,
+      "bytes": 4701,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "src/utils/random.js",
+      "status": 200,
+      "bytes": 2038,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    },
+    {
+      "file": "sw.js",
+      "status": 200,
+      "bytes": 4980,
+      "matchesCommit": true,
+      "gitNormalizedLineEndings": false
+    }
+  ],
+  "originalLocalUnchanged": true,
+  "originalGitHubHeadUnchanged": true,
+  "scope": "Only Holer0917/child-learning-b10-preview; no writes to production GitHub, Gitee, or source runtime."
+}

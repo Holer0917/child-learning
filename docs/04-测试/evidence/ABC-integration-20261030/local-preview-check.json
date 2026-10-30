@@ -1,0 +1,29 @@
+{
+  "executedAt": "2026-10-30T09:52:55.413Z",
+  "url": "http://127.0.0.1:8765/?preview=abc01#/home",
+  "passed": true,
+  "checks": [
+    {
+      "route": "profiles",
+      "heading": "学习档案",
+      "noOverflow": true
+    },
+    {
+      "route": "settings",
+      "heading": "数据管理",
+      "noOverflow": true
+    },
+    {
+      "route": "mistakes",
+      "heading": "错题本",
+      "noOverflow": true
+    },
+    {
+      "route": "stats",
+      "heading": "学习统计",
+      "noOverflow": true
+    }
+  ],
+  "pageErrors": [],
+  "note": "Actual 8765 development server; isolated Edge context, not the user browser and not a physical phone"
+}

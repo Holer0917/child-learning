@@ -12,15 +12,55 @@
  *   ③ 同一份卷子内不出现重复题目 —— 对应 FR-07
  */
 
-import { getKnowledgePoint } from './syllabus.js';
+import { getKnowledgePoint, QUESTION_TYPES } from './syllabus.js';
 import { createRandom, makeId } from '../utils/random.js';
 import { formatScaled, simplify } from '../utils/format.js';
+import { calculatePaperStats, DIFFICULTY_RULES } from './paper.js';
 
 /** 运算符号 */
 const SIGN = { add: '+', sub: '−', mul: '×', div: '÷' };
 
 /** 题型常量 */
 export const TYPES = ['horizontal', 'vertical', 'compare', 'fill', 'chain'];
+
+/**
+ * 预检查与组卷共用同一套兼容规则，不生成题目、不改变输入。
+ * 部分知识点/题型无交集时明确列入 warnings；交集整体为空或缺少目标星级则拒绝。
+ * @returns {{ok:boolean, code?:string, message?:string, kpIds:string[], types:string[],
+ *   eligibleKpIds:string[], skippedKpIds:string[], warnings:string[]}}
+ */
+export function validatePaperOptions({ kpIds = [], difficulty = 'normal', types = ['horizontal'] } = {}) {
+  const ids = [...new Set(Array.isArray(kpIds) ? kpIds : [])].filter(id => getKnowledgePoint(id));
+  const wanted = [...new Set(Array.isArray(types) ? types : [])];
+  const result = { ok: true, kpIds: ids, types: wanted, eligibleKpIds: [], skippedKpIds: [], warnings: [] };
+  const fail = (code, message) => ({ ...result, ok: false, code, message });
+  if (!ids.length) return fail('NO_KNOWLEDGE_POINTS', '请至少选择一个知识点');
+  if (!['easy', 'normal', 'hard'].includes(difficulty)) return fail('INVALID_DIFFICULTY', '请选择简单、适中或挑战难度。');
+  if (!wanted.length || wanted.some(type => !TYPES.includes(type))) {
+    return fail('INVALID_QUESTION_TYPES', '请至少选择一种支持的题型。');
+  }
+  const points = ids.map(id => getKnowledgePoint(id));
+  for (const point of points) {
+    (intersectTypes(point.types, wanted).length ? result.eligibleKpIds : result.skippedKpIds).push(point.id);
+  }
+  if (!result.eligibleKpIds.length) {
+    return fail('UNSUPPORTED_COMBINATION', '所选知识点不支持当前题型，请调整知识点或题型。');
+  }
+  if (result.skippedKpIds.length) {
+    const names = result.skippedKpIds.map(id => getKnowledgePoint(id).name).join('、');
+    result.warnings.push(`本次不出题的知识点：${names}（不支持所选题型）。如需练习这些知识点，请增选其支持的题型。`);
+  }
+  const eligible = result.eligibleKpIds.map(id => getKnowledgePoint(id));
+  const unused = wanted.filter(type => !eligible.some(point => point.types.includes(type)));
+  if (unused.length) {
+    result.warnings.push(`本次无法生成的题型：${unused.map(id => QUESTION_TYPES.find(type => type.id === id).name).join('、')}。请调整知识点，或取消这些题型。`);
+  }
+  const rule = DIFFICULTY_RULES[difficulty];
+  if (rule && !eligible.some(point => point.difficulty === rule.star)) {
+    return fail('DIFFICULTY_UNAVAILABLE', `${rule.name}要求 ${rule.star} 星题占比至少 ${rule.percent}%，当前知识点与题型组合没有 ${rule.star} 星题。请增选匹配的 ${rule.star} 星知识点，或改为适中。`);
+  }
+  return result;
+}
 
 /* ================================================================== *
  * 对外接口
@@ -35,6 +75,7 @@ export const TYPES = ['horizontal', 'vertical', 'compare', 'fill', 'chain'];
  * @param {string}   opts.difficulty  'easy' | 'normal' | 'hard'
  * @param {string[]} opts.types       题型列表
  * @param {number}   [opts.seed]      随机种子（用于可复现测试）
+ * @param {Set<string>} [opts.excludeKeys] 前一卷的一级去重键，不允许再出这些数值
  * @returns {Paper}
  */
 export function generatePaper({
@@ -42,96 +83,81 @@ export function generatePaper({
   count = 20,
   difficulty = 'normal',
   types = ['horizontal'],
-  seed
+  seed,
+  excludeKeys = new Set()
 } = {}) {
-  const ids = (kpIds ?? []).filter((id) => getKnowledgePoint(id));
-  if (ids.length === 0) throw new Error('请至少选择一个知识点');
+  const checked = validatePaperOptions({ kpIds, difficulty, types });
+  if (!checked.ok) throw Object.assign(new Error(checked.message), { code: checked.code });
+  const ids = checked.eligibleKpIds;
 
   const total = clamp(Math.round(count) || 20, 5, 100);
   const rng = createRandom(seed ?? Date.now());
+  const excluded = new Set(excludeKeys);
+  const rule = DIFFICULTY_RULES[difficulty];
+  const points = ids.map(id => {
+    const kp = getKnowledgePoint(id);
+    return { kp, spec: adjustSpec(kp.spec, difficulty), usableTypes: intersectTypes(kp.types, checked.types) };
+  });
+  // 先给目标星级分配向上取整的最低配额，其余题量在其它已选知识点间均分。
+  const quota = difficultyQuotas(points.map(point => point.kp), total, rule);
 
-  // 题量按知识点均分，余数补给前面的知识点
-  const quota = distribute(total, ids.length);
-
-  const questions = [];
+  let questions = [];
   const strictKeys = new Set();   // 一级去重：加乘交换律视为同一题
   const looseKeys = new Set();    // 二级去重：仅按操作数原序（用于兜底）
+  const typeCounts = new Map(checked.types.map(type => [type, 0]));
 
-  ids.forEach((kpId, i) => {
-    const kp = getKnowledgePoint(kpId);
-    const usableTypes = intersectTypes(kp.types, types);
-    const bucket = [];
-
+  function fill(point, need, strict) {
     let made = 0;
-    let guard = 0;
-    const limit = Math.max(quota[i] * 40, 400);
-
-    while (made < quota[i] && guard < limit) {
-      guard++;
-      const spec = adjustSpec(kp.spec, difficulty);
-      const raw = generateFromSpec(spec, rng);
+    const limit = Math.max(need * 40, 400);
+    for (let guard = 0; made < need && guard < limit; guard++) {
+      const raw = generateFromSpec(point.spec, rng);
       if (!raw) continue;
-
-      const q = finalize(raw, kp, rng.pick(usableTypes), rng);
-      const k = dedupeKey(q, true);
-      if (strictKeys.has(k)) continue;
-
-      strictKeys.add(k);
+      const type = balancedType(point.usableTypes, typeCounts, rng);
+      const q = finalize(raw, point.kp, type, rng);
+      if (excluded.size && excluded.has(dedupeKey(q, true))) continue;
+      if ((strict ? strictKeys : looseKeys).has(dedupeKey(q, strict))) continue;
+      strictKeys.add(dedupeKey(q, true));
       looseKeys.add(dedupeKey(q, false));
-      bucket.push(q);
+      typeCounts.set(type, typeCounts.get(type) + 1);
+      questions.push(q);
       made++;
     }
+    return made;
+  }
 
-    // 一级去重下数量不足 → 放宽为二级去重补齐（交换律不再视为同题）
-    let g2 = 0;
-    while (made < quota[i] && g2 < limit) {
-      g2++;
-      const spec = adjustSpec(kp.spec, difficulty);
-      const raw = generateFromSpec(spec, rng);
-      if (!raw) continue;
-
-      const q = finalize(raw, kp, rng.pick(usableTypes), rng);
-      const k = dedupeKey(q, false);
-      if (looseKeys.has(k)) continue;
-
-      looseKeys.add(k);
-      bucket.push(q);
-      made++;
-    }
-
-    questions.push(...bucket);
+  points.forEach((point, i) => {
+    if (!quota[i]) return;
+    const made = fill(point, quota[i], true);
+    if (made < quota[i]) fill(point, quota[i] - made, false);
   });
 
-  // 若某个知识点的组合空间不足（如"20 以内进位加法"只有 36 种组合），
-  // 把缺口转嫁给其它已选知识点补齐，而不是简单少出几道题。
+  // 有限题库的缺口只转给已选且题型匹配的知识点，优先补目标星级。
   if (questions.length < total) {
+    const refill = rule ? [...points.filter(point => point.kp.difficulty === rule.star),
+      ...points.filter(point => point.kp.difficulty !== rule.star)] : points;
     let progressed = true;
     let rounds = 0;
     while (questions.length < total && progressed && rounds < 6) {
       progressed = false;
       rounds++;
-      for (const kpId of ids) {
+      for (const point of refill) {
         if (questions.length >= total) break;
-        const kp = getKnowledgePoint(kpId);
-        const usableTypes = intersectTypes(kp.types, types);
-        const need = total - questions.length;
-        let added = 0;
-        let guard = 0;
-
-        while (added < need && guard < need * 60) {
-          guard++;
-          const raw = generateFromSpec(adjustSpec(kp.spec, difficulty), rng);
-          if (!raw) continue;
-          const q = finalize(raw, kp, rng.pick(usableTypes), rng);
-          const k = dedupeKey(q, false);
-          if (looseKeys.has(k)) continue;
-          looseKeys.add(k);
-          questions.push(q);
-          added++;
-          progressed = true;
-        }
+        if (fill(point, total - questions.length, false)) progressed = true;
       }
     }
+  }
+
+  // 即使题库耗尽，实际返回的题目也必须满足占比，不能用其它星级填满后静默降级。
+  const warnings = checked.warnings.slice();
+  if (rule) {
+    const targetCount = questions.filter(q => q.difficulty === rule.star).length;
+    let othersLeft = Math.floor(targetCount * 100 / rule.percent) - targetCount;
+    const before = questions.length;
+    questions = questions.filter(q => q.difficulty === rule.star || othersLeft-- > 0);
+    if (questions.length < before) warnings.push(`为保持${rule.name}档的星级比例，已减少实际题量。可减少请求题量或增选匹配知识点后重试。`);
+  }
+  if (!questions.length) {
+    throw Object.assign(new Error('当前条件下没有可用题目，请调整知识点、题量、难度或题型。'), { code: 'GENERATION_EXHAUSTED' });
   }
 
   // 打乱，避免同知识点的题扎堆
@@ -141,17 +167,39 @@ export function generatePaper({
   return {
     id: makeId('p'),
     questions,
+    stats: calculatePaperStats(questions),
     options: {
-      kpIds: ids,
+      kpIds: checked.kpIds,
       count: questions.length,
       requested: total,
       difficulty,
-      types
+      types: checked.types
     },
     // 实际题量少于请求题量（该知识点组合已接近上限）
     shortfall: total - questions.length,
+    warnings,
     createdAt: Date.now()
   };
+}
+
+/** 按原请求量和原设置重出整卷；原卷不修改，禁止与上一卷数值重复。 */
+export function regeneratePaper(paper, previousKeys = new Set()) {
+  const excluded = new Set([...previousKeys, ...paper.questions.map(question => dedupeKey(question, true))]);
+  try {
+    return generatePaper({
+      kpIds: paper.options.kpIds,
+      count: paper.options.requested ?? paper.options.count,
+      difficulty: paper.options.difficulty,
+      types: paper.options.types,
+      excludeKeys: excluded
+    });
+  } catch (error) {
+    if (error.code === 'GENERATION_EXHAUSTED') {
+      throw Object.assign(new Error('当前条件下没有更多不重复的题目，请调整知识点、题量、难度或题型。原预览已保留。'),
+        { code: 'REGENERATION_EXHAUSTED' });
+    }
+    throw error;
+  }
 }
 
 /**
@@ -176,7 +224,7 @@ export function generateQuestions(kpId, n = 10, {
  */
 export function regenerateQuestion(question, exclude = new Set()) {
   const kp = getKnowledgePoint(question?.kpId);
-  if (!kp) return null;
+  if (!kp || !kp.types.includes(question.type)) return null;
 
   const rng = createRandom();
   const spec = kp.spec;
@@ -611,12 +659,12 @@ export function buildVerticalLayout(q) {
  * ================================================================== */
 
 /**
- * 按难度档位收窄或放宽取值范围。
- *   easy   取区间下部 60%，并取消进位 / 退位要求
+ * 按难度档位收窄取值范围，不改变知识点语义约束。
+ *   easy   取区间下部 60%
  *   normal 使用原始约束
- *   hard   取区间上部 70%，并强制进位 / 退位
+ *   hard   取区间上部 70%
  *
- * 注意：始终在原区间内取值，因此**不会超纲**。
+ * 进位、退位、整十整百、商含 0 等约束均保留，星级由知识点配置决定。
  */
 export function adjustSpec(spec, difficulty) {
   if (!difficulty || difficulty === 'normal') return spec;
@@ -628,9 +676,6 @@ export function adjustSpec(spec, difficulty) {
       if (out[key]) out[key] = lowerPart(out[key], 0.6);
     }
     if (out.quotient) out.quotient = lowerPart(out.quotient, 0.6);
-    if (out.carry === true) out.carry = false;
-    if (out.borrow === true) out.borrow = false;
-    if (out.quotientHasZero) delete out.quotientHasZero;
     return out;
   }
 
@@ -639,8 +684,6 @@ export function adjustSpec(spec, difficulty) {
       if (out[key]) out[key] = upperPart(out[key], 0.7);
     }
     if (out.quotient) out.quotient = upperPart(out.quotient, 0.7);
-    if (out.carry === false) out.carry = true;
-    if (out.borrow === false) out.borrow = true;
     return out;
   }
 
@@ -734,8 +777,26 @@ function distribute(total, n) {
   return Array.from({ length: n }, (_, i) => base + (i < rest ? 1 : 0));
 }
 
-/** 取知识点支持、且用户勾选了的题型；交集为空则回退到该知识点的全部题型 */
+function difficultyQuotas(points, total, rule) {
+  if (!rule || points.every(point => point.difficulty === rule.star)) return distribute(total, points.length);
+  const targets = points.filter(point => point.difficulty === rule.star);
+  const others = points.filter(point => point.difficulty !== rule.star);
+  const minimum = Math.ceil(total * rule.percent / 100);
+  const quota = new Map();
+  for (const [group, amount] of [[targets, minimum], [others, total - minimum]]) {
+    const shares = distribute(amount, group.length);
+    group.forEach((point, i) => quota.set(point.id, shares[i]));
+  }
+  return points.map(point => quota.get(point.id));
+}
+
+/** 同一兼容集合按已接收题数尽量均衡分配；拒绝的重复候选不占配额。 */
+function balancedType(types, counts, rng) {
+  const minimum = Math.min(...types.map(type => counts.get(type)));
+  return rng.pick(types.filter(type => counts.get(type) === minimum));
+}
+
+/** 只使用知识点支持且用户勾选的题型；交集为空交给参数预检查处理。 */
 function intersectTypes(kpTypes, wanted) {
-  const inter = (wanted ?? []).filter((t) => kpTypes.includes(t));
-  return inter.length ? inter : kpTypes.slice();
+  return (wanted ?? []).filter(type => kpTypes.includes(type));
 }

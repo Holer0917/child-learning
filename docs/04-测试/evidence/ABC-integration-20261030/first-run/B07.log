@@ -1,0 +1,18 @@
+command: node tests/keyboard-browser.cjs
+startedAt: 2026-10-30T09:31:47.797Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+AssertionError [ERR_ASSERTION]: {"tag":"INPUT","id":"history-from","label":"","width":3,"outline":"none","visible":true,"inView":true}
+    at walk (C:\Users\s\Desktop\儿童学习\tests\keyboard-browser.cjs:63:46)
+    at async C:\Users\s\Desktop\儿童学习\tests\keyboard-browser.cjs:193:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

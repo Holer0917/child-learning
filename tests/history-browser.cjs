@@ -50,9 +50,10 @@ const log=[];
   assert.ok((await page.locator('.summary-notice').textContent()).includes('明细已压缩'));
   await page.goto(base+'#/result?id=does-not-exist');await page.getByText('找不到这条练习记录',{exact:true}).waitFor();
   log.push('PASS: 旧成绩按 id 打开且刷新不串到最新成绩；错题可回看；摘要和记录不存在有明确提示');
-  await page.goto(base+'#/mistakes');await page.getByText('错题本正在准备中',{exact:true}).waitFor();
-  await page.getByRole('link',{name:'先看成绩历史',exact:true}).click();await page.locator('.history-page').waitFor();
-  log.push('PASS: 错题本入口明确标为下一步开放，可返回历史页');
+  await page.goto(base+'#/mistakes');await page.getByRole('heading',{name:'错题本',exact:true}).waitFor();
+  assert.ok(await page.locator('.mistake-item').count()>0,'旧完整成绩可回补到已开放的错题本');
+  await page.getByRole('link',{name:'成绩历史',exact:true}).click();await page.locator('.history-page').waitFor();
+  log.push('PASS: 错题本已开放、旧完整成绩可回补，可从主导航返回历史页');
   for(const width of [360,390,768,1024,1440]) {
    await page.setViewportSize({width,height:900});
    for(const route of ['home','practice','history?limit=5','mistakes','result?id=history-44']) {

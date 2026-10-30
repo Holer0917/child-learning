@@ -1,0 +1,222 @@
+command: node --test --test-reporter=tap tests/generator-options.test.mjs tests/paper-stats.test.mjs tests/paper-edit.test.mjs tests/quiz-session.test.mjs tests/history.test.mjs
+startedAt: 2026-10-27T08:06:34.007Z
+exitCode: 0
+signal: 
+
+STDOUT
+TAP version 13
+# Subtest: 预检查拒绝空选、非法档位/题型、全不匹配和不存在的目标星级
+ok 1 - 预检查拒绝空选、非法档位/题型、全不匹配和不存在的目标星级
+  ---
+  duration_ms: 1.3895
+  type: 'test'
+  ...
+# Subtest: 部分匹配事先列明跳过项，生成结果不偷偷切换题型或增加知识点
+ok 2 - 部分匹配事先列明跳过项，生成结果不偷偷切换题型或增加知识点
+  ---
+  duration_ms: 4.8695
+  type: 'test'
+  ...
+# Subtest: 简单/挑战配额按向上取整执行：5/7/30/37/100 题与 30 个固定种子
+ok 3 - 简单/挑战配额按向上取整执行：5/7/30/37/100 题与 30 个固定种子
+  ---
+  duration_ms: 178.6123
+  type: 'test'
+  ...
+# Subtest: 简单档典型组合 30 题至少 21 道 1 星，挑战典型组合至少 15 道 3 星
+ok 4 - 简单档典型组合 30 题至少 21 道 1 星，挑战典型组合至少 15 道 3 星
+  ---
+  duration_ms: 25.668
+  type: 'test'
+  ...
+# Subtest: 简单题库容量不足时按实际题量保持比例，明确减少题量而非静默降级
+ok 5 - 简单题库容量不足时按实际题量保持比例，明确减少题量而非静默降级
+  ---
+  duration_ms: 3.0831
+  type: 'test'
+  ...
+# Subtest: 同知识点多选横式/竖式时均衡分配；5/30/37 题各类型数量相差不超过 1
+ok 6 - 同知识点多选横式/竖式时均衡分配；5/30/37 题各类型数量相差不超过 1
+  ---
+  duration_ms: 5.8921
+  type: 'test'
+  ...
+# Subtest: 原始 24 个知识点的全部支持题型均可单独组卷，且始终守住原规格
+ok 7 - 原始 24 个知识点的全部支持题型均可单独组卷，且始终守住原规格
+  ---
+  duration_ms: 5.1925
+  type: 'test'
+  ...
+# Subtest: 简单/挑战均保留进退位、商含 0、整十整百、分数等原始约束，不修改配置
+ok 8 - 简单/挑战均保留进退位、商含 0、整十整百、分数等原始约束，不修改配置
+  ---
+  duration_ms: 4.0719
+  type: 'test'
+  ...
+# Subtest: 单知识点批量和换一题签名兼容；保持题型，拒绝知识点不支持的题型
+ok 9 - 单知识点批量和换一题签名兼容；保持题型，拒绝知识点不支持的题型
+  ---
+  duration_ms: 0.513
+  type: 'test'
+  ...
+# Subtest: 读取原有 sessions 键，按时间倒序；不改写或清空历史
+ok 10 - 读取原有 sessions 键，按时间倒序；不改写或清空历史
+  ---
+  duration_ms: 1.3631
+  type: 'test'
+  ...
+# Subtest: 查历史详情按 id 定位，不回退到最近一次；不同档案隔离
+ok 11 - 查历史详情按 id 定位，不回退到最近一次；不同档案隔离
+  ---
+  duration_ms: 0.2343
+  type: 'test'
+  ...
+# Subtest: 损坏单条、重复 id、跨档案记录和异常日期不导致整页失败
+ok 12 - 损坏单条、重复 id、跨档案记录和异常日期不导致整页失败
+  ---
+  duration_ms: 0.1997
+  type: 'test'
+  ...
+# Subtest: 摘要可查看成绩；缺失明细时明确识别为摘要
+ok 13 - 摘要可查看成绩；缺失明细时明确识别为摘要
+  ---
+  duration_ms: 0.1773
+  type: 'test'
+  ...
+# Subtest: 统计按累计题量计算，空记录不虚构正确率
+ok 14 - 统计按累计题量计算，空记录不虚构正确率
+  ---
+  duration_ms: 0.2036
+  type: 'test'
+  ...
+# Subtest: 删除单题同步实际 count、均值、分布与删除数量，保留剩余 ID 和原卷
+ok 15 - 删除单题同步实际 count、均值、分布与删除数量，保留剩余 ID 和原卷
+  ---
+  duration_ms: 1.8148
+  type: 'test'
+  ...
+# Subtest: 无效/重复删除不增加次数，容量缺口与主动删除可区分
+ok 16 - 无效/重复删除不增加次数，容量缺口与主动删除可区分
+  ---
+  duration_ms: 0.2082
+  type: 'test'
+  ...
+# Subtest: 可以删到空卷，统计不出现 NaN，空卷拒绝进入答题
+ok 17 - 可以删到空卷，统计不出现 NaN，空卷拒绝进入答题
+  ---
+  duration_ms: 0.2786
+  type: 'test'
+  ...
+# Subtest: 删题后重新核对简单/挑战比例，删除其他星级可恢复
+ok 18 - 删题后重新核对简单/挑战比例，删除其他星级可恢复
+  ---
+  duration_ms: 0.2505
+  type: 'test'
+  ...
+# Subtest: 重出使用原请求量和原设置，排除原生成批次中包含已删除题的全部键
+ok 19 - 重出使用原请求量和原设置，排除原生成批次中包含已删除题的全部键
+  ---
+  duration_ms: 3.1831
+  type: 'test'
+  ...
+# Subtest: 有限剩余题库可少出新题，仍保证零原题重用及正确实际统计
+ok 20 - 有限剩余题库可少出新题，仍保证零原题重用及正确实际统计
+  ---
+  duration_ms: 3.9957
+  type: 'test'
+  ...
+# Subtest: 题库耗尽时抛专用错误并保留原卷；交换律变体不能绕过排除
+ok 21 - 题库耗尽时抛专用错误并保留原卷；交换律变体不能绕过排除
+  ---
+  duration_ms: 13.1982
+  type: 'test'
+  ...
+# Subtest: 按题目加权计算：6 道 1 星、3 道 2 星、1 道 3 星为 1.5 星
+ok 22 - 按题目加权计算：6 道 1 星、3 道 2 星、1 道 3 星为 1.5 星
+  ---
+  duration_ms: 1.0337
+  type: 'test'
+  ...
+# Subtest: 一位小数按四舍五入，空卷不出现 NaN；计算不改动题目
+ok 23 - 一位小数按四舍五入，空卷不出现 NaN；计算不改动题目
+  ---
+  duration_ms: 0.1793
+  type: 'test'
+  ...
+# Subtest: 当前题目集合决定统计，题目变化后不沿用原分布
+ok 24 - 当前题目集合决定统计，题目变化后不沿用原分布
+  ---
+  duration_ms: 0.1391
+  type: 'test'
+  ...
+# Subtest: 有限题库返回的 Paper.stats 使用实际数量，与请求数量分开
+ok 25 - 有限题库返回的 Paper.stats 使用实际数量，与请求数量分开
+  ---
+  duration_ms: 10.718
+  type: 'test'
+  ...
+# Subtest: 首次提交、重试不覆盖成绩，跳过与剩余题按实际题量结算
+ok 26 - 首次提交、重试不覆盖成绩，跳过与剩余题按实际题量结算
+  ---
+  duration_ms: 3.6016
+  type: 'test'
+  ...
+# Subtest: 刷新通过磁盘恢复题号、输入草稿和首次提交结果
+ok 27 - 刷新通过磁盘恢复题号、输入草稿和首次提交结果
+  ---
+  duration_ms: 2.0619
+  type: 'test'
+  ...
+# Subtest: 非法/过期/跨档案恢复点被隔离；恢复时重算判分
+ok 28 - 非法/过期/跨档案恢复点被隔离；恢复时重算判分
+  ---
+  duration_ms: 6.9814
+  type: 'test'
+  ...
+# Subtest: 倒计时包含后台/刷新时间，到期禁止继续计分
+ok 29 - 倒计时包含后台/刷新时间，到期禁止继续计分
+  ---
+  duration_ms: 1.768
+  type: 'test'
+  ...
+# Subtest: 退出零作答不新增记录；空答案是跳过
+ok 30 - 退出零作答不新增记录；空答案是跳过
+  ---
+  duration_ms: 0.3025
+  type: 'test'
+  ...
+# Subtest: 分数、小数、比较、有余数及非法格式输入
+ok 31 - 分数、小数、比较、有余数及非法格式输入
+  ---
+  duration_ms: 1.3448
+  type: 'test'
+  ...
+# Subtest: 24 个知识点的生成结果均能进入会话并接受标准答案
+ok 32 - 24 个知识点的生成结果均能进入会话并接受标准答案
+  ---
+  duration_ms: 7.2753
+  type: 'test'
+  ...
+# Subtest: 存储满后可继续答题，保留旧记录和磁盘恢复点
+ok 33 - 存储满后可继续答题，保留旧记录和磁盘恢复点
+  ---
+  duration_ms: 0.4468
+  type: 'test'
+  ...
+# Subtest: 501 条完整记录后压缩最早明细并保留统计
+ok 34 - 501 条完整记录后压缩最早明细并保留统计
+  ---
+  duration_ms: 10.7742
+  type: 'test'
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 305.2294
+
+STDERR

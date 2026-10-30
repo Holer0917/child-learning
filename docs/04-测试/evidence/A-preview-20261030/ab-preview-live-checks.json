@@ -1,0 +1,15 @@
+{
+  "executedAt": "2026-10-30T07:06:55.698Z",
+  "passed": true,
+  "url": "https://holer0917.github.io/child-learning-b10-preview/",
+  "commit": "359015f12945890f7569149fc5e8a9073f75b4cb",
+  "workerVersion": "ab-preview-1",
+  "checks": [
+    "公开测试首页可访问，版本标识 A+B，ab-preview-1 离线缓存就绪",
+    "公开部署可归档错题、启动1题重练、首次答对后自动攻克",
+    "公开部署五个页面在390px与1440px下正常展示且无横向溢出",
+    "公开部署断网刷新错题本及统计成功，正式数据命名空间哨兵保持不变"
+  ],
+  "pageErrors": [],
+  "browserContext": "isolated headless Edge; not a physical phone"
+}

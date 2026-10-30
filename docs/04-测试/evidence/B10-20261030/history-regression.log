@@ -1,0 +1,18 @@
+command: node tests/history-browser.cjs
+startedAt: 2026-10-30T04:40:04.062Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByText('错题本正在准备中', { exact: true }) to be visible[22m
+
+    at C:\Users\s\Desktop\儿童学习\tests\history-browser.cjs:53:84 {
+  log: [
+    "  - waiting for getByText('错题本正在准备中', { exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}

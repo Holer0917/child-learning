@@ -1,0 +1,71 @@
+{
+  "browser": "156.0.4314.50",
+  "checks": [
+    {
+      "id": "B01 boot and empty state",
+      "outcome": "pass",
+      "pwaPanelCount": 1
+    },
+    {
+      "id": "B02 mistakes layout sample",
+      "outcome": "measured",
+      "layouts": [
+        {
+          "width": 360,
+          "overflow": false,
+          "questionFont": "18px",
+          "minimumButtonHeight": 44
+        },
+        {
+          "width": 390,
+          "overflow": false,
+          "questionFont": "18px",
+          "minimumButtonHeight": 44
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "questionFont": "20px",
+          "minimumButtonHeight": 44
+        }
+      ]
+    },
+    {
+      "id": "B03 cleanup confirmation omits count",
+      "outcome": "issue_reproduced",
+      "actualDialogText": "清理已攻克错题？\n\n清理后这些错题记录将被删除，不可恢复。成绩历史与学习统计不受影响。\n\n取消\n确认清理"
+    },
+    {
+      "id": "B04 deficit silently starts quiz",
+      "outcome": "issue_reproduced",
+      "count": 8,
+      "shortfall": 2,
+      "confirmationDialogs": 0
+    },
+    {
+      "id": "B05 one-record trend still drawn",
+      "outcome": "issue_reproduced",
+      "pointCount": 1,
+      "insufficientRecordsMessage": 0
+    },
+    {
+      "id": "B06 stats layout sample",
+      "outcome": "measured",
+      "layouts": [
+        {
+          "width": 360,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "overflow": false
+        },
+        {
+          "width": 1440,
+          "overflow": false
+        }
+      ]
+    }
+  ],
+  "pageErrors": []
+}

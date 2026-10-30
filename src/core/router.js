@@ -5,6 +5,8 @@
  * 刷新任意页面都不会 404。详见设计说明书 D-3。
  */
 
+import { focusPage } from '../utils/accessibility.js';
+
 /** @type {Map<string, {render: Function, title?: string}>} */
 const routes = new Map();
 
@@ -76,8 +78,10 @@ function render() {
   const ctx = { path: routePath, query: parseQuery(path) };
 
   if (!route) {
+    document.title = '页面不存在 · 口算小达人';
     if (notFound) notFound(container, ctx);
     else container.textContent = '页面不存在：' + path;
+    focusPage(container);
     return;
   }
 
@@ -90,11 +94,15 @@ function render() {
       dispose = lifecycle.dispose;
       beforeLeave = lifecycle.beforeLeave;
     }
+    // 页面可能用 replaceState 消费一次性 start 参数；取消离开时恢复当前实际 URL。
+    const actual = currentPath();
+    if (actual.split('?')[0] === routePath) current = actual;
   } catch (err) {
     // 页面级异常不应导致整站白屏（FM-11）
     console.error('[router] 页面渲染失败：', err);
     container.textContent = '出了点小问题，请刷新重试。';
   }
+  focusPage(container);
 }
 
 /**
