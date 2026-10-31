@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "site": "formal",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "site": "formal",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "site": "preview",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "site": "preview",
+      "width": 1440,
+      "passed": true
+    }
+  ]
+}
