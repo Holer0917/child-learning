@@ -91,7 +91,7 @@ const server = http.createServer(async (req, res) => {
   const browserVersion = await probe.version(); await probe.close();
   const runtimeFiles = ['index.html', 'manifest.webmanifest', 'sw.js', 'assets/css/base.css',
     'assets/icons/app-192.png', 'assets/icons/app-512.png', 'assets/icons/apple-touch-icon.png', ...await walk('src')].sort();
-  const testedFiles = [...new Set([...runtimeFiles, ...unitFiles, ...suites.map(s => s[1]), 'tests/practice-navigation.cjs', 'tests/smoke.html', 'scripts/check-all.cjs'])].sort();
+  const testedFiles = [...new Set([...runtimeFiles, ...unitFiles, ...suites.map(s => s[1]), 'authoring/practice.js', 'scripts/build-practice.py', 'tests/practice-navigation.cjs', 'tests/smoke.html', 'scripts/check-all.cjs'])].sort();
   const inputs = await hashes(testedFiles);
   const startedAt = new Date().toISOString(), results = [];
   results.push(await run('unit', ['--test', '--test-reporter=tap', ...unitFiles]));
@@ -115,7 +115,7 @@ const server = http.createServer(async (req, res) => {
   const staticSizePassed = rawBytesExcludingImages <= 300000;
   const summary = { schemaVersion: 1, scope: '本地ABC集成自动验证；不等同于全部需求或真实手机最终验收',
     startedAt, finishedAt: new Date().toISOString(), timeZone: 'Asia/Shanghai', nodeVersion: process.version,
-    platform: process.platform, browser: `Edge ${browserVersion}`, requirementBaseline: 'SRS V1.5', designBaseline: 'SDD V1.13',
+    platform: process.platform, browser: `Edge ${browserVersion}`, requirementBaseline: 'SRS V1.6', designBaseline: 'SDD V1.14',
     workerVersion: (await fs.readFile(path.join(root, 'sw.js'), 'utf8')).match(/const VERSION = '([^']+)'/)?.[1],
     status: results.every(r => r.status === 'passed') && unchanged && staticSizePassed ? 'passed' : 'failed',
     totals: { suites: results.length, passedSuites: results.filter(r => r.status === 'passed').length,

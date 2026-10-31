@@ -1,0 +1,20 @@
+command: node tests/practice-wizard-browser.cjs
+startedAt: 2026-10-31T07:22:00.472Z
+exitCode: 0
+signal: 
+
+STDOUT
+PASS: local 初始仅第一步，后两步锁定且控件不进入DOM或Tab顺序
+PASS: local 第一→第二步；空知识点同时阻止下一步和步骤导航跳转
+PASS: local 第二→第三步；返回和取消保留题量、难度、题型与倒计时
+PASS: local 已完成步骤可返回；范围不变的前后切换与确认保留原试卷
+PASS: local 修改年级恢复对应默认知识点、使旧卷失效，同时保留练习参数
+PASS: local 薄弱知识点快捷入口预填范围并直接进入第三步
+PASS: local 离开清理面板及滚动锁，重新进入恢复第一步
+PASS: local 360×640 每步仅一个卡片、无横向溢出，三步后能出题和答题
+PASS: local 390×844 每步仅一个卡片、无横向溢出，三步后能出题和答题
+PASS: local 568×320 每步仅一个卡片、无横向溢出，三步后能出题和答题
+PASS: local 1440×900 每步仅一个卡片、无横向溢出，三步后能出题和答题
+PASS: 向导、面板及答题无页面JavaScript异常
+
+STDERR

@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "route": "home",
+      "width": 390
+    },
+    {
+      "route": "practice",
+      "width": 390
+    },
+    {
+      "route": "mistakes",
+      "width": 390
+    },
+    {
+      "route": "history",
+      "width": 390
+    },
+    {
+      "route": "profiles",
+      "width": 390
+    },
+    {
+      "route": "settings",
+      "width": 390
+    },
+    {
+      "route": "stats",
+      "width": 390
+    },
+    {
+      "route": "home",
+      "width": 1440
+    },
+    {
+      "route": "practice",
+      "width": 1440
+    },
+    {
+      "route": "mistakes",
+      "width": 1440
+    },
+    {
+      "route": "history",
+      "width": 1440
+    },
+    {
+      "route": "profiles",
+      "width": 1440
+    },
+    {
+      "route": "settings",
+      "width": 1440
+    },
+    {
+      "route": "stats",
+      "width": 1440
+    }
+  ],
+  "errors": []
+}
