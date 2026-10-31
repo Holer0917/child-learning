@@ -216,7 +216,7 @@ const server = http.createServer(async (req, res) => {
   await unsupportedContext.addInitScript(() => { delete Navigator.prototype.serviceWorker; });
   const unsupported = await attach(unsupportedContext); await unsupported.goto(base + '/#/home');
   await unsupported.getByText(/暂不支持离线缓存/).waitFor();
-  await unsupported.locator('.header-nav').getByRole('link', { name: '出题练习', exact: true }).click();
+  await unsupported.locator('.entry-practice').click();
   await toSettings(unsupported); await unsupported.locator('#generate-paper').click(); await unsupported.getByRole('button', { name: '开始答题', exact: true }).waitFor();
   await unsupportedContext.close();
   checks.push('PASS: Service Worker API不支持时给出在线降级说明，仍可出题');
