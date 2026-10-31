@@ -1,0 +1,116 @@
+{
+  "passed": true,
+  "site": "local",
+  "results": [
+    {
+      "width": 390,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "result",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "quiz",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "unknown",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "result",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "quiz",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "unknown",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "home",
+      "passed": true
+    }
+  ]
+}
