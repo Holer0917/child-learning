@@ -1,0 +1,222 @@
+{
+  "executedAt": "2026-10-31T14:51:00.455Z",
+  "passed": true,
+  "results": [
+    {
+      "id": "unit",
+      "passed": true,
+      "durationMs": 691,
+      "exitCode": 0,
+      "tests": 77,
+      "pass": 77
+    },
+    {
+      "id": "profile-entry",
+      "passed": true,
+      "durationMs": 20380,
+      "exitCode": 0,
+      "cases": 5
+    },
+    {
+      "id": "stats-fold",
+      "passed": true,
+      "durationMs": 4908,
+      "exitCode": 0,
+      "cases": 3
+    }
+  ],
+  "inputsUnchanged": true,
+  "inputs": [
+    {
+      "file": "assets/css/base.css",
+      "sha256": "a676191934a1425eca6dfc10de8fdfb8bdd696541f0dbd4b65bfe0f75cde4d3e"
+    },
+    {
+      "file": "index.html",
+      "sha256": "b4e26712a93f530162d62042eec89f785e3b3e71e4ed5835e0eeb2c256c59bef"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "sha256": "c34f60e56a16e4d5b11edbb2a4d8bf74382f1af96704b4099cc1ae3c589f40dc"
+    },
+    {
+      "file": "src/app/mistakePractice.js",
+      "sha256": "00cda2abd6ebc551f134a3840d46ad2f304785bc751f22168bb0c64fe8129fce"
+    },
+    {
+      "file": "src/app/pwa.js",
+      "sha256": "72029db85774383075fe46d1a769e35da44e33acdd4f21c28117b1e025f67d23"
+    },
+    {
+      "file": "src/app/quizSession.js",
+      "sha256": "d020299be9295cdafba3b450676568a0a31401c55502452d1de32f5db063def3"
+    },
+    {
+      "file": "src/core/backupSchema.js",
+      "sha256": "febf343adc127c912e51b9ca6c0eff4461491f5de19552f1b72bf8e2a4df81fd"
+    },
+    {
+      "file": "src/core/bus.js",
+      "sha256": "6bbab443990d3c1ae64fb39873427b332205fb3f12af5a68958699e01cde889b"
+    },
+    {
+      "file": "src/core/router.js",
+      "sha256": "280bb83b9e98739183aeb021aa321bb08927e09103b1c8c18e1f02f8fc790e80"
+    },
+    {
+      "file": "src/core/schema.js",
+      "sha256": "41f3f0c97fffcf6332a12888cc42b0b0c18d8aadb18e56499afae55769b795c2"
+    },
+    {
+      "file": "src/core/storage.js",
+      "sha256": "216d80aa85793a7d800ede5e60bb18ef831e6d36d5ad9eac73697a907c43a2d3"
+    },
+    {
+      "file": "src/domain/backup.js",
+      "sha256": "6422b6dc94ce07d053ed8d5412009bcb7d4aff44e1b2eb7eb038994a6b1704c7"
+    },
+    {
+      "file": "src/domain/generator.js",
+      "sha256": "8c5e1b1cdeee3fabbdc91769848045b77d6b2a08094df27333b6b3c2aa911e7e"
+    },
+    {
+      "file": "src/domain/grader.js",
+      "sha256": "2608490d0c0a66f5304111b077fbe78e0995d84b742ad2956c8e18c3137d9a6d"
+    },
+    {
+      "file": "src/domain/history.js",
+      "sha256": "174dedd1d2fa0a94d6e61a422234c69c40a46c14b27d9f80e7ced064ddd18af6"
+    },
+    {
+      "file": "src/domain/mistakes.js",
+      "sha256": "1a3d9c60f5a890c25f86a540b83f32b0ca4d88412492de11e4bf54720d43a08d"
+    },
+    {
+      "file": "src/domain/paper.js",
+      "sha256": "94e7c246effe219b78e7c4479dfb4d46e813b72fc8fbec88596b44e59c59ab78"
+    },
+    {
+      "file": "src/domain/profile.js",
+      "sha256": "0e643cde30f273a468eb9b975386dc2933321deafb9078ad4480a83d0f0862fb"
+    },
+    {
+      "file": "src/domain/stats.js",
+      "sha256": "280c67bfe80607e81d6b72d423eac9f045852716ba35d33de8ad66245e662779"
+    },
+    {
+      "file": "src/domain/syllabus.js",
+      "sha256": "475fa280b94bc1557f3cc0422942411fd6da353dda0db7397e9d07302877746d"
+    },
+    {
+      "file": "src/domain/variants.js",
+      "sha256": "f78937b020948de34d0031c76b95d40a5e18ce88da16b8c8cf02942e5e9e99e2"
+    },
+    {
+      "file": "src/main.js",
+      "sha256": "c6c6dc430e01134215abad958920c417894ab3dba90da5bf1b41c846a159c9da"
+    },
+    {
+      "file": "src/ui/components/feedback.js",
+      "sha256": "a1d50337c99785bea32792d3bf66ef66e51ee867309864aa770e503f6928c710"
+    },
+    {
+      "file": "src/ui/components/icon.js",
+      "sha256": "fbcd0f0d0aa728008dcb3b544a0ffc49d58b301b11c957c31916f53fb1df21b0"
+    },
+    {
+      "file": "src/ui/components/keypad.js",
+      "sha256": "0f73b39a6aeede276ea1083d69135c27b71b24116b30f5b5b9164952a51e7217"
+    },
+    {
+      "file": "src/ui/pages/history.js",
+      "sha256": "523d110600571430533765e09b8923e7b00eccbffb6d03ad8083147162581cdb"
+    },
+    {
+      "file": "src/ui/pages/home.js",
+      "sha256": "8fce766906ed9425aeae3a3d04ab71148b9956b8cade0e0ceacdfb5e7434e40a"
+    },
+    {
+      "file": "src/ui/pages/mistakes.js",
+      "sha256": "1a203556e0975ef9447dccd8ac58dccd0357af2f50b9f3623d58d4a9e23ad28a"
+    },
+    {
+      "file": "src/ui/pages/practice.js",
+      "sha256": "70c6b20c8a5db4a8fec094b1b200b94d34de1427365e91464601cd75b98fb7a2"
+    },
+    {
+      "file": "src/ui/pages/profiles.js",
+      "sha256": "16696f8b689ba6607f36091dc5e61227e6c1304ff74673fe8daabd2f2f9403fa"
+    },
+    {
+      "file": "src/ui/pages/quiz.js",
+      "sha256": "bd8c8b2bdb58edb7b0a9767acce64ee5ade5e6cf6b0f7ac618c96a542f95ca92"
+    },
+    {
+      "file": "src/ui/pages/result.js",
+      "sha256": "699aed727c2d280a3b097685725113ee3891de5e0b5753ead789f849df5086b6"
+    },
+    {
+      "file": "src/ui/pages/settings.js",
+      "sha256": "de4b73dd37f579844e8bf82c0fb18a6dfad6b558aaa7a37a02b6b6f244f9c0a2"
+    },
+    {
+      "file": "src/ui/pages/stats.js",
+      "sha256": "6224b3834d500002163cb0f6a1fa24d495f36d566e66d1a7b785991c7832f722"
+    },
+    {
+      "file": "src/utils/accessibility.js",
+      "sha256": "ca365969a100d8ab030c712f845e68a4283d0996b65c34ba12817f8c2f1d7048"
+    },
+    {
+      "file": "src/utils/date.js",
+      "sha256": "24f7872436bf8292f3994b930e6fca720857aaa9945051248a06b0764549e3fb"
+    },
+    {
+      "file": "src/utils/dom.js",
+      "sha256": "9b9a981145237af9e1e1e4fd6ed1acb7fef5ccc4e1bdbb5c67cd020062831c31"
+    },
+    {
+      "file": "src/utils/format.js",
+      "sha256": "b51e15ef686d76978bd628fd078ea0501a3b8274fcad23f3b889f59fe1475dbe"
+    },
+    {
+      "file": "src/utils/random.js",
+      "sha256": "ef5648d2c00f022d18b5934c2f02a2c6ac9acb2a38b828ce09c4f7ba0699ecab"
+    },
+    {
+      "file": "sw.js",
+      "sha256": "8afa14e18b09f8baee8939c39891423f6ed38c665cb59b61d0a10b8811f01850"
+    },
+    {
+      "file": "authoring/main.js",
+      "sha256": "0b38ccbfc7405b7f84361e6007d666788243b1db298229160eb359c09018e9de"
+    },
+    {
+      "file": "authoring/profiles.js",
+      "sha256": "c8d78d98124ab1e686a1d440c5bb8e155a996bd4bb562f8455afe011f6d7748a"
+    },
+    {
+      "file": "authoring/practice.js",
+      "sha256": "fe662e363eaf326a34f2bbf93f4eb959a42cdf14eb581543727a016d2f285cd5"
+    },
+    {
+      "file": "scripts/build-entry.py",
+      "sha256": "a6a13290b4e744fde1798dd8d74098057875841f6e61b47392dfff2e32b320c3"
+    },
+    {
+      "file": "scripts/build-practice.py",
+      "sha256": "694c779d48ce41cbb48d2874a01822b24d4644629fae254cf6bdcb244b82bc12"
+    },
+    {
+      "file": "tests/profile-entry.cjs",
+      "sha256": "1c96a03e4b847ed26233ad6f1385fdc518d6026f1c3b7dfdf654c651713edff7"
+    },
+    {
+      "file": "tests/stats-fold.cjs",
+      "sha256": "e9373b9f41166e78b7157d5d71914ecb1f268e0e39581fa6fbbef1ee63e06db5"
+    }
+  ],
+  "runtimeBytes": 297601,
+  "limit": 300000,
+  "scope": "77 domain tests plus current profile-entry/offline and collapsible-stats browser scenarios; not the historical 140-group GUI suite or a physical-device acceptance"
+}

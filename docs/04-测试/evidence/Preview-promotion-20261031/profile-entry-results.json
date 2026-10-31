@@ -1,0 +1,28 @@
+{
+  "executedAt": "2026-10-31T14:50:55.209Z",
+  "passed": true,
+  "site": "http://127.0.0.1:63954/",
+  "checks": [
+    {
+      "width": 360,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "case": "delete final profile stays empty after refresh",
+      "passed": true
+    },
+    {
+      "case": "blocked session storage falls back to current document",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

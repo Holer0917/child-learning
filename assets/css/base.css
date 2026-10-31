@@ -37,6 +37,7 @@ h2{font-size:19px;margin:0 0 12px}
 .brand{text-decoration:none;font-size:19px;font-weight:650}
 .header-nav{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
 body:has(.start-page) .header-nav{display:none}
+body:has(.profiles-entry) .header-nav{display:none}
 .nav-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:7px 10px;text-decoration:none;font-size:14px}
 .nav-link[aria-current]{text-decoration:underline;text-underline-offset:7px;font-weight:700}
 .profile-copy{display:flex;align-items:center;gap:8px;font-size:13px}
@@ -247,7 +248,7 @@ to{opacity:1;transform:translateY(0)}
 .confirm-dialog::backdrop{background:rgb(0 0 0 / .25)}
 .site-footer{max-width:1020px;margin:12px auto 0;padding:16px 0 24px;border-top:1px solid var(--c-line);color:var(--c-muted);font-size:12px}
 .pwa-panel{margin-top:12px}
-body:not(:has(.start-page)) #pwa-panel{display:none}
+body:not(:has(.start-page,.profiles-page)) #pwa-panel{display:none}
 .pwa-panel .actions{margin:8px 0 12px;max-width:440px}
 .pwa-panel .btn{font-size:13px}
 .pwa-panel p{overflow-wrap:anywhere}
@@ -330,6 +331,10 @@ body:has(.quiz-page) .header-nav{display:none}
 .mistakes-buttons .btn{font-size:13px}
 }
 .stats-page{max-width:900px;margin:0 auto}
+.stats-fold>summary{min-height:44px;padding:8px 0;cursor:pointer}
+.stats-fold>summary .card-title{display:inline;margin:0}
+.stats-fold>summary::marker{color:var(--c-primary)}
+.stats-fold[open]>summary{margin-bottom:12px}
 .stats-chart-wrap{margin:14px 0 4px}
 .stats-chart{display:block;width:100%;height:auto}
 .chart-grid{stroke:#e4e4e4;stroke-width:1}
@@ -361,7 +366,10 @@ body:has(.quiz-page) .header-nav{display:none}
 .mastery-entry.level-weak .mastery-fill{background:repeating-linear-gradient(45deg,var(--c-danger) 0 2px,#fff 2px 4px)}
 .priority-practice{margin:16px 0}
 .priority-practice ul{list-style:none;margin:0;padding:0}
-.priority-practice a{display:block;padding:10px 0;min-height:44px}
+.priority-practice li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0}
+.priority-practice li>div{min-width:0}
+.priority-practice p{margin:4px 0 0}
+.priority-practice a{display:block;flex-shrink:0;padding:10px 12px;min-height:44px}
 .activity-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
 .activity-day{border:1px dashed #aaa;display:flex;flex-direction:column;align-items:center;padding:6px 1px;font-size:11px}
 .activity-day.has-practice{border:2px solid #333;padding:5px 0}
@@ -388,6 +396,9 @@ a.profile-chip{text-decoration:none}
 .btn-disabled{opacity:.6}
 .file-input{display:block;margin:12px 0;width:100%;min-height:44px}
 .file-input::file-selector-button{min-height:44px;background:#fff;border:1px solid;border-radius:4px}
+.settings-page p,.settings-page .sound-setting,.settings-page .import-preview li,.settings-page .file-input{font-size:14px}
+.settings-page h3{font-size:16px;font-weight:650}
+.settings-page .file-input::file-selector-button{font:inherit;color:inherit;padding:8px 14px;border-color:#cddfe0;border-radius:12px}
 .import-preview,.import-errors{padding:12px;margin-top:12px;border:1px solid #777;background:#fff;border-radius:8px;overflow-wrap:anywhere}
 .import-errors{border-style:dashed}
 .sound-setting{display:flex;align-items:center;min-height:44px;gap:8px;margin:12px 0}

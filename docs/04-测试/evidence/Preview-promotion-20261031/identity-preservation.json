@@ -1,0 +1,9 @@
+{
+  "preserved": {
+    "index.html": "b4e26712a93f530162d62042eec89f785e3b3e71e4ed5835e0eeb2c256c59bef",
+    "manifest.webmanifest": "c34f60e56a16e4d5b11edbb2a4d8bf74382f1af96704b4099cc1ae3c589f40dc",
+    "src/core/storage.js": "216d80aa85793a7d800ede5e60bb18ef831e6d36d5ad9eac73697a907c43a2d3"
+  },
+  "formalWorker": "abc-14",
+  "previewWorker": "abc-preview-22"
+}
