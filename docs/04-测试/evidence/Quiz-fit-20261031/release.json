@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "sourceCodeCommit": "7c194b2b75d7ed1efa43500b05e970ab8ddb1aba",
+  "previewCommit": "cb3708c9007bc8e136bf7d81f8aeea437eada59b",
+  "pages": {
+    "formal": {
+      "status": "built",
+      "commit": "7c194b2b75d7ed1efa43500b05e970ab8ddb1aba",
+      "expectedCommit": "7c194b2b75d7ed1efa43500b05e970ab8ddb1aba",
+      "url": "https://holer0917.github.io/child-learning/"
+    },
+    "preview": {
+      "status": "built",
+      "commit": "cb3708c9007bc8e136bf7d81f8aeea437eada59b",
+      "expectedCommit": "cb3708c9007bc8e136bf7d81f8aeea437eada59b",
+      "url": "https://holer0917.github.io/child-learning-b10-preview/"
+    }
+  },
+  "formalWorker": "abc-5",
+  "previewWorker": "abc-preview-5",
+  "sourceTests": {
+    "unit": 77,
+    "browserGroups": 138
+  },
+  "previewTests": {
+    "unit": 80,
+    "browserGroups": 43
+  },
+  "mobileBoundaryLayouts": 45,
+  "publicFeedbackLayouts": 4,
+  "runtimeFilesMatchedPerSite": 43
+}

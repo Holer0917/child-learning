@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "width": 360,
+      "height": 480,
+      "page": 480,
+      "footer": "none"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "page": 844,
+      "footer": "none"
+    },
+    {
+      "width": 568,
+      "height": 320,
+      "page": 320,
+      "footer": "none"
+    },
+    {
+      "width": 667,
+      "height": 375,
+      "page": 375,
+      "footer": "none"
+    }
+  ]
+}
