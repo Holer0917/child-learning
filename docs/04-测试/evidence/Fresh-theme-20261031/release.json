@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-31T09:07:28.795176+00:00",
+  "formalSourceCommit": "418f1e1379db4fe64f2338dc3e4098cdbb1c2a99",
+  "previewCommit": "5589dd5509a41f2fb8aeb2837b4c5117eb0d9361",
+  "requirements": "SRS V1.6",
+  "design": "SDD V1.14",
+  "worker": "abc-7",
+  "previewWorker": "abc-preview-7",
+  "unitTests": 77,
+  "browserGroups": 138,
+  "mobileBoundaryCombinations": 45,
+  "previewUnitAndIsolationTests": 80,
+  "previewBrowserGroups": 43,
+  "runtimeBytesExcludingPng": 298945,
+  "runtimeBudgetBytes": 300000,
+  "publicFilesPerSite": 43,
+  "publicThemeRouteViewportChecks": 14,
+  "publicFlowsPassed": true,
+  "pages": {
+    "formal": {
+      "status": "built",
+      "commit": "418f1e1379db4fe64f2338dc3e4098cdbb1c2a99",
+      "expectedCommit": "418f1e1379db4fe64f2338dc3e4098cdbb1c2a99",
+      "url": "https://holer0917.github.io/child-learning/"
+    },
+    "preview": {
+      "status": "built",
+      "commit": "5589dd5509a41f2fb8aeb2837b4c5117eb0d9361",
+      "expectedCommit": "5589dd5509a41f2fb8aeb2837b4c5117eb0d9361",
+      "url": "https://holer0917.github.io/child-learning-b10-preview/"
+    }
+  },
+  "limitation": "Isolated headless Edge mobile emulation; no new physical phone acceptance claimed."
+}
