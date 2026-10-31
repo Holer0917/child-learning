@@ -1,0 +1,20 @@
+command: node tests/mobile-quiz-browser.cjs
+startedAt: 2026-10-31T05:13:35.140Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+AssertionError [ERR_ASSERTION]: 四位数被除数竖式/568×320 题目被裁切
+
+false !== true
+
+    at C:\Users\s\Desktop\儿童学习\tests\mobile-quiz-browser.cjs:237:14 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

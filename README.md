@@ -1,5 +1,7 @@
 # 口算小达人 · KidsMath
 
+> **手机答题单屏优化**：答题时隐藏页脚离线/安装区域及手机全站顶栏；手机键盘与题目按高度排布。SW更新为abc-5/abc-preview-5，验证和发布见[记录](docs/04-测试/23-手机答题单屏布局.md)。
+
 > **课程信息**：华中科技大学 CS2406 软件工程实践，选题 2「儿童学习」。
 > 仓库同时维护于 GitHub（Holer0917/child-learning）与 Gitee（huang-lei544513/childrens-learning）。
 

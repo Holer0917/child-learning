@@ -220,6 +220,7 @@ let browser;
         window.scrollTo(0, Math.max(0, bottom - innerHeight + 12)); // 模拟用户滚动到可同时看到输入与按键的位置。
         return {
           overflow: document.documentElement.scrollWidth > innerWidth,
+          pageHeight: document.documentElement.scrollHeight, viewportHeight: innerHeight,
           stemFits: stem.scrollWidth <= stem.clientWidth && stem.scrollHeight <= stem.clientHeight + 1,
           font: parseFloat(getComputedStyle(stem).fontSize), together: bottom - top <= innerHeight - 16,
           inner: [innerWidth, innerHeight], columns: getComputedStyle(document.querySelector('.quiz-card')).gridTemplateColumns,
@@ -231,6 +232,7 @@ let browser;
         };
       });
       assert.equal(metrics.overflow, false, `${fixture.name}/${width}×${height} 页面溢出`);
+      assert.ok(metrics.pageHeight <= metrics.viewportHeight + 1, `${fixture.name}/${width}×${height} 需要滚动: ${JSON.stringify(metrics)}`);
       assert.equal(metrics.media.coarse, true, '布局检查必须保持触屏模拟，避免截图改变模拟状态后得到失真的结果');
       assert.equal(metrics.stemFits, true, `${fixture.name}/${width}×${height} 题目被裁切`);
       assert.ok(metrics.font >= 32);

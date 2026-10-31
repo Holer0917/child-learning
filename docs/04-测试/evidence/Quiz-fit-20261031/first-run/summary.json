@@ -1,0 +1,649 @@
+{
+  "schemaVersion": 1,
+  "scope": "本地ABC集成自动验证；不等同于全部需求或真实手机最终验收",
+  "startedAt": "2026-10-31T05:09:54.040Z",
+  "finishedAt": "2026-10-31T05:11:58.649Z",
+  "timeZone": "Asia/Shanghai",
+  "nodeVersion": "v24.22.1",
+  "platform": "win32",
+  "browser": "Edge 156.0.4314.56",
+  "requirementBaseline": "SRS V1.5",
+  "designBaseline": "SDD V1.13",
+  "workerVersion": "abc-5",
+  "status": "passed",
+  "totals": {
+    "suites": 15,
+    "passedSuites": 15,
+    "browserCheckGroups": 138,
+    "unit": {
+      "tests": 77,
+      "pass": 77,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "staticSize": {
+    "rawBytesExcludingImages": 299998,
+    "limitBytes": 300000,
+    "method": "UTF-8原文件字节；入口HTML、manifest、SW、CSS与全部运行JS；不含PNG、测试、文档、未引用素材；非gzip",
+    "passed": true
+  },
+  "inputsUnchangedDuringRun": true,
+  "inputs": [
+    {
+      "file": "assets/css/base.css",
+      "bytes": 25274,
+      "sha256": "f7aeac4d88e5792b48b2db7a008271c996f004c41a5d38a1d90df728a6d5b20e"
+    },
+    {
+      "file": "assets/icons/app-192.png",
+      "bytes": 669,
+      "sha256": "9796883b72fc05d47ee0a9ee4723b26abdd2e23b21cfdab08cbaab78e55bc509"
+    },
+    {
+      "file": "assets/icons/app-512.png",
+      "bytes": 2038,
+      "sha256": "e2aa3b2f89f14333f126155ffd21a3ace841e6b3c3b6cd61a111dd0bdc217612"
+    },
+    {
+      "file": "assets/icons/apple-touch-icon.png",
+      "bytes": 643,
+      "sha256": "303d5cad28fb8359dfa828790b663e8284badcffb331cf48a8adabaff5921bc3"
+    },
+    {
+      "file": "index.html",
+      "bytes": 1412,
+      "sha256": "b4e26712a93f530162d62042eec89f785e3b3e71e4ed5835e0eeb2c256c59bef"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "bytes": 556,
+      "sha256": "c34f60e56a16e4d5b11edbb2a4d8bf74382f1af96704b4099cc1ae3c589f40dc"
+    },
+    {
+      "file": "scripts/check-all.cjs",
+      "bytes": 10628,
+      "sha256": "6f4797e98bf5f6f5345dc089e283533b98d2509ffff935e90d508e00d32d9fc0"
+    },
+    {
+      "file": "src/app/mistakePractice.js",
+      "bytes": 2765,
+      "sha256": "00cda2abd6ebc551f134a3840d46ad2f304785bc751f22168bb0c64fe8129fce"
+    },
+    {
+      "file": "src/app/pwa.js",
+      "bytes": 6484,
+      "sha256": "72029db85774383075fe46d1a769e35da44e33acdd4f21c28117b1e025f67d23"
+    },
+    {
+      "file": "src/app/quizSession.js",
+      "bytes": 6824,
+      "sha256": "d020299be9295cdafba3b450676568a0a31401c55502452d1de32f5db063def3"
+    },
+    {
+      "file": "src/core/backupSchema.js",
+      "bytes": 13151,
+      "sha256": "febf343adc127c912e51b9ca6c0eff4461491f5de19552f1b72bf8e2a4df81fd"
+    },
+    {
+      "file": "src/core/bus.js",
+      "bytes": 2284,
+      "sha256": "6bbab443990d3c1ae64fb39873427b332205fb3f12af5a68958699e01cde889b"
+    },
+    {
+      "file": "src/core/router.js",
+      "bytes": 3474,
+      "sha256": "280bb83b9e98739183aeb021aa321bb08927e09103b1c8c18e1f02f8fc790e80"
+    },
+    {
+      "file": "src/core/schema.js",
+      "bytes": 2978,
+      "sha256": "41f3f0c97fffcf6332a12888cc42b0b0c18d8aadb18e56499afae55769b795c2"
+    },
+    {
+      "file": "src/core/storage.js",
+      "bytes": 11144,
+      "sha256": "216d80aa85793a7d800ede5e60bb18ef831e6d36d5ad9eac73697a907c43a2d3"
+    },
+    {
+      "file": "src/domain/backup.js",
+      "bytes": 8989,
+      "sha256": "6422b6dc94ce07d053ed8d5412009bcb7d4aff44e1b2eb7eb038994a6b1704c7"
+    },
+    {
+      "file": "src/domain/generator.js",
+      "bytes": 27532,
+      "sha256": "8c5e1b1cdeee3fabbdc91769848045b77d6b2a08094df27333b6b3c2aa911e7e"
+    },
+    {
+      "file": "src/domain/grader.js",
+      "bytes": 5444,
+      "sha256": "2608490d0c0a66f5304111b077fbe78e0995d84b742ad2956c8e18c3137d9a6d"
+    },
+    {
+      "file": "src/domain/history.js",
+      "bytes": 4053,
+      "sha256": "174dedd1d2fa0a94d6e61a422234c69c40a46c14b27d9f80e7ced064ddd18af6"
+    },
+    {
+      "file": "src/domain/mistakes.js",
+      "bytes": 11433,
+      "sha256": "1a3d9c60f5a890c25f86a540b83f32b0ca4d88412492de11e4bf54720d43a08d"
+    },
+    {
+      "file": "src/domain/paper.js",
+      "bytes": 2228,
+      "sha256": "94e7c246effe219b78e7c4479dfb4d46e813b72fc8fbec88596b44e59c59ab78"
+    },
+    {
+      "file": "src/domain/profile.js",
+      "bytes": 5446,
+      "sha256": "f28255ad77585aa9dd7f77c382a673b7378e816c8212ae5f7e332ebb1da556f4"
+    },
+    {
+      "file": "src/domain/stats.js",
+      "bytes": 5955,
+      "sha256": "280c67bfe80607e81d6b72d423eac9f045852716ba35d33de8ad66245e662779"
+    },
+    {
+      "file": "src/domain/syllabus.js",
+      "bytes": 13319,
+      "sha256": "475fa280b94bc1557f3cc0422942411fd6da353dda0db7397e9d07302877746d"
+    },
+    {
+      "file": "src/domain/variants.js",
+      "bytes": 3029,
+      "sha256": "f78937b020948de34d0031c76b95d40a5e18ce88da16b8c8cf02942e5e9e99e2"
+    },
+    {
+      "file": "src/main.js",
+      "bytes": 5872,
+      "sha256": "e8ecf9df79ff21f1f8d3800bf2272c4cb8fc62d5d306659c223d08ab42301873"
+    },
+    {
+      "file": "src/ui/components/feedback.js",
+      "bytes": 4805,
+      "sha256": "a1d50337c99785bea32792d3bf66ef66e51ee867309864aa770e503f6928c710"
+    },
+    {
+      "file": "src/ui/components/icon.js",
+      "bytes": 1216,
+      "sha256": "ed04d086d5a6c99cd169e3f374749041a9068142eae24c599c061e7b984f91e8"
+    },
+    {
+      "file": "src/ui/components/keypad.js",
+      "bytes": 2053,
+      "sha256": "0f73b39a6aeede276ea1083d69135c27b71b24116b30f5b5b9164952a51e7217"
+    },
+    {
+      "file": "src/ui/pages/history.js",
+      "bytes": 7684,
+      "sha256": "f38ff6c2782428531a6ee889ba581e45395bde557587dc0b76b04807643ecc63"
+    },
+    {
+      "file": "src/ui/pages/home.js",
+      "bytes": 2745,
+      "sha256": "6c3a6f7dacae4eca08c055a968269cd2774f8e3dacf655b02d8590f9b87e274a"
+    },
+    {
+      "file": "src/ui/pages/mistakes.js",
+      "bytes": 16832,
+      "sha256": "22e214aee8ce143df61b5d2f19dde777e492ff3a33baf1a3fdc632e32127007d"
+    },
+    {
+      "file": "src/ui/pages/practice.js",
+      "bytes": 31381,
+      "sha256": "57260ea4b87781d5967cb52c6bde79fdc44389f9106cef20de2d8b2b1ef519b3"
+    },
+    {
+      "file": "src/ui/pages/profiles.js",
+      "bytes": 7650,
+      "sha256": "5b0d76dac37e630e8dc59a577edee111929f7d4c874d10a6ccdc30ea14e19128"
+    },
+    {
+      "file": "src/ui/pages/quiz.js",
+      "bytes": 12905,
+      "sha256": "c2fa7011c1ed1cf6f24d633c30605a9012171411b7f8061bbacc46c922968528"
+    },
+    {
+      "file": "src/ui/pages/result.js",
+      "bytes": 7479,
+      "sha256": "699aed727c2d280a3b097685725113ee3891de5e0b5753ead789f849df5086b6"
+    },
+    {
+      "file": "src/ui/pages/settings.js",
+      "bytes": 7384,
+      "sha256": "9bb6f0e90745d49b05bced8ced4ea801826bd1a576137d65debd2980e16cc90b"
+    },
+    {
+      "file": "src/ui/pages/stats.js",
+      "bytes": 9477,
+      "sha256": "867102442dbc637e8eff13e1320f566b2f548eb43d40bb3056ad74de2cdaf2fe"
+    },
+    {
+      "file": "src/utils/accessibility.js",
+      "bytes": 1636,
+      "sha256": "ca365969a100d8ab030c712f845e68a4283d0996b65c34ba12817f8c2f1d7048"
+    },
+    {
+      "file": "src/utils/date.js",
+      "bytes": 2216,
+      "sha256": "24f7872436bf8292f3994b930e6fca720857aaa9945051248a06b0764549e3fb"
+    },
+    {
+      "file": "src/utils/dom.js",
+      "bytes": 3069,
+      "sha256": "9b9a981145237af9e1e1e4fd6ed1acb7fef5ccc4e1bdbb5c67cd020062831c31"
+    },
+    {
+      "file": "src/utils/format.js",
+      "bytes": 4701,
+      "sha256": "b51e15ef686d76978bd628fd078ea0501a3b8274fcad23f3b889f59fe1475dbe"
+    },
+    {
+      "file": "src/utils/random.js",
+      "bytes": 2038,
+      "sha256": "ef5648d2c00f022d18b5934c2f02a2c6ac9acb2a38b828ce09c4f7ba0699ecab"
+    },
+    {
+      "file": "sw.js",
+      "bytes": 5081,
+      "sha256": "1f41317fb48e6f440745a1742604d9e511bcb507a897d74c21e6a3de25c868af"
+    },
+    {
+      "file": "tests/count-browser.cjs",
+      "bytes": 12209,
+      "sha256": "6a66d8e8a502ff95928d33aa110ab7c200d1fede6efe0a5f40bdc79fae41e8c5"
+    },
+    {
+      "file": "tests/feedback-browser.cjs",
+      "bytes": 18585,
+      "sha256": "6ec944e3972584817b59cc68ab85f99d29198ecefcbaedd0e0664ace6660dc16"
+    },
+    {
+      "file": "tests/generator-options.test.mjs",
+      "bytes": 8884,
+      "sha256": "2b3c830eb4b9742090c8b07948dc4a3e5c5c0b282b051c9ca3260149641e173b"
+    },
+    {
+      "file": "tests/history-browser.cjs",
+      "bytes": 7675,
+      "sha256": "a523ed245558f93bbabb12bd98c90ab342f00fff358a97cdc4ea365d9308f1cd"
+    },
+    {
+      "file": "tests/history.test.mjs",
+      "bytes": 2635,
+      "sha256": "9d3ee5aeee32ac0d2a945d6e449330e4353c0424f4401e904905ffb1ace66fc5"
+    },
+    {
+      "file": "tests/keyboard-browser.cjs",
+      "bytes": 19101,
+      "sha256": "bb1055a6de085ea207cdb02f1d28dc8215fd3a51bcf54a5705db65cb8f18cf47"
+    },
+    {
+      "file": "tests/mistakes-browser.cjs",
+      "bytes": 17851,
+      "sha256": "8329baaa9c627b88f4bef634742198229a05cee5623fe5c3004291658ab39fe3"
+    },
+    {
+      "file": "tests/mistakes-stats.test.mjs",
+      "bytes": 16152,
+      "sha256": "0f55bbde677f7a76073a42579f89e77c2dbe1c06103655be91b4fd547b51cc9b"
+    },
+    {
+      "file": "tests/mobile-quiz-browser.cjs",
+      "bytes": 20447,
+      "sha256": "5598c410b6b3ad74fcf7af58366a7bf9e13f6b6d5ba8f64dc459eb2846659e77"
+    },
+    {
+      "file": "tests/options-browser.cjs",
+      "bytes": 11354,
+      "sha256": "3dc3584ae330dd0bfd58eea915a82950e34184896ed95ee5efa7ec823cde7b98"
+    },
+    {
+      "file": "tests/paper-edit-browser.cjs",
+      "bytes": 14756,
+      "sha256": "cbf378d60d529628fd35f148b26a8dbf5b7451cbfefa999e0690d25ebae7488e"
+    },
+    {
+      "file": "tests/paper-edit.test.mjs",
+      "bytes": 5535,
+      "sha256": "e5dcc1935a59f24d37cedc6372846fa831bbb4a97b249d47ad894a543c367dfa"
+    },
+    {
+      "file": "tests/paper-stats.test.mjs",
+      "bytes": 2064,
+      "sha256": "dbf85dd5b7c3215eb13b899a317af39fe817b18ce91ec7a8b85a044bc3ff534b"
+    },
+    {
+      "file": "tests/practice-browser.cjs",
+      "bytes": 13210,
+      "sha256": "8479f83c195b3396311aa81ec2429a98fd537e197b06513d8a693d2826b4d656"
+    },
+    {
+      "file": "tests/practice-navigation.cjs",
+      "bytes": 1437,
+      "sha256": "c554b043dda73134598141e328b7a750735c6c61027950c0dfd5d58a61b262fe"
+    },
+    {
+      "file": "tests/practice-wizard-browser.cjs",
+      "bytes": 8800,
+      "sha256": "f2108e814b42aa777f44a86c55d48bc2a4fc1c5f619a8dcb6c083315199e78d0"
+    },
+    {
+      "file": "tests/preview-browser.cjs",
+      "bytes": 10221,
+      "sha256": "4ec2cf79e84a0916a57e033b845de4c1de69d88d068898d9e7cec8d40f34ee74"
+    },
+    {
+      "file": "tests/profiles-backup.test.mjs",
+      "bytes": 17056,
+      "sha256": "1d678e454eef26aa78a6d1a0ad708d6832d3ba3f08d4e3f12e20c7a53508a677"
+    },
+    {
+      "file": "tests/profiles-browser.cjs",
+      "bytes": 19660,
+      "sha256": "4a84ee719d974167797f0bbe6dfa3c42a7d7d2178c0071619b8f6716e6c0690a"
+    },
+    {
+      "file": "tests/pwa-browser.cjs",
+      "bytes": 18461,
+      "sha256": "e7873f08617b60208334eb2e3b20eebc213efb6a3af049186e4c2d517450e335"
+    },
+    {
+      "file": "tests/quiz-browser.cjs",
+      "bytes": 9173,
+      "sha256": "f2b817f304b137ef255ae56b64c4516c039b3589de4c4c432e6b9fb8ab4dacc1"
+    },
+    {
+      "file": "tests/quiz-session.test.mjs",
+      "bytes": 6308,
+      "sha256": "1c91162dbbf469d0d8707585bad907d8c871c6b97e279f38f5954fc8eaec3bba"
+    },
+    {
+      "file": "tests/smoke.html",
+      "bytes": 8918,
+      "sha256": "858846dccf2683fd7e5b38954d861edc33740c49df50868fa268faebb18bacd3"
+    }
+  ],
+  "results": [
+    {
+      "id": "unit",
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/generator-options.test.mjs",
+        "tests/paper-stats.test.mjs",
+        "tests/paper-edit.test.mjs",
+        "tests/quiz-session.test.mjs",
+        "tests/history.test.mjs",
+        "tests/mistakes-stats.test.mjs",
+        "tests/profiles-backup.test.mjs"
+      ],
+      "startedAt": "2026-10-31T05:09:54.040Z",
+      "durationMs": 532,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 0,
+      "logFile": "unit.log",
+      "unitCounts": {
+        "tests": 77,
+        "pass": 77,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "id": "practice-wizard",
+      "command": [
+        "node",
+        "tests/practice-wizard-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:09:54.573Z",
+      "durationMs": 4303,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 12,
+      "logFile": "practice-wizard.log",
+      "resultFile": "practice-wizard-results.json",
+      "resultSha256": "a5c7aea3e4a24914776824d1f265119a8f6492f71d19de4ccbeb7e654b3dc70d"
+    },
+    {
+      "id": "A-integration",
+      "command": [
+        "node",
+        "tests/mistakes-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:09:58.878Z",
+      "durationMs": 4667,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 11,
+      "logFile": "A-integration.log",
+      "resultFile": "A-integration-results.json",
+      "resultSha256": "a309171bc283bfd63d4535ffb697a50ef166d4a95dba2877e0268dd11c16698c"
+    },
+    {
+      "id": "C-integration",
+      "command": [
+        "node",
+        "tests/profiles-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:03.547Z",
+      "durationMs": 6818,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 12,
+      "logFile": "C-integration.log",
+      "resultFile": "C-integration-results.json",
+      "resultSha256": "1f9283f057e7f37a8c0d47c9a61fb3c365ffa5c533d0f12114d3c0bc3f53e2fd"
+    },
+    {
+      "id": "B01",
+      "command": [
+        "node",
+        "tests/practice-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:10.366Z",
+      "durationMs": 3351,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 8,
+      "logFile": "B01.log",
+      "resultFile": "B01-results.json",
+      "resultSha256": "9d3eac0357688607279666aad65de9de941cb233990d3baed691ca7741b45079"
+    },
+    {
+      "id": "B02",
+      "command": [
+        "node",
+        "tests/count-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:13.718Z",
+      "durationMs": 3963,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 9,
+      "logFile": "B02.log",
+      "resultFile": "B02-results.json",
+      "resultSha256": "291f8ffd39c0b8de97d90e59d64da5e7c3899aedcc466e86e1cbe7b8aa5f8078"
+    },
+    {
+      "id": "B03",
+      "command": [
+        "node",
+        "tests/options-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:17.683Z",
+      "durationMs": 4026,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 9,
+      "logFile": "B03.log",
+      "resultFile": "B03-results.json",
+      "resultSha256": "2c5c95c2228dcf4947ecdaa544e98653209d5418c47764aed38825bcc1ea6ac7"
+    },
+    {
+      "id": "B04",
+      "command": [
+        "node",
+        "tests/preview-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:21.711Z",
+      "durationMs": 6705,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 8,
+      "logFile": "B04.log",
+      "resultFile": "B04-results.json",
+      "resultSha256": "33bd55579f919b50df4f59c42933c2a948ef317dc6e7a188c0c9ee85532b0791"
+    },
+    {
+      "id": "B05",
+      "command": [
+        "node",
+        "tests/paper-edit-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:28.418Z",
+      "durationMs": 9512,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 10,
+      "logFile": "B05.log",
+      "resultFile": "B05-results.json",
+      "resultSha256": "c1ea3825e7441359aee11b269749ada25b593cfe624e6553143a603009032e9f"
+    },
+    {
+      "id": "B06",
+      "command": [
+        "node",
+        "tests/mobile-quiz-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:10:37.932Z",
+      "durationMs": 25651,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 8,
+      "logFile": "B06.log",
+      "resultFile": "B06-results.json",
+      "resultSha256": "fbe147b19f4178b8700c54cdbd2dba92c36c6482c8718a73d4ffdb001a2a548d"
+    },
+    {
+      "id": "B07",
+      "command": [
+        "node",
+        "tests/keyboard-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:11:03.584Z",
+      "durationMs": 20632,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 10,
+      "logFile": "B07.log",
+      "resultFile": "B07-results.json",
+      "resultSha256": "034588d1bf91acbf1d6c4615dfb9c6b68eacaf8bce6bb3ed81323fc5c817c7e2"
+    },
+    {
+      "id": "B08",
+      "command": [
+        "node",
+        "tests/pwa-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:11:24.218Z",
+      "durationMs": 8020,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 13,
+      "logFile": "B08.log",
+      "resultFile": "B08-results.json",
+      "resultSha256": "39f61ff360a46b9a97b3173938bd4a45cd1368447f51a1d555de64a38c386dd2"
+    },
+    {
+      "id": "B09",
+      "command": [
+        "node",
+        "tests/feedback-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:11:32.240Z",
+      "durationMs": 10666,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 11,
+      "logFile": "B09.log",
+      "resultFile": "B09-results.json",
+      "resultSha256": "aefddc345c915ff92ecef7b7dfaac497e748f1663e9717b1b792338dc41fcc61"
+    },
+    {
+      "id": "quiz-regression",
+      "command": [
+        "node",
+        "tests/quiz-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:11:42.908Z",
+      "durationMs": 12791,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 10,
+      "logFile": "quiz-regression.log",
+      "resultFile": "quiz-regression-results.json",
+      "resultSha256": "d03d90fdd96ed84dec42b659b520005ab3e7e8f408477536e4cfd4d2a138ea11"
+    },
+    {
+      "id": "history-regression",
+      "command": [
+        "node",
+        "tests/history-browser.cjs"
+      ],
+      "startedAt": "2026-10-31T05:11:55.700Z",
+      "durationMs": 2945,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "status": "passed",
+      "checkCount": 7,
+      "logFile": "history-regression.log",
+      "resultFile": "history-regression-results.json",
+      "resultSha256": "310128c983ff6c367f0afe20e30f4984e4415e462bc7233f3643c5db32027636"
+    }
+  ],
+  "notVerified": [
+    "iOS/Android真实手机与系统键盘、安全区、读屏软件",
+    "扬声器人工听音、静音模式、系统安装",
+    "Slow 3G/LCP与5位陌生家长试用",
+    "跨标签页同时提交、真实进程崩溃及所有存储容量组合",
+    "外部托管平台现行发布能力"
+  ]
+}
