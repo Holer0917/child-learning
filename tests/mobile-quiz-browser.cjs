@@ -1,5 +1,6 @@
 /** B06：触屏模拟、真实出题/会话接口与明确的边界样本；不读写用户数据。 */
 const { chromium } = require('playwright');
+const { toKnowledgeStep, openKnowledge, toSettings, selectGrade } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const http = require('node:http');
@@ -112,12 +113,13 @@ let browser;
 
   // 另从出题界面走完整入口，验证当前页面确实按题目启用余数键。
   const flow = await newPage();
-  await flow.getByRole('button', { name: '三年级', exact: true }).tap();
-  await flow.locator('#choose-kp').tap();
+  await selectGrade(flow, '三年级', true);
+  await openKnowledge(flow, true);
   await flow.getByRole('button', { name: '全不选', exact: true }).tap();
   await flow.locator('#kp-G3-05').check();
   await flow.locator('#kp-confirm').tap();
   await flow.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(flow, true);
   await flow.locator('#custom-count').fill('5');
   await flow.locator('#generate-paper').tap();
   await flow.getByRole('button', { name: '开始答题', exact: true }).tap();

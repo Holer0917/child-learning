@@ -1,3 +1,4 @@
+const { toSettings } = require('./practice-navigation.cjs');
 // 先在项目根目录运行 python -m http.server 8765 --bind 127.0.0.1。
 // 只使用独立测试浏览器；示例成绩不会进入用户日常浏览器的数据。
 const {chromium}=require('playwright');
@@ -15,6 +16,7 @@ const log=[];
   await page.locator('.entry-history').click();
   await page.getByText('第一份成绩，等你来创造',{exact:true}).waitFor();
   await page.getByRole('link',{name:'开始出题练习',exact:true}).click();
+  await toSettings(page);
   await page.getByRole('button',{name:'开始出题 · 30 道',exact:true}).waitFor();
   log.push('PASS: 开始页三个入口，历史空态可进入出题台');
   await page.evaluate(async()=>{
@@ -62,7 +64,7 @@ const log=[];
    }
   }
   log.push('PASS: 开始页、出题台、成绩历史、历史详情、错题本入口在 360/390/768/1024/1440px 无横向溢出');
-  await page.goto(base+'#/practice');await page.getByRole('button',{name:'开始出题 · 30 道',exact:true}).click();
+  await page.goto(base+'#/practice');await toSettings(page);await page.getByRole('button',{name:'开始出题 · 30 道',exact:true}).click();
   await page.getByRole('button',{name:'开始答题',exact:true}).click();await page.locator('#quiz-answer').waitFor();
   await page.locator('#quiz-answer').fill('999999');await page.getByRole('button',{name:'提交答案',exact:true}).click();
   // 首题可能为比较题，使用实际标准答案可涵盖任意默认知识点。

@@ -1,5 +1,6 @@
 /** B03 难度、题型组合与异常路径；所有数据均位于独立浏览器环境。 */
 const { chromium } = require('playwright');
+const { toKnowledgeStep, openKnowledge, toSettings, selectGrade } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
@@ -27,15 +28,16 @@ let browser;
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto(base + '/#/practice');
+  await page.goto(base + '/#/practice'); await toSettings(page);
   const generate = () => page.locator('#generate-paper').click();
   const questions = () => page.locator('.question-item').evaluateAll(nodes => nodes.map(node => ({ ...node.dataset })));
   const selectOnly = async ids => {
-    await page.locator('#choose-kp').click();
+    await openKnowledge(page);
     await page.getByRole('button', { name: '全不选', exact: true }).click();
     for (const id of ids) await page.locator(`#kp-${id}`).check();
     await page.locator('#kp-confirm').click();
     await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(page);
   };
   assert.ok((await page.locator('#settings-compatibility').textContent()).includes('100 以内数的认识与比较'));
   await generate();
@@ -73,7 +75,7 @@ let browser;
   assert.equal(await page.locator('.question-item').count(), 7);
   checks.push('PASS: 无 3 星的组合切到挑战后清除旧卷、事先提示并拒绝生成；改为适中可恢复出题');
 
-  await page.getByRole('button', { name: '三年级', exact: true }).click();
+  await selectGrade(page, '三年级');
   await selectOnly(['G3-01', 'G3-07']);
   await page.getByRole('button', { name: '30', exact: true }).click();
   await page.getByRole('button', { name: '挑战', exact: true }).click();
@@ -88,7 +90,7 @@ let browser;
   assert.equal(await page.locator('.paper-block').count(), 0);
   checks.push('PASS: 三年级挑战至少 50% 为 3 星；所选项无 1 星时简单档明确拒绝，不增选或改写知识点');
 
-  await page.getByRole('button', { name: '一年级', exact: true }).click();
+  await selectGrade(page, '一年级');
   await selectOnly(['G1-01']);
   await page.getByRole('button', { name: '适中', exact: true }).click();
   await page.getByRole('button', { name: '竖式', exact: true }).click();
@@ -97,10 +99,11 @@ let browser;
   await generate();
   await page.getByRole('alert').filter({ hasText: '不支持当前题型' }).waitFor();
   assert.equal(await page.locator('.paper-block').count(), 0);
-  await page.locator('#choose-kp').click();
+  await openKnowledge(page);
   await page.locator('#kp-G1-03').check();
   await page.locator('#kp-confirm').click();
   await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(page);
   assert.ok((await page.locator('#settings-compatibility').textContent()).includes('10 以内加法'));
   await generate();
   qs = await questions();
@@ -110,7 +113,7 @@ let browser;
   assert.ok((await page.locator('.preview-vertical').first().textContent()).includes('─'));
   checks.push('PASS: 仅选不支持竖式的知识点会拒绝；加入支持项后只出匹配知识点的竖式，预览数字分行且有横线');
 
-  await page.getByRole('button', { name: '二年级', exact: true }).click();
+  await selectGrade(page, '二年级');
   await selectOnly(['G2-01']);
   await page.getByRole('button', { name: '横式', exact: true }).click();
   await generate();
@@ -143,7 +146,7 @@ let browser;
     await layout.emulateMedia({ colorScheme: scheme });
     for (const width of [360, 390, 768, 1440]) {
       await layout.setViewportSize({ width, height: 900 });
-      await layout.goto(base + '/#/practice');
+      await layout.goto(base + '/#/practice'); await toSettings(layout);
       await layout.getByRole('button', { name: '挑战', exact: true }).click();
       const metrics = await layout.evaluate(() => ({
         overflow: document.documentElement.scrollWidth > innerWidth,
@@ -156,7 +159,7 @@ let browser;
       assert.ok(metrics.buttons.every(size => size.width >= 44 && size.height >= 44));
       if (scheme === 'light' && [390, 1440].includes(width)) {
         await fs.mkdir(path.join(root, '.tmp'), { recursive: true });
-        await layout.locator('.settings-column').screenshot({ path: path.join(root, '.tmp', `b03-settings-${width}.png`) });
+        await layout.locator('.card:has(#custom-count)').screenshot({ path: path.join(root, '.tmp', `b03-settings-${width}.png`) });
       }
     }
   }

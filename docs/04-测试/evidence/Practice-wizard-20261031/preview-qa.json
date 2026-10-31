@@ -1,0 +1,218 @@
+{
+  "executedAt": "2026-10-31T04:52:07.282Z",
+  "passed": true,
+  "results": [
+    {
+      "name": "unit",
+      "passed": true,
+      "exitCode": 0,
+      "startedAt": "2026-10-31T04:51:50.200Z",
+      "unitPass": 80
+    },
+    {
+      "name": "c-browser",
+      "passed": true,
+      "exitCode": 0,
+      "startedAt": "2026-10-31T04:51:50.607Z",
+      "browserGroups": 12
+    },
+    {
+      "name": "a-browser",
+      "passed": true,
+      "exitCode": 0,
+      "startedAt": "2026-10-31T04:51:56.096Z",
+      "browserGroups": 11
+    },
+    {
+      "name": "history",
+      "passed": true,
+      "exitCode": 0,
+      "startedAt": "2026-10-31T04:51:59.477Z",
+      "browserGroups": 7
+    },
+    {
+      "name": "pwa",
+      "passed": true,
+      "exitCode": 0,
+      "startedAt": "2026-10-31T04:52:01.908Z",
+      "browserGroups": 13
+    }
+  ],
+  "runtimeHashes": [
+    {
+      "file": "assets/css/base.css",
+      "sha256": "8acca365d29e6b7ef8a11b245e603c3bc34e1a71945ce61c78dc03f0345efb23"
+    },
+    {
+      "file": "assets/icons/app-192.png",
+      "sha256": "9796883b72fc05d47ee0a9ee4723b26abdd2e23b21cfdab08cbaab78e55bc509"
+    },
+    {
+      "file": "assets/icons/app-512.png",
+      "sha256": "e2aa3b2f89f14333f126155ffd21a3ace841e6b3c3b6cd61a111dd0bdc217612"
+    },
+    {
+      "file": "assets/icons/apple-touch-icon.png",
+      "sha256": "303d5cad28fb8359dfa828790b663e8284badcffb331cf48a8adabaff5921bc3"
+    },
+    {
+      "file": "index.html",
+      "sha256": "4a838c449792b146f79cebae13c21239396a380bee10f16cf9f0cedc98d2001d"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "sha256": "b1729c23b98b019becfabd9a5d8bafd23ab229dc46f182aa2bc334833558085b"
+    },
+    {
+      "file": "src/app/mistakePractice.js",
+      "sha256": "00cda2abd6ebc551f134a3840d46ad2f304785bc751f22168bb0c64fe8129fce"
+    },
+    {
+      "file": "src/app/pwa.js",
+      "sha256": "72029db85774383075fe46d1a769e35da44e33acdd4f21c28117b1e025f67d23"
+    },
+    {
+      "file": "src/app/quizSession.js",
+      "sha256": "d020299be9295cdafba3b450676568a0a31401c55502452d1de32f5db063def3"
+    },
+    {
+      "file": "src/core/backupSchema.js",
+      "sha256": "febf343adc127c912e51b9ca6c0eff4461491f5de19552f1b72bf8e2a4df81fd"
+    },
+    {
+      "file": "src/core/bus.js",
+      "sha256": "6bbab443990d3c1ae64fb39873427b332205fb3f12af5a68958699e01cde889b"
+    },
+    {
+      "file": "src/core/router.js",
+      "sha256": "280bb83b9e98739183aeb021aa321bb08927e09103b1c8c18e1f02f8fc790e80"
+    },
+    {
+      "file": "src/core/schema.js",
+      "sha256": "41f3f0c97fffcf6332a12888cc42b0b0c18d8aadb18e56499afae55769b795c2"
+    },
+    {
+      "file": "src/core/storage.js",
+      "sha256": "925e522257f4bbcb846a0c855c27b5f501e41b48a2789940c7a36549de473ec0"
+    },
+    {
+      "file": "src/domain/backup.js",
+      "sha256": "6422b6dc94ce07d053ed8d5412009bcb7d4aff44e1b2eb7eb038994a6b1704c7"
+    },
+    {
+      "file": "src/domain/generator.js",
+      "sha256": "8c5e1b1cdeee3fabbdc91769848045b77d6b2a08094df27333b6b3c2aa911e7e"
+    },
+    {
+      "file": "src/domain/grader.js",
+      "sha256": "2608490d0c0a66f5304111b077fbe78e0995d84b742ad2956c8e18c3137d9a6d"
+    },
+    {
+      "file": "src/domain/history.js",
+      "sha256": "174dedd1d2fa0a94d6e61a422234c69c40a46c14b27d9f80e7ced064ddd18af6"
+    },
+    {
+      "file": "src/domain/mistakes.js",
+      "sha256": "1a3d9c60f5a890c25f86a540b83f32b0ca4d88412492de11e4bf54720d43a08d"
+    },
+    {
+      "file": "src/domain/paper.js",
+      "sha256": "94e7c246effe219b78e7c4479dfb4d46e813b72fc8fbec88596b44e59c59ab78"
+    },
+    {
+      "file": "src/domain/profile.js",
+      "sha256": "f28255ad77585aa9dd7f77c382a673b7378e816c8212ae5f7e332ebb1da556f4"
+    },
+    {
+      "file": "src/domain/stats.js",
+      "sha256": "280c67bfe80607e81d6b72d423eac9f045852716ba35d33de8ad66245e662779"
+    },
+    {
+      "file": "src/domain/syllabus.js",
+      "sha256": "475fa280b94bc1557f3cc0422942411fd6da353dda0db7397e9d07302877746d"
+    },
+    {
+      "file": "src/domain/variants.js",
+      "sha256": "f78937b020948de34d0031c76b95d40a5e18ce88da16b8c8cf02942e5e9e99e2"
+    },
+    {
+      "file": "src/main.js",
+      "sha256": "e8ecf9df79ff21f1f8d3800bf2272c4cb8fc62d5d306659c223d08ab42301873"
+    },
+    {
+      "file": "src/ui/components/feedback.js",
+      "sha256": "a1d50337c99785bea32792d3bf66ef66e51ee867309864aa770e503f6928c710"
+    },
+    {
+      "file": "src/ui/components/icon.js",
+      "sha256": "ed04d086d5a6c99cd169e3f374749041a9068142eae24c599c061e7b984f91e8"
+    },
+    {
+      "file": "src/ui/components/keypad.js",
+      "sha256": "0f73b39a6aeede276ea1083d69135c27b71b24116b30f5b5b9164952a51e7217"
+    },
+    {
+      "file": "src/ui/pages/history.js",
+      "sha256": "f38ff6c2782428531a6ee889ba581e45395bde557587dc0b76b04807643ecc63"
+    },
+    {
+      "file": "src/ui/pages/home.js",
+      "sha256": "6c3a6f7dacae4eca08c055a968269cd2774f8e3dacf655b02d8590f9b87e274a"
+    },
+    {
+      "file": "src/ui/pages/mistakes.js",
+      "sha256": "22e214aee8ce143df61b5d2f19dde777e492ff3a33baf1a3fdc632e32127007d"
+    },
+    {
+      "file": "src/ui/pages/practice.js",
+      "sha256": "57260ea4b87781d5967cb52c6bde79fdc44389f9106cef20de2d8b2b1ef519b3"
+    },
+    {
+      "file": "src/ui/pages/profiles.js",
+      "sha256": "5b0d76dac37e630e8dc59a577edee111929f7d4c874d10a6ccdc30ea14e19128"
+    },
+    {
+      "file": "src/ui/pages/quiz.js",
+      "sha256": "c2fa7011c1ed1cf6f24d633c30605a9012171411b7f8061bbacc46c922968528"
+    },
+    {
+      "file": "src/ui/pages/result.js",
+      "sha256": "699aed727c2d280a3b097685725113ee3891de5e0b5753ead789f849df5086b6"
+    },
+    {
+      "file": "src/ui/pages/settings.js",
+      "sha256": "9bb6f0e90745d49b05bced8ced4ea801826bd1a576137d65debd2980e16cc90b"
+    },
+    {
+      "file": "src/ui/pages/stats.js",
+      "sha256": "867102442dbc637e8eff13e1320f566b2f548eb43d40bb3056ad74de2cdaf2fe"
+    },
+    {
+      "file": "src/utils/accessibility.js",
+      "sha256": "ca365969a100d8ab030c712f845e68a4283d0996b65c34ba12817f8c2f1d7048"
+    },
+    {
+      "file": "src/utils/date.js",
+      "sha256": "24f7872436bf8292f3994b930e6fca720857aaa9945051248a06b0764549e3fb"
+    },
+    {
+      "file": "src/utils/dom.js",
+      "sha256": "9b9a981145237af9e1e1e4fd6ed1acb7fef5ccc4e1bdbb5c67cd020062831c31"
+    },
+    {
+      "file": "src/utils/format.js",
+      "sha256": "b51e15ef686d76978bd628fd078ea0501a3b8274fcad23f3b889f59fe1475dbe"
+    },
+    {
+      "file": "src/utils/random.js",
+      "sha256": "ef5648d2c00f022d18b5934c2f02a2c6ac9acb2a38b828ce09c4f7ba0699ecab"
+    },
+    {
+      "file": "sw.js",
+      "sha256": "933cd1a953427cfbea6717dcaed5d29e60b5fbd168ddbb804d0c96c24020d875"
+    }
+  ],
+  "inputsUnchanged": true,
+  "workerVersion": "abc-preview-4",
+  "namespace": "km-preview-b10:"
+}

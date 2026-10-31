@@ -1,0 +1,18 @@
+command: node tests/history-browser.cjs
+startedAt: 2026-10-31T04:46:41.725Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: '开始出题 · 30 道', exact: true }) to be visible[22m
+
+    at C:\Users\s\Desktop\儿童学习\tests\history-browser.cjs:19:66 {
+  log: [
+    "  - waiting for getByRole('button', { name: '开始出题 · 30 道', exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}

@@ -1,5 +1,6 @@
 /** B04：按真实出题结果验证预览统计、答案隐藏、同卷答题与响应式布局。 */
 const { chromium } = require('playwright');
+const { toKnowledgeStep, openKnowledge, toSettings, selectGrade } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
@@ -27,13 +28,14 @@ let browser;
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto(base + '/#/practice');
+  await page.goto(base + '/#/practice'); await toSettings(page);
   const selectOnly = async (target, ids) => {
-    await target.locator('#choose-kp').click();
+    await openKnowledge(target);
     await target.getByRole('button', { name: '全不选', exact: true }).click();
     for (const id of ids) await target.locator(`#kp-${id}`).check();
     await target.locator('#kp-confirm').click();
     await target.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(target);
   };
   const generate = async (target, count) => {
     await target.locator('#custom-count').fill(String(count));
@@ -75,10 +77,11 @@ let browser;
   assert.ok((await page.locator('.warn-text').textContent()).includes(`少出 ${100 - actual} 道`));
   checks.push('PASS: 100 题请求触及题库上限时，统计分母与题数均用实际值，唯一知识点显示 100%，难度保留 1.0');
 
-  await page.locator('#choose-kp').click();
+  await openKnowledge(page);
   await page.getByRole('button', { name: '全选', exact: true }).click();
   await page.locator('#kp-confirm').click();
   await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(page);
   await generate(page, 30);
   rows = await distribution(page);
   assert.equal(rows.reduce((sum, row) => sum + row.count, 0), 30);
@@ -92,7 +95,7 @@ let browser;
     ['一年级', 'G1-03', 'horizontal'], ['一年级', 'G1-03', 'vertical'],
     ['一年级', 'G1-08', 'compare'], ['一年级', 'G1-01', 'fill'], ['二年级', 'G2-05', 'chain']
   ]) {
-    await page.getByRole('button', { name: grade, exact: true }).click();
+    await selectGrade(page, grade);
     await selectOnly(page, [kpId]);
     if (await page.locator(`#type-${type}`).getAttribute('aria-pressed') !== 'true') await page.locator(`#type-${type}`).click();
     for (const other of ['horizontal', 'vertical', 'compare', 'fill', 'chain'].filter(value => value !== type)) {
@@ -129,7 +132,7 @@ let browser;
     await layout.emulateMedia({ colorScheme: scheme });
     for (const width of [360, 390, 768, 1440]) {
       await layout.setViewportSize({ width, height: 900 });
-      await layout.goto(base + '/#/practice');
+      await layout.goto(base + '/#/practice'); await toSettings(layout);
       await selectOnly(layout, ['G1-01', 'G1-06', 'G1-03']);
       await generate(layout, 7);
       const metrics = await layout.evaluate(() => ({

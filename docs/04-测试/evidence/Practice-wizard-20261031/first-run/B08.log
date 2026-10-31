@@ -1,0 +1,16 @@
+command: node tests/pwa-browser.cjs
+startedAt: 2026-10-31T04:45:49.777Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#generate-paper')[22m
+
+    at C:\Users\s\Desktop\儿童学习\tests\pwa-browser.cjs:115:41 {
+  log: [ "  - waiting for locator('#generate-paper')" ],
+  name: 'TimeoutError'
+}

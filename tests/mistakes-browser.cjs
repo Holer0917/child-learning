@@ -1,5 +1,6 @@
 // 独立 Edge 上下文与随机回环端口，不读取个人浏览器档案，不发布网页。
 const { chromium } = require('playwright');
+const { toKnowledgeStep, openKnowledge, toSettings, selectGrade } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const http = require('node:http');
 const fs = require('node:fs/promises');
@@ -186,10 +187,11 @@ const finishViaApi = async () => {
   await page.goto(base + '/#/stats'); await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: path.join(root, '.tmp', 'a-stats-mobile.png'), fullPage: true });
   await page.locator('.priority-practice a').first().click();
-  await page.locator('#choose-kp').click();
+  await openKnowledge(page);
   assert.equal(await page.getByRole('checkbox', { checked: true }).count(), 1);
   await page.locator('#kp-confirm').click();
   await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(page);
   assert.ok(page.url().includes('kp=G1-01'));
   pass('错题/统计页360、390、1440px无横向溢出且按钮≥44px；薄弱点快捷入口选中对应知识点');
 

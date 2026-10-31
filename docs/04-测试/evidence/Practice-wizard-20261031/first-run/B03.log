@@ -1,0 +1,16 @@
+command: node tests/options-browser.cjs
+startedAt: 2026-10-31T04:44:23.358Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+locator.screenshot: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.settings-column')[22m
+
+    at C:\Users\s\Desktop\儿童学习\tests\options-browser.cjs:162:50 {
+  log: [ "  - waiting for locator('.settings-column')" ],
+  name: 'TimeoutError'
+}

@@ -1,6 +1,7 @@
 // 运行前安装 playwright 或通过 NODE_PATH 指向其目录。
 // 使用独立浏览器数据，不读取日常浏览器档案；本地测试服务器随用例退出。
 const { chromium } = require('playwright');
+const { toKnowledgeStep, openKnowledge, toSettings, selectGrade } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const http = require('node:http');
 const fs = require('node:fs/promises');
@@ -28,12 +29,13 @@ let browser;
   page.on('pageerror', e => errors.push(e.message));
   const active = () => page.evaluate(() => JSON.parse(localStorage.getItem(`km:quiz:active:${JSON.parse(localStorage.getItem('km:active'))}`)));
   const start = async () => {
-    await page.goto(base + '/#/practice');
-    await page.locator('#choose-kp').click();
+    await page.goto(base + '/#/practice'); await toSettings(page);
+    await openKnowledge(page);
     await page.getByRole('button', { name: '全不选', exact: true }).click();
     await page.getByRole('checkbox', { name: /^10 以内加法/ }).check();
     await page.locator('#kp-confirm').click();
     await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(page);
     await page.getByRole('button', { name: '10', exact: true }).click();
     await page.getByRole('button', { name: '开始出题 · 10 道', exact: true }).click();
     await page.getByRole('button', { name: '开始答题', exact: true }).click();
@@ -117,7 +119,7 @@ let browser;
   const isolated=await browser.newContext();
   await isolated.addInitScript(() => { Storage.prototype.setItem = () => { throw new Error('disabled'); }; });
   const fallback=await isolated.newPage();
-  await fallback.goto(base+'/#/practice');
+  await fallback.goto(base+'/#/practice'); await toSettings(fallback);
   await fallback.getByRole('button',{name:'开始出题 · 30 道',exact:true}).click();
   await fallback.getByRole('button',{name:'开始答题',exact:true}).click();
   await fallback.locator('#quiz-answer').fill('1');

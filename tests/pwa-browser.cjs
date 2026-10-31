@@ -1,5 +1,6 @@
 /** B08：真实 Service Worker、缓存和断网，发布版本/故障仅由隔离测试服务器注入。 */
 const { chromium } = require('playwright');
+const { toSettings } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const http = require('node:http');
@@ -112,7 +113,7 @@ const server = http.createServer(async (req, res) => {
   assert.equal(await page.locator('.history-record').count(), 2);
   await page.reload(); await ready(page); assert.equal(await page.locator('.history-record').count(), 2);
   await page.getByRole('link', { name: '出题练习', exact: true }).click();
-  await page.locator('#generate-paper').click(); await page.getByRole('button', { name: '开始答题', exact: true }).click();
+  await toSettings(page); await page.locator('#generate-paper').click(); await page.getByRole('button', { name: '开始答题', exact: true }).click();
   await page.locator('#quiz-answer').waitFor();
   assert.equal((await state(page)).profile, beforeOffline.profile);
   const offlineRequests = requests.slice(networkBefore).filter(request => !request.pathname.endsWith('/sw.js'));
@@ -215,7 +216,7 @@ const server = http.createServer(async (req, res) => {
   await unsupportedContext.addInitScript(() => { delete Navigator.prototype.serviceWorker; });
   const unsupported = await attach(unsupportedContext); await unsupported.goto(base + '/#/practice');
   await unsupported.getByText(/暂不支持离线缓存/).waitFor();
-  await unsupported.locator('#generate-paper').click(); await unsupported.getByRole('button', { name: '开始答题', exact: true }).waitFor();
+  await toSettings(unsupported); await unsupported.locator('#generate-paper').click(); await unsupported.getByRole('button', { name: '开始答题', exact: true }).waitFor();
   await unsupportedContext.close();
   checks.push('PASS: Service Worker API不支持时给出在线降级说明，仍可出题');
 

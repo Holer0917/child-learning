@@ -1,5 +1,6 @@
 /** B05：真实用户路径验证预览调整，数据仅位于隔离浏览器上下文。 */
 const { chromium } = require('playwright');
+const { toKnowledgeStep, openKnowledge, toSettings, selectGrade } = require('./practice-navigation.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
@@ -28,15 +29,16 @@ let browser;
     const context = await browser.newContext({ viewport: viewport ?? { width: 390, height: 844 } });
     const page = await context.newPage();
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto(base + '/#/practice');
+    await page.goto(base + '/#/practice'); await toSettings(page);
     return page;
   };
   const selectOnly = async (page, ids) => {
-    await page.locator('#choose-kp').click();
+    await openKnowledge(page);
     await page.getByRole('button', { name: '全不选', exact: true }).click();
     for (const id of ids) await page.locator(`#kp-${id}`).check();
     await page.locator('#kp-confirm').click();
     await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  await toSettings(page);
   };
   const chooseTypes = async (page, wanted) => {
     for (const type of wanted) if (await page.locator(`#type-${type}`).getAttribute('aria-pressed') !== 'true') await page.locator(`#type-${type}`).click();
@@ -56,7 +58,7 @@ let browser;
   })));
 
   const page = await newPage();
-  await page.getByRole('button', { name: '三年级', exact: true }).click();
+  await selectGrade(page, '三年级');
   await selectOnly(page, ['G3-01']);
   await page.locator('#limit-minutes').selectOption('3');
   await generate(page, 30);
@@ -179,7 +181,7 @@ let browser;
     ['三年级', 'G3-08', 'horizontal', /^\d+(?:\.\d)?$/], ['三年级', 'G3-05', 'horizontal', /^\d+余[1-9]\d*$/],
     ['一年级', 'G1-08', 'compare', /^[<>=]$/], ['一年级', 'G1-01', 'fill', /^\d+$/], ['二年级', 'G2-05', 'chain', /^\d+$/]
   ]) {
-    await formats.getByRole('button', { name: grade, exact: true }).click();
+    await selectGrade(formats, grade);
     await selectOnly(formats, [kpId]);
     await chooseTypes(formats, [type]);
     await generate(formats, 5);
@@ -198,8 +200,8 @@ let browser;
     await formats.emulateMedia({ colorScheme: scheme });
     for (const width of [360, 390, 768, 1440]) {
       await formats.setViewportSize({ width, height: 900 });
-      await formats.goto(base + '/#/practice');
-      await formats.getByRole('button', { name: '三年级', exact: true }).click();
+      await formats.goto(base + '/#/practice'); await toSettings(formats);
+      await selectGrade(formats, '三年级');
       await selectOnly(formats, ['G3-01']);
       await chooseTypes(formats, ['horizontal', 'vertical']);
       await generate(formats, 5);
