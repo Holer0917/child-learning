@@ -1,0 +1,1864 @@
+{
+  "executedAt": "2026-10-31T04:17:26.914Z",
+  "browser": "156.0.4314.56",
+  "checks": [
+    "PASS AC-KB.1/5: 开始页与出题台双向 Tab，所有现有控件可达，轮廓≥2px，切页聚焦主标题",
+    "PASS AC-KB.2/3: 仅键盘完成年级、搜索/清空、知识点 Enter/Space、题量、难度、题型、计时设置与出题；预览焦点和答案开关正常",
+    "PASS AC-KB.1/2/4/5: 按键先于提交/跳过的 Tab 顺序与视觉一致；Space/Enter 输入保留按键焦点；答错→反馈→订正→下一题焦点正常，首次错误不覆盖",
+    "PASS: 非法输入不计分并定位输入/错误，订正清除 aria-invalid；按住 Enter 跨反馈与自动切题不重复提交或跳题；合成 IME Enter 不提交",
+    "PASS: 键盘跳过/继续正常；退出对话框首焦点为继续、Tab/Shift+Tab 闭环；Escape/继续关闭后恢复退出按钮及原草稿",
+    "PASS AC-KB.3/4/5: 仅键盘完成 10 题和结算（8 对/1 错/1 跳过=80.0%）；离开取消/确认及首页继续均保留草稿与题号，成绩/历史切页焦点正确",
+    "PASS AC-KB.1/5: 360/1440px 当前 6 条路由、空成绩/失效详情与 404 双向 Tab 走查；无隐藏焦点、无横向溢出，轮廓≥2px",
+    "PASS: 25 次隔离测试练习，键盘加载第 21～25 条后焦点移至第 21 条，加载按钮消失也不丢失焦点",
+    "PASS: 退出对话框打开期间倒计时到期仍自动结算，模态层移除，成绩主标题获得焦点",
+    "PASS: 全部键盘路径未捕获页面 JavaScript 异常 0 条"
+  ],
+  "focusWalks": [
+    {
+      "name": "开始页",
+      "controls": 14,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "出题台初始",
+      "controls": 29,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-1",
+          "label": "一年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-2",
+          "label": "二年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-3",
+          "label": "三年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "choose-kp",
+          "label": "已选 8 个知识点10 以内加法、10 以内减法等 8 项选择 ›"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-10",
+          "label": "10"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-20",
+          "label": "20"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-30",
+          "label": "30"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-50",
+          "label": "50"
+        },
+        {
+          "tag": "INPUT",
+          "id": "custom-count",
+          "label": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-easy",
+          "label": "简单"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-normal",
+          "label": "适中"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-hard",
+          "label": "挑战"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-horizontal",
+          "label": "横式"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-vertical",
+          "label": "竖式"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-compare",
+          "label": "比较大小"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-fill",
+          "label": "填空"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-chain",
+          "label": "连算"
+        },
+        {
+          "tag": "SELECT",
+          "id": "limit-minutes",
+          "label": "不限时，慢慢来1 分钟2 分钟3 分钟4 分钟5 分钟6 分钟7 分钟8 分钟9 分钟10 分钟11 分钟12 分钟13 分钟14 分钟15"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "generate-paper",
+          "label": "开始出题 · 30 道"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "答题页编辑态",
+      "controls": 27,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "toggle-sound",
+          "label": "提示音：关闭"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "exit-quiz",
+          "label": "退出练习"
+        },
+        {
+          "tag": "INPUT",
+          "id": "quiz-answer",
+          "label": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "1"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "2"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "3"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "4"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "5"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "6"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "7"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "8"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "9"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "-"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "0"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "删除一位"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "submit-answer",
+          "label": "提交答案"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "skip-question",
+          "label": "跳过"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "成绩页",
+      "controls": 15,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "返回成绩历史"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "",
+          "label": "举一反三 · 5 道同类题"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "再出一份题"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "查看错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "查看学习统计"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "成绩历史",
+      "controls": 19,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 5 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 10 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 30 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "全部记录"
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-from",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-from",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-to",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-to",
+          "label": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "history-kp",
+          "label": "全部知识点10 以内加法"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "查看 2026-10-31 12:17 的练习详情"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "delete-smvvw3mdd1se5",
+          "label": "删除 2026-10-31 12:17 的成绩"
+        }
+      ]
+    },
+    {
+      "name": "360px/home",
+      "controls": 14,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "360px/practice",
+      "controls": 29,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-1",
+          "label": "一年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-2",
+          "label": "二年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-3",
+          "label": "三年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "choose-kp",
+          "label": "已选 8 个知识点10 以内加法、10 以内减法等 8 项选择 ›"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-10",
+          "label": "10"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-20",
+          "label": "20"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-30",
+          "label": "30"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-50",
+          "label": "50"
+        },
+        {
+          "tag": "INPUT",
+          "id": "custom-count",
+          "label": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-easy",
+          "label": "简单"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-normal",
+          "label": "适中"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-hard",
+          "label": "挑战"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-horizontal",
+          "label": "横式"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-vertical",
+          "label": "竖式"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-compare",
+          "label": "比较大小"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-fill",
+          "label": "填空"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-chain",
+          "label": "连算"
+        },
+        {
+          "tag": "SELECT",
+          "id": "limit-minutes",
+          "label": "不限时，慢慢来1 分钟2 分钟3 分钟4 分钟5 分钟6 分钟7 分钟8 分钟9 分钟10 分钟11 分钟12 分钟13 分钟14 分钟15"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "generate-paper",
+          "label": "开始出题 · 30 道"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "360px/history",
+      "controls": 18,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 5 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 10 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 30 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "全部记录"
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-from",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-from",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-to",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-to",
+          "label": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "history-kp",
+          "label": "全部知识点"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始出题练习"
+        }
+      ]
+    },
+    {
+      "name": "360px/mistakes",
+      "controls": 15,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "查看学习统计"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "status-pending",
+          "label": "待攻克"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "status-mastered",
+          "label": "已攻克"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "status-all",
+          "label": "全部"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题练习"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "360px/quiz",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "360px/result",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "360px/result?id=missing",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "返回成绩历史"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "360px/not-found",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "回到首页"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/home",
+      "controls": 14,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/practice",
+      "controls": 29,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-1",
+          "label": "一年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-2",
+          "label": "二年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "grade-3",
+          "label": "三年级"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "choose-kp",
+          "label": "已选 8 个知识点10 以内加法、10 以内减法等 8 项选择 ›"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-10",
+          "label": "10"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-20",
+          "label": "20"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-30",
+          "label": "30"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "count-50",
+          "label": "50"
+        },
+        {
+          "tag": "INPUT",
+          "id": "custom-count",
+          "label": ""
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-easy",
+          "label": "简单"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-normal",
+          "label": "适中"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "difficulty-hard",
+          "label": "挑战"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-horizontal",
+          "label": "横式"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-vertical",
+          "label": "竖式"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-compare",
+          "label": "比较大小"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-fill",
+          "label": "填空"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "type-chain",
+          "label": "连算"
+        },
+        {
+          "tag": "SELECT",
+          "id": "limit-minutes",
+          "label": "不限时，慢慢来1 分钟2 分钟3 分钟4 分钟5 分钟6 分钟7 分钟8 分钟9 分钟10 分钟11 分钟12 分钟13 分钟14 分钟15"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "generate-paper",
+          "label": "开始出题 · 30 道"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/history",
+      "controls": 18,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 5 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 10 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "最近 30 次"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "全部记录"
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-from",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-from",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-to",
+          "label": ""
+        },
+        {
+          "tag": "INPUT",
+          "id": "history-to",
+          "label": ""
+        },
+        {
+          "tag": "SELECT",
+          "id": "history-kp",
+          "label": "全部知识点"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始出题练习"
+        }
+      ]
+    },
+    {
+      "name": "1440px/mistakes",
+      "controls": 15,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "查看学习统计"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "status-pending",
+          "label": "待攻克"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "status-mastered",
+          "label": "已攻克"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "status-all",
+          "label": "全部"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题练习"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/quiz",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/result",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "去出题"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/result?id=missing",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "返回成绩历史"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    },
+    {
+      "name": "1440px/not-found",
+      "controls": 11,
+      "sequence": [
+        {
+          "tag": "A",
+          "id": "",
+          "label": "口算小达人首页"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "开始"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "出题练习"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "成绩历史"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "错题本"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "数据管理"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "打开学习档案"
+        },
+        {
+          "tag": "A",
+          "id": "",
+          "label": "回到首页"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-check",
+          "label": "检查更新 / 重试离线"
+        },
+        {
+          "tag": "BUTTON",
+          "id": "pwa-install",
+          "label": "添加到主屏幕"
+        }
+      ]
+    }
+  ]
+}

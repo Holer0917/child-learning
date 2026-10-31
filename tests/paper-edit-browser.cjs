@@ -32,8 +32,11 @@ let browser;
     return page;
   };
   const selectOnly = async (page, ids) => {
+    await page.locator('#choose-kp').click();
     await page.getByRole('button', { name: '全不选', exact: true }).click();
     for (const id of ids) await page.locator(`#kp-${id}`).check();
+    await page.locator('#kp-confirm').click();
+    await page.locator('.kp-dialog').waitFor({ state: 'detached' });
   };
   const chooseTypes = async (page, wanted) => {
     for (const type of wanted) if (await page.locator(`#type-${type}`).getAttribute('aria-pressed') !== 'true') await page.locator(`#type-${type}`).click();

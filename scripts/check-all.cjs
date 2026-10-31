@@ -114,7 +114,7 @@ const server = http.createServer(async (req, res) => {
   const staticSizePassed = rawBytesExcludingImages <= 300000;
   const summary = { schemaVersion: 1, scope: '本地ABC集成自动验证；不等同于全部需求或真实手机最终验收',
     startedAt, finishedAt: new Date().toISOString(), timeZone: 'Asia/Shanghai', nodeVersion: process.version,
-    platform: process.platform, browser: `Edge ${browserVersion}`, requirementBaseline: 'SRS V1.5', designBaseline: 'SDD V1.11',
+    platform: process.platform, browser: `Edge ${browserVersion}`, requirementBaseline: 'SRS V1.5', designBaseline: 'SDD V1.12',
     workerVersion: (await fs.readFile(path.join(root, 'sw.js'), 'utf8')).match(/const VERSION = '([^']+)'/)?.[1],
     status: results.every(r => r.status === 'passed') && unchanged && staticSizePassed ? 'passed' : 'failed',
     totals: { suites: results.length, passedSuites: results.filter(r => r.status === 'passed').length,

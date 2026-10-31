@@ -29,8 +29,11 @@ let browser;
   const active = () => page.evaluate(() => JSON.parse(localStorage.getItem(`km:quiz:active:${JSON.parse(localStorage.getItem('km:active'))}`)));
   const start = async () => {
     await page.goto(base + '/#/practice');
+    await page.locator('#choose-kp').click();
     await page.getByRole('button', { name: '全不选', exact: true }).click();
     await page.getByRole('checkbox', { name: /^10 以内加法/ }).check();
+    await page.locator('#kp-confirm').click();
+    await page.locator('.kp-dialog').waitFor({ state: 'detached' });
     await page.getByRole('button', { name: '10', exact: true }).click();
     await page.getByRole('button', { name: '开始出题 · 10 道', exact: true }).click();
     await page.getByRole('button', { name: '开始答题', exact: true }).click();

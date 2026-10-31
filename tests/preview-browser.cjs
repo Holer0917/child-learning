@@ -29,8 +29,11 @@ let browser;
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(base + '/#/practice');
   const selectOnly = async (target, ids) => {
+    await target.locator('#choose-kp').click();
     await target.getByRole('button', { name: '全不选', exact: true }).click();
     for (const id of ids) await target.locator(`#kp-${id}`).check();
+    await target.locator('#kp-confirm').click();
+    await target.locator('.kp-dialog').waitFor({ state: 'detached' });
   };
   const generate = async (target, count) => {
     await target.locator('#custom-count').fill(String(count));
@@ -72,7 +75,10 @@ let browser;
   assert.ok((await page.locator('.warn-text').textContent()).includes(`少出 ${100 - actual} 道`));
   checks.push('PASS: 100 题请求触及题库上限时，统计分母与题数均用实际值，唯一知识点显示 100%，难度保留 1.0');
 
+  await page.locator('#choose-kp').click();
   await page.getByRole('button', { name: '全选', exact: true }).click();
+  await page.locator('#kp-confirm').click();
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' });
   await generate(page, 30);
   rows = await distribution(page);
   assert.equal(rows.reduce((sum, row) => sum + row.count, 0), 30);

@@ -113,8 +113,11 @@ let browser;
   // 另从出题界面走完整入口，验证当前页面确实按题目启用余数键。
   const flow = await newPage();
   await flow.getByRole('button', { name: '三年级', exact: true }).tap();
+  await flow.locator('#choose-kp').tap();
   await flow.getByRole('button', { name: '全不选', exact: true }).tap();
   await flow.locator('#kp-G3-05').check();
+  await flow.locator('#kp-confirm').tap();
+  await flow.locator('.kp-dialog').waitFor({ state: 'detached' });
   await flow.locator('#custom-count').fill('5');
   await flow.locator('#generate-paper').tap();
   await flow.getByRole('button', { name: '开始答题', exact: true }).tap();

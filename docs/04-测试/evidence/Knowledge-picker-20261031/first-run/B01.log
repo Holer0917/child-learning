@@ -1,0 +1,20 @@
+command: node tests/practice-browser.cjs
+startedAt: 2026-10-31T04:16:29.901Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+locator.click: Error: strict mode violation: getByRole('button', { name: '三年级', exact: true }) resolved to 2 elements:
+    1) <button id="grade-3" class="chip" type="button" aria-label="三年级" aria-pressed="false">…</button> aka locator('#grade-3')
+    2) <button class="chip" type="button" id="kp-grade-3" aria-label="三年级" aria-pressed="false">…</button> aka getByRole('dialog', { name: '选择知识点' }).getByLabel('三年级')
+
+Call log:
+[2m  - waiting for getByRole('button', { name: '三年级', exact: true })[22m
+
+    at C:\Users\s\Desktop\儿童学习\tests\practice-browser.cjs:40:64 {
+  log: [
+    "  - waiting for getByRole('button', { name: '三年级', exact: true })"
+  ]
+}

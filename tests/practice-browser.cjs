@@ -29,9 +29,24 @@ let browser;
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(base + '/#/practice');
+  assert.equal(await page.locator('.kp-list').count(), 0);
+  await page.locator('#choose-kp').click();
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'kp-dialog-title');
+  await page.locator('#kp-select-none').click();
+  await page.locator('#kp-cancel').click();
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  assert.ok((await page.locator('#choose-kp').textContent()).includes('已选 8 个'));
+  await page.locator('#choose-kp').click();
+  await page.locator('.kp-dialog').getByRole('button', { name: '三年级', exact: true }).click();
+  await page.keyboard.press('Escape');
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  assert.equal(await page.locator('#grade-1').getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'choose-kp');
+  checks.push('PASS: 默认只显示知识点入口；取消和Escape丢弃选择及年级草稿，返回入口焦点');
+  await page.locator('#choose-kp').click();
   const names = new Set();
   for (const grade of ['一年级', '二年级', '三年级']) {
-    await page.getByRole('button', { name: grade, exact: true }).click();
+    await page.locator('.kp-dialog').getByRole('button', { name: grade, exact: true }).click();
     assert.equal(await page.getByRole('checkbox').count(), 8);
     const points = await page.locator('.kp-item').evaluateAll(items => items.map(item => ({
       name: item.querySelector('.kp-name').textContent,
@@ -50,7 +65,7 @@ let browser;
   assert.equal(names.size, 24);
   checks.push('PASS: 三个年级各 8 个知识点，共 24 个；名称、年级、顺序、星级、说明、题型均可见');
 
-  await page.getByRole('button', { name: '一年级', exact: true }).click();
+  await page.locator('.kp-dialog').getByRole('button', { name: '一年级', exact: true }).click();
   const search = page.getByRole('searchbox', { name: '搜索当前年级知识点' });
   await search.fill('进位');
   assert.equal(await page.getByRole('checkbox').count(), 2);
@@ -110,10 +125,10 @@ let browser;
   checks.push('PASS: 全选/全不选/反选正确；搜索批量操作不改变隐藏项，清空后选择保持');
 
   await search.fill('进位');
-  await page.getByRole('button', { name: '三年级', exact: true }).click();
+  await page.locator('.kp-dialog').getByRole('button', { name: '三年级', exact: true }).click();
   assert.equal(await search.inputValue(), '');
   assert.equal(await page.getByRole('checkbox', { checked: true }).count(), 8);
-  assert.equal(await page.evaluate(() => document.activeElement.id), 'grade-3');
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'kp-grade-3');
   await search.fill('分数');
   assert.equal(await page.getByRole('checkbox').count(), 1);
   assert.equal(await page.locator('.kp-name').textContent(), '同分母分数加减法');
@@ -126,17 +141,27 @@ let browser;
   assert.equal(await page.getByRole('checkbox').isChecked(), true);
   checks.push('PASS: 年级切换清空关键词并选择新年级默认组合；键盘切换复选框后焦点保留');
 
-  await page.getByRole('button', { name: '一年级', exact: true }).click();
+  await page.locator('.kp-dialog').getByRole('button', { name: '一年级', exact: true }).click();
   await page.getByRole('button', { name: '全不选', exact: true }).click();
+  await page.locator('#kp-confirm').click();
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' });
   await page.getByRole('button', { name: '开始出题 · 30 道', exact: true }).click();
   await page.getByRole('alert').filter({ hasText: '请至少选择一个知识点' }).waitFor();
+  await page.locator('#choose-kp').click();
   await search.fill('地基');
   await page.getByRole('button', { name: '全选搜索结果', exact: true }).click();
+  await page.locator('#kp-confirm').click();
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' });
   await page.getByRole('button', { name: '10', exact: true }).click();
   await page.getByRole('button', { name: '开始出题 · 10 道', exact: true }).click();
   assert.equal(await page.locator('.question-item').count(), 10);
+  const originalPaper = await page.locator('.question-item').allTextContents();
+  await page.locator('#choose-kp').click();
   await search.fill('不存在的知识点');
   assert.equal(await page.locator('.question-item').count(), 10, '搜索本身不改动已生成试卷');
+  await page.locator('#kp-confirm').click();
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' });
+  assert.deepEqual(await page.locator('.question-item').allTextContents(), originalPaper);
   await page.getByRole('button', { name: '开始答题', exact: true }).click();
   await page.locator('#quiz-answer').waitFor();
   const session = await page.evaluate(() => {
@@ -155,6 +180,10 @@ let browser;
     for (const width of [360, 390, 768, 1440]) {
       await layout.setViewportSize({ width, height: 900 });
       await layout.goto(base + '/#/practice');
+      const compact = await layout.locator('#choose-kp').boundingBox();
+      assert.ok(compact.height < 120, '知识点入口应保持紧凑');
+      assert.equal(await layout.locator('.kp-item').count(), 0);
+      await layout.locator('#choose-kp').click();
       await layout.getByRole('searchbox').fill('进位');
       const metrics = await layout.evaluate(() => ({
         overflow: document.documentElement.scrollWidth > innerWidth,
@@ -170,6 +199,8 @@ let browser;
         await fs.mkdir(path.join(root, '.tmp'), { recursive: true });
         await layout.screenshot({ path: path.join(root, '.tmp', `b01-practice-${width}.png`), fullPage: true });
       }
+      await layout.locator('#kp-cancel').click();
+      await layout.locator('.kp-dialog').waitFor({ state: 'detached' });
     }
   }
   checks.push('PASS: 360/390/768/1440px、浅色/深色系统主题下无横向溢出，保持白底，新增输入和按钮触控区 ≥44px');

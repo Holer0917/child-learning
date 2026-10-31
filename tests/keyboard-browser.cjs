@@ -84,6 +84,8 @@ let browser;
 
   await tabTo(page, '#grade-2'); await page.keyboard.press('Space'); await assertFocus(page, '#grade-2');
   await tabTo(page, '#grade-1', true); await page.keyboard.press('Enter'); await assertFocus(page, '#grade-1');
+  await tabTo(page, '#choose-kp'); await page.keyboard.press('Enter');
+  await assertFocus(page, '#kp-dialog-title');
   await tabTo(page, '#kp-search'); await page.keyboard.type('加法'); await assertFocus(page, '#kp-search');
   await tabTo(page, '#clear-kp-search'); await page.keyboard.press('Space'); await assertFocus(page, '#kp-search');
   await tabTo(page, '#kp-select-none'); await page.keyboard.press('Enter'); await assertFocus(page, '#kp-select-none');
@@ -92,6 +94,8 @@ let browser;
   await page.keyboard.press('Space'); assert.equal(await page.locator('#kp-G1-01').isChecked(), false);
   await page.keyboard.press('Space'); assert.equal(await page.locator('#kp-G1-01').isChecked(), true);
   await assertFocus(page, '#kp-G1-01');
+  await tabTo(page, '#kp-confirm'); await page.keyboard.press('Enter');
+  await page.locator('.kp-dialog').waitFor({ state: 'detached' }); await assertFocus(page, '#choose-kp');
   await tabTo(page, '#count-20'); await page.keyboard.press('Space'); await assertFocus(page, '#count-20');
   await tabTo(page, '#custom-count'); await typeValue(page, '10'); await page.keyboard.press('Enter'); await assertFocus(page, '#custom-count');
   await tabTo(page, '#difficulty-easy'); await page.keyboard.press('Enter'); await assertFocus(page, '#difficulty-easy');

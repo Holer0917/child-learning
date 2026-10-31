@@ -1,0 +1,147 @@
+{
+  "executedAt": "2026-10-31T04:20:14.676Z",
+  "passed": true,
+  "results": [
+    {
+      "site": "local",
+      "width": 360,
+      "height": 640,
+      "metrics": {
+        "width": 360,
+        "height": 640,
+        "dialog": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 640
+        },
+        "footer": {
+          "top": 565,
+          "bottom": 640
+        },
+        "button": {
+          "width": 88,
+          "height": 44
+        },
+        "bodyOverflow": "auto",
+        "horizontal": false
+      },
+      "checks": [
+        "compact entry",
+        "footer visible",
+        "focus trap",
+        "cancel/Escape preserves paper",
+        "unchanged selection preserves paper",
+        "confirmed selection invalidates paper and controls generated questions",
+        "draft grade commit",
+        "route cleanup"
+      ]
+    },
+    {
+      "site": "local",
+      "width": 390,
+      "height": 844,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dialog": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844
+        },
+        "footer": {
+          "top": 769,
+          "bottom": 844
+        },
+        "button": {
+          "width": 88,
+          "height": 44
+        },
+        "bodyOverflow": "auto",
+        "horizontal": false
+      },
+      "checks": [
+        "compact entry",
+        "footer visible",
+        "focus trap",
+        "cancel/Escape preserves paper",
+        "unchanged selection preserves paper",
+        "confirmed selection invalidates paper and controls generated questions",
+        "draft grade commit",
+        "route cleanup"
+      ]
+    },
+    {
+      "site": "local",
+      "width": 568,
+      "height": 320,
+      "metrics": {
+        "width": 568,
+        "height": 320,
+        "dialog": {
+          "x": 0,
+          "y": 0,
+          "width": 568,
+          "height": 320
+        },
+        "footer": {
+          "top": 245,
+          "bottom": 320
+        },
+        "button": {
+          "width": 88,
+          "height": 44
+        },
+        "bodyOverflow": "auto",
+        "horizontal": false
+      },
+      "checks": [
+        "compact entry",
+        "footer visible",
+        "focus trap",
+        "cancel/Escape preserves paper",
+        "unchanged selection preserves paper",
+        "confirmed selection invalidates paper and controls generated questions",
+        "draft grade commit",
+        "route cleanup"
+      ]
+    },
+    {
+      "site": "local",
+      "width": 1440,
+      "height": 900,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dialog": {
+          "x": 360,
+          "y": 54,
+          "width": 720,
+          "height": 792
+        },
+        "footer": {
+          "top": 768,
+          "bottom": 845
+        },
+        "button": {
+          "width": 88,
+          "height": 44
+        },
+        "bodyOverflow": "auto",
+        "horizontal": false
+      },
+      "checks": [
+        "compact entry",
+        "footer visible",
+        "focus trap",
+        "cancel/Escape preserves paper",
+        "unchanged selection preserves paper",
+        "confirmed selection invalidates paper and controls generated questions",
+        "draft grade commit",
+        "route cleanup"
+      ]
+    }
+  ],
+  "errors": []
+}

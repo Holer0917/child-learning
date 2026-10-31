@@ -1,0 +1,20 @@
+command: node tests/practice-browser.cjs
+startedAt: 2026-10-31T04:20:20.042Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+2 !== 0
+
+    at C:\Users\s\Desktop\儿童学习\tests\practice-browser.cjs:185:14 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

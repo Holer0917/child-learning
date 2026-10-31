@@ -1,0 +1,27 @@
+command: node tests/mistakes-browser.cjs
+startedAt: 2026-10-31T04:16:21.484Z
+exitCode: 1
+signal: 
+
+STDOUT
+PASS: 普通答题首次错题自动归档，成绩页可进入错题本
+PASS: 1道错题可重练，刷新恢复 retry 模式，首次答对自动攻克
+PASS: 清理前展示数量，取消不删除，确认后旧成绩不变且刷新不复造错题
+PASS: 仅剩3道时确认实际题数；取消不开始，确认可答题并显示变式全对反馈
+PASS: 再来一组排除上一组，题库耗尽明确提示并提供重练原题
+PASS: 24道原错题明确分批，刷新保留剩余批次，成绩页可继续最后4道原错题
+PASS: 少于2次不绘图；范围、环比、文字表、升序掌握度、薄弱前三名、56日日历和徽章齐备
+
+STDERR
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+0 !== 1
+
+    at C:\Users\s\Desktop\儿童学习\tests\mistakes-browser.cjs:189:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
