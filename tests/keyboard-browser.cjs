@@ -78,6 +78,7 @@ let browser;
   await walk(page, '开始页');
   await tabTo(page, '.entry-practice'); await page.keyboard.press('Enter');
   await page.getByRole('heading', { name: '出题练习', exact: true }).waitFor();
+  await page.locator('#practice-next-1').waitFor();
   await assertFocus(page, '#app h1');
   await walk(page, '出题台初始');
   checks.push('PASS AC-KB.1/5: 开始页与出题台双向 Tab，所有现有控件可达，轮廓≥2px，切页聚焦主标题');

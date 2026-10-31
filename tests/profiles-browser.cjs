@@ -57,6 +57,14 @@ const exported = (page, url) => page.evaluate(async url => (await import(new URL
     assert.equal(await page.locator('.start-entry').count(), 3);
     assert.ok(!(await page.locator('.entry-mistakes').textContent()).includes('后续'));
     await page.getByRole('link', { name: '档案', exact: true }).click(); await page.locator('.profiles-page').waitFor();
+    assert.equal(await page.locator('#profile-name').count(), 0);
+    await page.getByRole('button', { name: '创建档案', exact: true }).click();
+    assert.equal(await page.locator('.profiles-list-card').isVisible(), false);
+    await page.getByRole('button', { name: '返回档案列表', exact: true }).click();
+    assert.equal(await page.locator('#app h1').evaluate(n => n === document.activeElement), true);
+    assert.equal(await page.locator('.profile-card').count(), 1);
+    await page.getByRole('button', { name: '创建档案', exact: true }).click();
+    await page.getByRole('button', { name: '创建档案', exact: true }).click();
     await page.getByRole('button', { name: '创建档案', exact: true }).click();
     await page.locator('#profile-name').fill('样例三'); await page.getByRole('button', { name: '创建档案', exact: true }).click();
     assert.equal(await page.locator('.profile-card').count(), 3); assert.equal(await page.getByRole('button', { name: '创建档案', exact: true }).isDisabled(), true);
@@ -96,7 +104,7 @@ const exported = (page, url) => page.evaluate(async url => (await import(new URL
     await page.getByText('还没有学习档案', { exact: true }).waitFor(); await page.reload(); await page.getByText('还没有学习档案', { exact: true }).waitFor();
     assert.equal(await page.evaluate(() => Object.keys(localStorage).filter(k => /km:(sessions|mistakes|badges|quiz:active|quiz:result):/.test(k)).length), 0);
     await page.goto(url + '#/practice'); await page.getByRole('heading', { name: '先创建学习档案', exact: true }).waitFor();
-    await page.getByRole('link', { name: '创建学习档案', exact: true }).click(); await page.getByRole('button', { name: '创建档案', exact: true }).click();
+    await page.getByRole('link', { name: '创建学习档案', exact: true }).click(); await page.getByRole('button', { name: '创建档案', exact: true }).click(); await page.getByRole('button', { name: '创建档案', exact: true }).click();
     assert.equal(await page.locator('.profile-card').count(), 1);
     pass('删除确认可取消，最后档案清理后刷新不自动重建，并引导新建'); await context.close();
   }
@@ -199,7 +207,7 @@ const exported = (page, url) => page.evaluate(async url => (await import(new URL
     await page.waitForFunction(() => document.querySelector('#pwa-panel')?.dataset.ready === 'true' && !!navigator.serviceWorker.controller);
     const workerVersion = (await fs.readFile(path.join(root, 'sw.js'), 'utf8')).match(/const VERSION = '([^']+)'/)[1];
     assert.equal(await page.locator('#pwa-panel').getAttribute('data-version'), workerVersion);
-    await context.setOffline(true); await page.goto(url + '#/profiles'); await page.getByRole('button', { name: '创建档案', exact: true }).click();
+    await context.setOffline(true); await page.goto(url + '#/profiles'); await page.getByRole('button', { name: '创建档案', exact: true }).click(); await page.getByRole('button', { name: '创建档案', exact: true }).click();
     assert.equal(await page.locator('.profile-card').count(), 2);
     await page.goto(url + '#/settings'); const payload = await exported(page, url); await file(page, payload); await page.locator('#import-mode').selectOption('overwrite');
     page.once('dialog', d => d.accept()); await page.locator('#confirm-import').click(); await page.locator('.profiles-page').waitFor();

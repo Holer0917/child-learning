@@ -1,0 +1,21 @@
+command: node tests/keyboard-browser.cjs
+startedAt: 2026-10-31T05:47:13.870Z
+exitCode: 1
+signal: 
+
+STDOUT
+
+STDERR
+AssertionError [ERR_ASSERTION]: 焦点应位于 #app h1，实际 {"tag":"A","id":"","label":"出题练习","width":2,"outline":"solid","visible":true,"inView":true}
+
+false !== true
+
+    at assertFocus (C:\Users\s\Desktop\儿童学习\tests\keyboard-browser.cjs:36:12)
+    at async C:\Users\s\Desktop\儿童学习\tests\keyboard-browser.cjs:81:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
