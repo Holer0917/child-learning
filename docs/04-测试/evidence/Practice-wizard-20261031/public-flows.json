@@ -1,0 +1,31 @@
+{
+  "executedAt": "2026-10-31T04:54:39.379Z",
+  "passed": true,
+  "results": [
+    {
+      "site": "formal",
+      "worker": "abc-4",
+      "passed": true,
+      "checks": [
+        "current shell and three home entries",
+        "real JSON download and overwrite roundtrip",
+        "mistake retry and mastery",
+        "offline profile/stats reload"
+      ]
+    },
+    {
+      "site": "preview",
+      "worker": "abc-preview-4",
+      "passed": true,
+      "checks": [
+        "current shell and three home entries",
+        "real JSON download and overwrite roundtrip",
+        "mistake retry and mastery",
+        "offline profile/stats reload"
+      ]
+    }
+  ],
+  "sameOriginDataIsolation": true,
+  "pageErrors": [],
+  "browser": "isolated headless Edge; mobile viewport, not a physical phone"
+}

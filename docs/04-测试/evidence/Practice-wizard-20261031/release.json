@@ -1,0 +1,102 @@
+{
+  "executedAt": "2026-10-31T04:55:41.761231+00:00",
+  "passed": true,
+  "sourceCodeCommit": "42432e27ddb0689bc2c309adc120dda275f9bcd5",
+  "previewCommit": "cf80f6497717e34b22ef7c8ba838fcfcc7e561d9",
+  "formalWorker": "abc-4",
+  "previewWorker": "abc-preview-4",
+  "requirementBaseline": "SRS V1.5",
+  "designBaseline": "SDD V1.13",
+  "sourceTests": {
+    "suites": 15,
+    "passedSuites": 15,
+    "browserCheckGroups": 138,
+    "unit": {
+      "tests": 77,
+      "pass": 77,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "previewTests": {
+    "unitPass": 80,
+    "browserGroups": 43
+  },
+  "pages": {
+    "formal": {
+      "status": "built",
+      "commit": "42432e27ddb0689bc2c309adc120dda275f9bcd5",
+      "expectedCommit": "42432e27ddb0689bc2c309adc120dda275f9bcd5",
+      "url": "https://holer0917.github.io/child-learning/"
+    },
+    "preview": {
+      "status": "built",
+      "commit": "cf80f6497717e34b22ef7c8ba838fcfcc7e561d9",
+      "expectedCommit": "cf80f6497717e34b22ef7c8ba838fcfcc7e561d9",
+      "url": "https://holer0917.github.io/child-learning-b10-preview/"
+    }
+  },
+  "publicWizardCheckGroups": 23,
+  "publicLayouts": [
+    {
+      "site": "formal",
+      "width": 360,
+      "height": 640,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "formal",
+      "width": 390,
+      "height": 844,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "formal",
+      "width": 568,
+      "height": 320,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "formal",
+      "width": 1440,
+      "height": 900,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "preview",
+      "width": 360,
+      "height": 640,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "preview",
+      "width": 390,
+      "height": 844,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "preview",
+      "width": 568,
+      "height": 320,
+      "stages": 3,
+      "questionCount": 10
+    },
+    {
+      "site": "preview",
+      "width": 1440,
+      "height": 900,
+      "stages": 3,
+      "questionCount": 10
+    }
+  ],
+  "runtimeFilesMatchedPerSite": 43,
+  "scope": "isolated headless Edge and touch simulation; physical device feedback is recorded separately"
+}
