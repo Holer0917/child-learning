@@ -1,0 +1,46 @@
+{
+  "executedAt": "2026-10-31T04:34:40.801484+00:00",
+  "passed": true,
+  "sourceCodeCommit": "832b7c4dd24a2ff628b65e912edc98844567d522",
+  "previewCommit": "bf84f668f346fe74dffa2abae91d71eb5e273957",
+  "formalWorker": "abc-3",
+  "previewWorker": "abc-preview-3",
+  "requirementBaseline": "SRS V1.5",
+  "designBaseline": "SDD V1.12",
+  "sourceTests": {
+    "suites": 14,
+    "passedSuites": 14,
+    "browserCheckGroups": 126,
+    "unit": {
+      "tests": 77,
+      "pass": 77,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "previewTests": {
+    "unitPass": 80,
+    "browserGroups": 43
+  },
+  "pages": {
+    "formal": {
+      "status": "built",
+      "commit": "832b7c4dd24a2ff628b65e912edc98844567d522",
+      "expectedCommit": "832b7c4dd24a2ff628b65e912edc98844567d522",
+      "url": "https://holer0917.github.io/child-learning/"
+    },
+    "preview": {
+      "status": "built",
+      "commit": "bf84f668f346fe74dffa2abae91d71eb5e273957",
+      "expectedCommit": "bf84f668f346fe74dffa2abae91d71eb5e273957",
+      "url": "https://holer0917.github.io/child-learning-b10-preview/"
+    }
+  },
+  "publicPickerLayouts": 8,
+  "checksPerLayout": 8,
+  "runtimeFilesMatchedPerSite": 43,
+  "githubSyncMethod": "GitHub REST exact Git objects; returned blob/tree/commit SHAs matched local; fast-forward ref update, no force",
+  "scope": "isolated headless Edge and touch simulation; not physical-device acceptance"
+}
