@@ -35,7 +35,14 @@ const log=[];
   await page.goto(base+'#/history');
   await page.locator('.history-record').first().waitFor();
   assert.equal(await page.locator('.history-record').count(),10);
-  assert.ok((await page.locator('.history-record').first().getAttribute('href')).includes('history-0'));
+  const first = page.locator('.history-record').first();
+  assert.equal(await first.evaluate(node=>node.tagName),'ARTICLE');
+  assert.equal(await first.locator('a').count(),1);
+  assert.ok((await first.locator('.record-detail').getAttribute('href')).includes('history-0'));
+  assert.equal(await first.locator('.record-detail').textContent(),'查看详情');
+  await first.locator('.record-counts').click();
+  assert.equal(new URL(page.url()).hash,'#/history');
+  log.push('PASS: 记录文字为普通卡片，点击不跳转；每条仅一个查看详情链接');
   const waitCount=async n=>page.waitForFunction(count=>document.querySelectorAll('.history-record').length===count,n);
   await page.getByRole('link',{name:'最近 5 次',exact:true}).click();await waitCount(5);
   await page.reload();await page.locator('.history-page').waitFor();assert.equal(await page.locator('.history-record').count(),5);
@@ -44,7 +51,8 @@ const log=[];
   await page.getByRole('button',{name:'再看更早的记录',exact:true}).click();await waitCount(40);
   await page.getByRole('button',{name:'再看更早的记录',exact:true}).click();await waitCount(46);
   log.push('PASS: 原记录倒序显示；最近 5/10/30 次、全部与分批加载；刷新保留显示范围');
-  await page.locator('a[href="#/result?id=history-44"]').click();await page.locator('.result-page').waitFor();
+  await page.locator('a[href="#/result?id=history-44"]').focus();
+  await page.keyboard.press('Enter');await page.locator('.result-page').waitFor();
   assert.equal(await page.locator('.score').textContent(),'30.0%');
   await page.reload();await page.locator('.result-page').waitFor();assert.equal(await page.locator('.score').textContent(),'30.0%');
   assert.equal(await page.locator('.review-list > li').count(),7);
@@ -61,6 +69,14 @@ const log=[];
    for(const route of ['home','practice','history?limit=5','mistakes','result?id=history-44']) {
     await page.goto(base+'#/'+route);await page.locator('#app h1').waitFor();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${route} overflow at ${width}`);
+    if(route.startsWith('history')) {
+     const card=page.locator('.history-record').first();
+     await card.locator('time').click();
+     assert.ok(new URL(page.url()).hash.startsWith('#/history'));
+     const link=card.locator('.record-detail');
+     assert.equal(await link.isVisible(),true);
+     assert.ok((await link.boundingBox()).height>=44);
+    }
    }
   }
   log.push('PASS: 开始页、出题台、成绩历史、历史详情、错题本入口在 360/390/768/1024/1440px 无横向溢出');
