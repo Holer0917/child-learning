@@ -1,0 +1,288 @@
+{
+  "executedAt": "2026-10-31T16:22:28.048Z",
+  "passed": true,
+  "site": "http://127.0.0.1:63340/",
+  "checks": [
+    {
+      "width": 390,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 390,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1024,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1099,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1100,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1280,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 1920,
+      "route": "profiles",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "home",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "practice",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "history",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "mistakes",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "stats",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "settings",
+      "passed": true
+    },
+    {
+      "width": 2560,
+      "route": "profiles",
+      "passed": true
+    }
+  ],
+  "errors": []
+}
