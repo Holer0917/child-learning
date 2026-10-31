@@ -23,6 +23,8 @@ const STEPS = ['选择年级', '选择知识点', '设置并出题'];
 
 /** 页面内状态（不持久化，刷新即重置） */
 const state = {
+  profileId: null,
+  returning: false,
   step: 1,
   reached: 1,
   grade: 1,
@@ -44,6 +46,14 @@ const state = {
 
 export function renderPractice(root, ctx) {
   const profile = getActiveProfile();
+  if ((ctx?.query.get('edit') === '1' || state.returning) && state.profileId === profile?.id && state.kpIds.length) {
+    state.returning = false;
+    state.step = 3;
+    paint(root);
+    return;
+  }
+  state.returning = false;
+  state.profileId = profile?.id;
   state.grade = profile?.grade ?? 1;
   state.kpIds = getGradeDefaultKPs(state.grade);
   state.count = 30;
@@ -90,16 +100,29 @@ function paint(root, focusId) {
       ], '02', `${GRADES.find(g => g.id === state.grade).name} · 选择完成后进入练习设置`) : null,
       state.step === 3 ? card('练习设置', [
             el('p', { class: 'small muted', text: `${GRADES.find(g => g.id === state.grade).name} · 已选 ${state.kpIds.length} 个知识点` }),
-            optionBlock(root), compatibilityBlock(),
+            optionBlock(root),
             el('div', { class: 'practice-summary' }, [
               el('div', {}, [el('strong', { id: 'count-confirmation', text: `本次将生成 ${state.count} 道题` }),
                 el('p', { text: `${GRADES.find(g => g.id === state.grade).name} · ${state.kpIds.length} 个知识点` })])
-            ]), errorBlock(root), generateBar(root), backStep(root, 2)
+            ]), errorBlock(root), generateBar(root),
+            state.paper ? el('a', { id: 'reopen-preview', class: 'btn', href: '#/preview', text: '查看已生成题目' }) : null,
+            backStep(root, 2)
           ], '03', '设置题量、难度、题型及倒计时') : null,
-      state.step === 3 && state.paper ? paperBlock(root) : null
     ].filter(Boolean))
   );
   if (focusId) root.querySelector(`#${focusId}`)?.focus({ preventScroll: true });
+}
+
+export function renderPracticePreview(root) {
+  const valid = state.paper && state.profileId === getActiveProfile()?.id;
+  root.replaceChildren(el('section', { class: 'page practice-preview' }, [
+    el('h1', { text: '题目预览' }),
+    el('a', { id: 'preview-back', class: 'btn', href: valid ? '#/practice?edit=1' : '#/practice',
+      text: valid ? '返回练习设置' : '返回出题练习' }),
+    valid ? resumeBlock(root) : null,
+    valid ? paperBlock(root) : el('p', { class: 'empty', text: '预览已失效，请重新出题。' })
+  ]));
+  return () => { state.returning = location.hash.split('?')[0] === '#/practice'; };
 }
 
 function changeStep(root, step) {
@@ -138,7 +161,11 @@ function resumeBlock(root) {
     el('div', { class: 'actions' }, [
       el('a', { class: 'btn btn-primary', href: '#/quiz', text: '继续练习' }),
       el('button', { class: 'btn', text: '放弃上次练习', onclick: () => {
-        if (window.confirm('放弃上次练习？未结算的进度将被删除。')) { discardSession(); paint(root); }
+        if (window.confirm('放弃上次练习？未结算的进度将被删除。')) {
+          discardSession(); state.paperError = '';
+          if (root.querySelector('.practice-preview')) renderPracticePreview(root);
+          else paint(root);
+        }
       } })
     ])
   ]));
@@ -338,7 +365,7 @@ function optionBlock(root) {
       el('input', {
         id: 'custom-count', class: 'count-input', type: 'text', inputmode: 'numeric',
         enterkeyhint: 'done', autocomplete: 'off', value: state.countDraft,
-        'aria-describedby': 'count-hint count-feedback',
+        'aria-describedby': 'count-feedback',
         oninput: e => {
           state.countDraft = e.target.value;
           state.countFeedback = '';
@@ -354,8 +381,6 @@ function optionBlock(root) {
           confirmCount(root);
         }
       }),
-      el('p', { id: 'count-hint', class: 'small count-hint',
-        text: '请输入 5～100 的整数，离开输入框或按回车确认。小数、空值和非数字会恢复上次有效题量。' }),
       el('p', { id: 'count-feedback', class: 'small count-feedback', role: 'status',
         'aria-live': 'polite', 'aria-atomic': 'true', text: state.countFeedback })
     ]),
@@ -375,8 +400,7 @@ function optionBlock(root) {
             paint(root, `difficulty-${d.id}`);
           }
         }, [el('strong', { text: d.name }), el('span', { text: d.desc })])
-      )),
-      el('p', { class: 'small option-hint', text: '简单：1 星题至少占 70%；挑战：3 星题至少占 50%。适中按所选知识点均衡出题。' })
+      ))
     ]),
     el('div', { class: 'field' }, [
       el('span', { class: 'field-label', text: '题型（可多选）' }),
@@ -397,8 +421,7 @@ function optionBlock(root) {
             paint(root, `type-${t.id}`);
           }
         })
-      )),
-      el('p', { class: 'small option-hint', text: '仅使用已选知识点支持的题型；可多选混合出题，至少保留一种。' })
+      ))
     ]),
     el('div', { class: 'field timer-field' }, [
       el('label', { class: 'field-label', for: 'limit-minutes' }, [icon('clock'), '倒计时（可选）']),
@@ -416,13 +439,6 @@ function errorBlock(root) {
   return el('p', { class: 'alert', role: 'alert', text: state.error });
 }
 
-function compatibilityBlock() {
-  const checked = validatePaperOptions(state);
-  return el('div', { id: 'settings-compatibility', class: 'small options-feedback', role: 'status', 'aria-live': 'polite' }, [
-    !checked.ok && state.kpIds.length ? el('p', { text: checked.message }) : null,
-    ...checked.warnings.map(message => el('p', { text: message }))
-  ]);
-}
 
 function confirmCount(root) {
   const raw = state.countDraft.trim();
@@ -503,11 +519,10 @@ function generate(root) {
       : '当前条件下无法出题，请调整知识点、难度或题型。';
   }
 
-  paint(root, state.paper ? 'paper-heading' : 'generate-paper');
   if (state.paper) {
     bus.emit(EVENTS.PAPER_GENERATED, { paperId: state.paper.id });
-    root.querySelector('.paper-block')?.scrollIntoView({ behavior: 'instant', block: 'start' });
-  }
+    go('/preview');
+  } else paint(root, 'generate-paper');
 }
 
 function usePaper(paper) {
@@ -589,7 +604,6 @@ function paperBlock(root) {
 
     targetStar && actual ? el('p', { class: 'small difficulty-result',
       text: `${targetStar} 星题 ${targetCount} / ${actual} 道，占比 ${(targetCount / actual * 100).toFixed(1)}%` }) : null,
-    ...(paper.warnings ?? []).map(message => el('p', { class: 'small paper-warning', text: message })),
 
     el('div', { class: 'paper-actions' }, [
       el('button', { id: 'regenerate-paper', type: 'button', class: 'btn', text: '重新生成', onclick: () => regenerate(root) }),

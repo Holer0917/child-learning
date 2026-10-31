@@ -38,7 +38,7 @@ let browser;
     const selected = await page.locator('.count-options [aria-pressed="true"]').allTextContents();
     assert.deepEqual(selected, [10, 20, 30, 50].includes(expected) ? [String(expected)] : []);
   };
-  const setCount = async value => { await input.fill(value); await input.press('Tab'); };
+  const setCount = async value => { await toSettings(page); await input.fill(value); await input.press('Tab'); };
 
   await checkCount(30);
   for (const n of [10, 20, 30, 50]) {
@@ -51,9 +51,10 @@ let browser;
   for (const n of [5, 100, 37]) {
     await setCount(String(n));
     await checkCount(n);
-    await page.locator('#generate-paper').click();
+    await page.locator('#generate-paper').click(); await page.locator('.practice-preview').waitFor();
     assert.equal(await page.locator('.question-item').count(), n);
     assert.ok((await page.locator('.paper-meta').textContent()).includes(`共 ${n} 道`));
+    await toSettings(page);
   }
   checks.push('PASS: 自定义 5/100/37 经失焦确认后分别生成相同题数，非快捷值不误亮快捷按钮');
 
@@ -90,14 +91,16 @@ let browser;
   checks.push('PASS: 清空后逐字输入 37/10 不丢焦点或提前纠正；回车确认后焦点仍在输入框');
 
   await input.fill('73');
-  await page.locator('#generate-paper').click();
-  await checkCount(73);
+  await page.locator('#generate-paper').click(); await page.locator('.practice-preview').waitFor();
+  await page.locator('.practice-preview').waitFor();
   assert.equal(await page.locator('.question-item').count(), 73);
+  await toSettings(page); await checkCount(73);
   await input.fill('101');
   assert.equal(await page.locator('.paper-block').count(), 0, '编辑题量立即移除旧卷，防止开始旧练习');
-  await page.locator('#generate-paper').click();
-  await checkCount(100);
+  await page.locator('#generate-paper').click(); await page.locator('.practice-preview').waitFor();
+  await page.locator('.practice-preview').waitFor();
   assert.equal(await page.locator('.question-item').count(), 100);
+  await toSettings(page); await checkCount(100);
   assert.ok((await page.locator('#count-feedback').textContent()).includes('已调整为 100 道'));
   await input.fill('37abc');
   await page.getByRole('button', { name: '10', exact: true }).click();
@@ -129,7 +132,7 @@ let browser;
   await toSettings(page);
   assert.equal(await page.getByRole('button', { name: '挑战', exact: true }).getAttribute('aria-pressed'), 'true');
   assert.equal(await page.locator('#limit-minutes').inputValue(), '3');
-  await page.locator('#generate-paper').click();
+  await page.locator('#generate-paper').click(); await page.locator('.practice-preview').waitFor();
   assert.equal(await page.locator('.question-item').count(), 37);
   await page.getByRole('button', { name: '开始答题', exact: true }).click();
   await page.locator('#quiz-answer').waitFor();
@@ -154,7 +157,7 @@ let browser;
   await layout.locator('.kp-dialog').waitFor({ state: 'detached' });
   await toSettings(layout);
   await layout.locator('#custom-count').fill('100');
-  await layout.locator('#generate-paper').click();
+  await layout.locator('#generate-paper').click(); await layout.locator('.practice-preview').waitFor();
   const actual = await layout.locator('.question-item').count();
   assert.ok(actual > 0 && actual < 100, '单一小题库应报告可用题数不足');
   assert.ok((await layout.locator('.warn-text').textContent()).includes(`少出 ${100 - actual} 道`));

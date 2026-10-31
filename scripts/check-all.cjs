@@ -12,6 +12,7 @@ const relative = file => path.relative(root, file).split(path.sep).join('/');
 const digest = data => createHash('sha256').update(data).digest('hex');
 const unitFiles = ['generator-options', 'paper-stats', 'paper-edit', 'quiz-session', 'history', 'mistakes-stats', 'profiles-backup'].map(name => `tests/${name}.test.mjs`);
 const suites = [
+  ['practice-preview-flow', 'tests/practice-preview-flow.cjs', 'practice-preview-flow-results.json'],
   ['practice-wizard', 'tests/practice-wizard-browser.cjs', 'wizard-browser-results.json'],
   ['A-integration', 'tests/mistakes-browser.cjs', 'a-browser-results.json'],
   ['C-integration', 'tests/profiles-browser.cjs', 'c-browser-results.json'],

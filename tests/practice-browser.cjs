@@ -165,6 +165,7 @@ let browser;
   await page.locator('#kp-confirm').click();
   await page.locator('.kp-dialog').waitFor({ state: 'detached' });
   await toSettings(page);
+  await page.locator('#reopen-preview').click(); await page.locator('.practice-preview').waitFor();
   assert.deepEqual(await page.locator('.question-item').allTextContents(), originalPaper);
   await page.getByRole('button', { name: '开始答题', exact: true }).click();
   await page.locator('#quiz-answer').waitFor();

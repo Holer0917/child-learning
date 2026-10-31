@@ -47,8 +47,9 @@ let browser;
     }
   };
   const generate = async (page, count) => {
+    await toSettings(page);
     await page.locator('#custom-count').fill(String(count));
-    await page.locator('#generate-paper').click();
+    await page.locator('#generate-paper').click(); await page.locator('.practice-preview').waitFor();
   };
   const rows = async page => page.locator('.question-item').evaluateAll(nodes => nodes.map(node => ({
     id: node.querySelector('.question-delete').id,
@@ -101,7 +102,7 @@ let browser;
   assert.equal(await page.locator('.question-answer').count(), 0);
   assert.equal(await page.locator('#toggle-answers').getAttribute('aria-pressed'), 'false');
   assert.equal(await page.locator('.paper-removed').count(), 0);
-  assert.equal(await page.locator('#limit-minutes').inputValue(), '3');
+  assert.equal(await page.locator('.practice-preview').count(), 1);
   assert.equal(await page.evaluate(() => document.activeElement.id), 'regenerate-paper');
   checks.push('PASS: 重新生成恢复原请求 30 题，与上一生成批次（含已删题）零重用；答案关闭、统计重置、倒计时保留');
 

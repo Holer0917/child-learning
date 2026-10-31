@@ -1,0 +1,403 @@
+{
+  "executedAt": "2026-10-31T10:06:26.415Z",
+  "browser": "156.0.4314.56",
+  "checks": [
+    "PASS: 10 类真实生成题通过触屏键完成输入、退格、草稿保存、判分与自动下一题；分数等价及小数尾零正确，比较符号改选不拼接",
+    "PASS: 从三年级选有余数知识点→出题→开始答题，全触屏输入含“余”的答案后正常判对",
+    "PASS: 分数光标选区替换、选区/单字退格、40 字上限正常；1/0 不计分，触屏订正后可正常提交",
+    "PASS: 竖屏输入小数→横屏尺寸→刷新继续，草稿及小数键保留，提交后下一题重新可见",
+    "PASS: 5 类合法边界样本×9 种手机/横屏/缩小视口/平板尺寸，共 45 组，无裁切/横溢出，题字 ≥32px、触控区 ≥44px，点键后输入框可见且不被覆盖",
+    "PASS: 竖式视觉只显示上下版式，读屏保留完整题干；深色系统主题仍为白底",
+    "PASS: 桌面原生输入与 Enter 判分正常；旧两参数 mountKeypad 调用保留 18 键及输入聚焦行为",
+    "PASS: 全部手机作答、异常、旋转恢复及桌面路径未捕获页面异常为 0"
+  ],
+  "inputResults": [
+    {
+      "name": "横式整数",
+      "mode": "integer",
+      "value": "6",
+      "expected": "6",
+      "correct": true
+    },
+    {
+      "name": "竖式商含0",
+      "mode": "integer",
+      "value": "509",
+      "expected": "509",
+      "correct": true
+    },
+    {
+      "name": "比较大小",
+      "mode": "compare",
+      "value": ">",
+      "expected": ">",
+      "correct": true
+    },
+    {
+      "name": "填空",
+      "mode": "integer",
+      "value": "3",
+      "expected": "3",
+      "correct": true
+    },
+    {
+      "name": "含括号连算",
+      "mode": "integer",
+      "value": "37",
+      "expected": "37",
+      "correct": true
+    },
+    {
+      "name": "分数",
+      "mode": "fraction",
+      "value": "4/6",
+      "expected": "2/3",
+      "correct": true
+    },
+    {
+      "name": "小数",
+      "mode": "decimal",
+      "value": "61.30",
+      "expected": "61.3",
+      "correct": true
+    },
+    {
+      "name": "有余数",
+      "mode": "remainder",
+      "value": "11余1",
+      "expected": "11余1",
+      "correct": true
+    },
+    {
+      "name": "竖式小数",
+      "mode": "decimal",
+      "value": "61.30",
+      "expected": "61.3",
+      "correct": true
+    },
+    {
+      "name": "竖式有余数",
+      "mode": "remainder",
+      "value": "11余1",
+      "expected": "11余1",
+      "correct": true
+    }
+  ],
+  "layouts": [
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 320,
+      "height": 568,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 360,
+      "height": 640,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 390,
+      "height": 844,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 414,
+      "height": 896,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 360,
+      "height": 480,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 568,
+      "height": 320,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 667,
+      "height": 375,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 844,
+      "height": 390,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数被除数竖式",
+      "width": 768,
+      "height": 1024,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 320,
+      "height": 568,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 360,
+      "height": 640,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 390,
+      "height": 844,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 414,
+      "height": 896,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 360,
+      "height": 480,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 568,
+      "height": 320,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 667,
+      "height": 375,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 844,
+      "height": 390,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "含括号长连算",
+      "width": 768,
+      "height": 1024,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 320,
+      "height": 568,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 360,
+      "height": 640,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 390,
+      "height": 844,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 414,
+      "height": 896,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 360,
+      "height": 480,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 568,
+      "height": 320,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 667,
+      "height": 375,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 844,
+      "height": 390,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "双分数长算式",
+      "width": 768,
+      "height": 1024,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 320,
+      "height": 568,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 360,
+      "height": 640,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 390,
+      "height": 844,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 414,
+      "height": 896,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 360,
+      "height": 480,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 568,
+      "height": 320,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 667,
+      "height": 375,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 844,
+      "height": 390,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "小数竖式",
+      "width": 768,
+      "height": 1024,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 320,
+      "height": 568,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 360,
+      "height": 640,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 390,
+      "height": 844,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 414,
+      "height": 896,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 360,
+      "height": 480,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 568,
+      "height": 320,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 667,
+      "height": 375,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 844,
+      "height": 390,
+      "font": 32,
+      "fits": true
+    },
+    {
+      "fixture": "四位数比较",
+      "width": 768,
+      "height": 1024,
+      "font": 32,
+      "fits": true
+    }
+  ]
+}

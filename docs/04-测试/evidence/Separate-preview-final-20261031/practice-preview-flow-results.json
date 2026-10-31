@@ -1,0 +1,22 @@
+{
+  "executedAt": "2026-10-31T10:05:07.564Z",
+  "passed": true,
+  "site": "http://127.0.0.1:56553/",
+  "checks": [
+    "PASS: separate preview, concise settings, browser back/forward, preserved parameters, reload recovery, start quiz at 360/390/1440px"
+  ],
+  "layouts": [
+    {
+      "width": 360,
+      "passed": true
+    },
+    {
+      "width": 390,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "passed": true
+    }
+  ]
+}

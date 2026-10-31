@@ -1,0 +1,9 @@
+command: node tests/practice-preview-flow.cjs
+startedAt: 2026-10-31T10:05:03.357Z
+exitCode: 0
+signal: 
+
+STDOUT
+PASS: separate preview, concise settings, browser back/forward, preserved parameters, reload recovery, start quiz at 360/390/1440px
+
+STDERR

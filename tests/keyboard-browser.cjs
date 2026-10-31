@@ -111,7 +111,7 @@ let browser;
   await tabTo(page, '#limit-minutes'); await page.keyboard.press('ArrowDown');
   assert.equal(await page.locator('#limit-minutes').inputValue(), '1'); await page.keyboard.press('ArrowUp');
   await tabTo(page, '#generate-paper'); await page.keyboard.press('Enter');
-  await page.locator('.paper-block').waitFor(); await assertFocus(page, '#paper-heading');
+  await page.locator('.paper-block').waitFor(); await assertFocus(page, '#app h1');
   assert.equal(await page.locator('.paper-total').textContent(), '共 10 道');
   await tabTo(page, '#toggle-answers'); await page.keyboard.press('Space'); assert.equal(await page.locator('.question-answer').count(), 10);
   await page.keyboard.press('Enter'); assert.equal(await page.locator('.question-answer').count(), 0);

@@ -39,7 +39,7 @@ let browser;
   };
   const generate = async (target, count) => {
     await target.locator('#custom-count').fill(String(count));
-    await target.locator('#generate-paper').click();
+    await target.locator('#generate-paper').click(); await target.locator('.practice-preview').waitFor();
   };
   const distribution = async target => target.locator('.distribution-item').evaluateAll(nodes => nodes.map(node => ({
     kpId: node.dataset.kpId, count: Number(node.dataset.count), percent: Number(node.dataset.percent),
@@ -87,8 +87,8 @@ let browser;
   assert.equal(rows.reduce((sum, row) => sum + row.count, 0), 30);
   assert.equal(rows.some(row => row.kpId === 'G1-08'), false, '未生成的知识点不占统计行');
   assert.ok(rows.every((row, i) => !i || row.count <= rows[i - 1].count));
-  assert.ok((await page.locator('.paper-warning').allTextContents()).some(text => text.includes('100 以内数的认识与比较')));
-  checks.push('PASS: 部分题型不匹配时只统计实际出题知识点，列表降序、题数合计与实际题量一致，跳过说明保留');
+  assert.equal(await page.locator('.paper-warning').count(), 0);
+  checks.push('PASS: 部分题型不匹配时只统计实际出题知识点，列表降序、题数合计与实际题量一致，已删除冗余跳过说明');
 
   // 五种题型逐一验证预览，保持答案不出现在显示文本中。
   for (const [grade, kpId, type] of [
