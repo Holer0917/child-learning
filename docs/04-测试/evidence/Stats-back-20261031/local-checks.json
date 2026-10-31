@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "site": "local",
+  "checks": [
+    {
+      "width": 390,
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "passed": true
+    }
+  ]
+}
